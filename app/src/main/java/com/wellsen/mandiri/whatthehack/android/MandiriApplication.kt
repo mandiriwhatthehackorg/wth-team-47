@@ -1,15 +1,17 @@
 /*
  * *
- *  * Created by Wellsen on 7/10/19 10:16 AM
+ *  * Created by Wellsen on 7/10/19 10:38 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/10/19 10:16 AM
+ *  * Last modified 7/10/19 10:37 AM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android
 
 import android.app.Application
+import com.wellsen.mandiri.whatthehack.android.module.networkModule
+import com.wellsen.mandiri.whatthehack.android.module.sharedPreferenceModule
 import com.wellsen.mandiri.whatthehack.android.util.log.CrashReportingTree
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -25,6 +27,15 @@ class MandiriApplication : Application() {
 
     startKoin {
       androidContext(this@MandiriApplication)
+      if (BuildConfig.DEBUG) {
+        printLogger()
+      }
+      modules(
+          listOf(
+              sharedPreferenceModule,
+              networkModule
+          )
+      )
     }
   }
 
