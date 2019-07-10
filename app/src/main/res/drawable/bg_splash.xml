@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/10/19 12:33 PM
+  ~  * Created by Wellsen on 7/10/19 8:20 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/10/19 12:27 PM
+  ~  * Last modified 7/10/19 8:19 PM
   ~  */
   -->
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:opacity="opaque"
->
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:opacity="opaque"
+    >
 
-    <item android:drawable="@color/colorPrimary"/>
+  <item android:drawable="@color/colorPrimary"/>
 
-    <!-- Set the Background Image-->
-    <item android:gravity="center" android:width="200dp" android:height="58dp"
-          android:drawable="@drawable/ic_mandiri">
+  <!-- Set the Background Image-->
+  <item
+      android:drawable="@drawable/ic_mandiri"
+      android:gravity="center"
+      android:height="58dp"
+      android:width="200dp">
 
-    </item>
+  </item>
 </layer-list>

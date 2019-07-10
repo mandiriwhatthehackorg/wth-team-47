@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/10/19 8:18 PM
+  ~  * Created by Wellsen on 7/10/19 8:20 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/10/19 2:35 PM
+  ~  * Last modified 7/10/19 8:19 PM
   ~  */
   -->
 
 <layout>
 
-    <data>
-        <import type="com.wellsen.mandiri.whatthehack.android.BuildConfig"/>
-    </data>
+  <data>
+    <import type="com.wellsen.mandiri.whatthehack.android.BuildConfig"/>
+  </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 xmlns:tools="http://schemas.android.com/tools"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 tools:context=".ui.splash.SplashActivity"
-    >
+  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context=".ui.splash.SplashActivity"
+      >
 
-        <TextView
-                android:id="@+id/tv_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_margin="?attr/actionBarSize"
-                android:textColor="@android:color/white"
-                android:text="@{`Version ` + BuildConfig.VERSION_NAME}"
-                tools:text="Version 1.0"
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="?attr/actionBarSize"
+        android:text="@{`Version ` + BuildConfig.VERSION_NAME}"
+        android:textColor="@android:color/white"
+        tools:text="Version 1.0"
         />
 
-    </FrameLayout>
+  </FrameLayout>
 
 </layout>
 

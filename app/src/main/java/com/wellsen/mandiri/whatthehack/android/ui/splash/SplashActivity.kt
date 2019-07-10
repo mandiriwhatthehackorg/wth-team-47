@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/10/19 8:18 PM
+ *  * Created by Wellsen on 7/10/19 8:20 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/10/19 8:18 PM
+ *  * Last modified 7/10/19 8:19 PM
  *
  */
 
@@ -20,21 +20,21 @@ import com.wellsen.mandiri.whatthehack.android.ui.login.LoginActivity
 
 class SplashActivity : BindingActivity<ActivitySplashBinding>() {
 
-    @LayoutRes
-    override fun getLayoutResId() = R.layout.activity_splash
+  @LayoutRes
+  override fun getLayoutResId() = R.layout.activity_splash
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        binding.lifecycleOwner = this
+    binding.lifecycleOwner = this
 
-        Handler().postDelayed(
-            {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            },
-            3000
-        )
-    }
+    Handler().postDelayed(
+        {
+          startActivity(Intent(this, LoginActivity::class.java))
+          finish()
+        },
+        3000
+    )
+  }
 
 }

@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/10/19 8:18 PM
+ *  * Created by Wellsen on 7/10/19 8:20 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/10/19 1:37 PM
+ *  * Last modified 7/10/19 8:19 PM
  *
  */
 
@@ -17,15 +17,15 @@ import androidx.databinding.ViewDataBinding
 
 abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
 
-    @LayoutRes
-    abstract fun getLayoutResId(): Int
+  @LayoutRes
+  abstract fun getLayoutResId(): Int
 
-    protected lateinit var binding: T private set
+  protected lateinit var binding: T private set
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, getLayoutResId())
-    }
+    binding = DataBindingUtil.setContentView(this, getLayoutResId())
+  }
 
 }
