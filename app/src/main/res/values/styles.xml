@@ -1,3 +1,12 @@
+<!--
+  ~ /**
+  ~  * Created by Wellsen on 7/10/19 12:33 PM
+  ~  * for Mandiri What The Hack Hackathon
+  ~  * Copyright (c) 2019 . All rights reserved.
+  ~  * Last modified 7/10/19 12:27 PM
+  ~  */
+  -->
+
 <resources>
 
   <!-- Base application theme. -->
@@ -6,6 +15,18 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <!--Style for Splash Activity-->
+  <style name="AppTheme.Splash">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowBackground">@drawable/bg_splash</item>
+    <item name="android:windowDisablePreview">true</item>
   </style>
 
 </resources>
