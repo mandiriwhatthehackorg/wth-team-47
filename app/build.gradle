@@ -9,13 +9,17 @@ android {
     applicationId "com.wellsen.mandiri.whatthehack.android"
     minSdkVersion 21
     targetSdkVersion 28
+    multiDexEnabled true
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    buildConfigField "String", "ONBOARDING_BASE_URL", "\"" + getOnboardingBaseUrl() + "\""
+    buildConfigField "String", "API_GATEWAY_BASE_URL", "\"" + getApiGatewayBaseUrl() + "\""
   }
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
+      shrinkResources true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
@@ -58,4 +62,26 @@ dependencies {
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'androidx.test:runner:1.2.0'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+// If you're using the Android Databinding library,
+// you may want to increase the number of errors that javac will print.
+// When Dagger prints an error, databinding compilation will halt and sometimes print more than 100 errors,
+// which is the default amount for javac. For more information, see Issue 306.
+gradle.projectsEvaluated {
+  tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xmaxerrs" << "500" // or whatever number you want
+  }
+}
+
+def getOnboardingBaseUrl() {
+  Properties properties = new Properties()
+  properties.load(project.rootProject.file('local.properties').newDataInputStream())
+  return properties.getProperty("ONBOARDING_BASE_URL")
+}
+
+def getApiGatewayBaseUrl() {
+  Properties properties = new Properties()
+  properties.load(project.rootProject.file('local.properties').newDataInputStream())
+  return properties.getProperty("API_GATEWAY_BASE_URL")
 }
