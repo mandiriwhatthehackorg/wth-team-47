@@ -1,17 +1,19 @@
 /*
  * *
- *  * Created by Wellsen on 7/10/19 8:20 PM
+ *  * Created by Wellsen on 7/11/19 12:52 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/10/19 8:19 PM
+ *  * Last modified 7/11/19 12:51 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.splash
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.annotation.LayoutRes
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivitySplashBinding
@@ -28,9 +30,17 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>() {
 
     binding.lifecycleOwner = this
 
+    val logo = findViewById<View>(R.id.iv_logo)
+
     Handler().postDelayed(
         {
-          startActivity(Intent(this, LoginActivity::class.java))
+          startActivity(
+              Intent(this, LoginActivity::class.java),
+              ActivityOptions.makeSceneTransitionAnimation(
+                  this,
+                  logo, "logo"
+              ).toBundle()
+          )
           finish()
         },
         3000

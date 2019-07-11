@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/10/19 12:33 PM
+  ~  * Created by Wellsen on 7/11/19 12:52 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/10/19 11:31 AM
+  ~  * Last modified 7/11/19 12:50 PM
   ~  */
   -->
 
@@ -20,4 +20,6 @@
   <string name="login_failed">"Login failed"</string>
 
   <string name="title_activity_splash">SplashActivity</string>
+  <string name="tv_text_register">No account yet? Create one</string>
+  <string name="tv_text_forgot_pass">Forgot Password</string>
 </resources>

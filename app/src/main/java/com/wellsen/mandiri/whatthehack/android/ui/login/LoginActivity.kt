@@ -1,3 +1,12 @@
+/*
+ * *
+ *  * Created by Wellsen on 7/11/19 12:52 PM
+ *  * for Mandiri What The Hack Hackathon
+ *  * Copyright (c) 2019 . All rights reserved.
+ *  * Last modified 7/11/19 12:19 PM
+ *
+ */
+
 package com.wellsen.mandiri.whatthehack.android.ui.login
 
 import android.app.Activity
@@ -25,10 +34,10 @@ class LoginActivity : AppCompatActivity() {
 
     setContentView(R.layout.activity_login)
 
-    val username = findViewById<EditText>(R.id.username)
-    val password = findViewById<EditText>(R.id.password)
-    val login = findViewById<Button>(R.id.login)
-    val loading = findViewById<ProgressBar>(R.id.loading)
+    val username = findViewById<EditText>(R.id.et_username)
+    val password = findViewById<EditText>(R.id.et_password)
+    val login = findViewById<Button>(R.id.btn_login)
+    val loading = findViewById<ProgressBar>(R.id.pb)
 
     loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
         .get(LoginViewModel::class.java)

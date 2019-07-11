@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/10/19 8:20 PM
+  ~  * Created by Wellsen on 7/11/19 12:52 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/10/19 8:19 PM
+  ~  * Last modified 7/10/19 9:12 PM
   ~  */
   -->
 
@@ -16,12 +16,4 @@
 
   <item android:drawable="@color/colorPrimary"/>
 
-  <!-- Set the Background Image-->
-  <item
-      android:drawable="@drawable/ic_mandiri"
-      android:gravity="center"
-      android:height="58dp"
-      android:width="200dp">
-
-  </item>
 </layer-list>
