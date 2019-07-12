@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 12:17 PM
+ *  * Created by Wellsen on 7/12/19 1:19 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 11:59 AM
+ *  * Last modified 7/12/19 12:45 PM
  *
  */
 
@@ -12,6 +12,7 @@ package com.wellsen.mandiri.whatthehack.android.ui.login
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Pair
 import android.view.inputmethod.EditorInfo
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
@@ -79,7 +80,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         Intent(this, ForgotPassActivity::class.java),
         ActivityOptions.makeSceneTransitionAnimation(
           this,
-          binding.ivLogo, "logo"
+          Pair.create(binding.ivLogo, "logo"),
+          Pair.create(binding.tilUsername, "username"),
+          Pair.create(binding.btnRegister, "button")
         ).toBundle()
       )
     }
