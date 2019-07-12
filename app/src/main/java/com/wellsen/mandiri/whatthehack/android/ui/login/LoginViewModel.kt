@@ -1,61 +1,81 @@
+/*
+ * *
+ *  * Created by Wellsen on 7/12/19 11:26 AM
+ *  * for Mandiri What The Hack Hackathon
+ *  * Copyright (c) 2019 . All rights reserved.
+ *  * Last modified 7/12/19 11:21 AM
+ *
+ */
+
 package com.wellsen.mandiri.whatthehack.android.ui.login
 
-import android.util.Patterns
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.wellsen.mandiri.whatthehack.android.R
-import com.wellsen.mandiri.whatthehack.android.data.LoginRepository
-import com.wellsen.mandiri.whatthehack.android.data.Result
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.OnboardingApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.request.LoginRequest
+import com.wellsen.mandiri.whatthehack.android.data.remote.response.LoginResponse
+import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.NonNullMutableLiveData
+import com.wellsen.mandiri.whatthehack.android.util.extension.with
+import com.wellsen.mandiri.whatthehack.android.util.validator.PasswordValidator
+import com.wellsen.mandiri.whatthehack.android.util.validator.UsernameValidator
+import timber.log.Timber
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(
+  private val onboardingApi: OnboardingApi,
+  private val usernameValidator: UsernameValidator,
+  private val passwordValidator: PasswordValidator
+) : BaseViewModel() {
+
+  var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
+  var username: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
+  var password: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
 
   private val _loginForm = MutableLiveData<LoginFormState>()
   val loginFormState: LiveData<LoginFormState> = _loginForm
 
-  private val _loginResult = MutableLiveData<LoginResult>()
-  val loginResult: LiveData<LoginResult> = _loginResult
-
-  fun login(
-    username: String,
-    password: String
-  ) {
-    // can be launched in a separate asynchronous job
-    val result = loginRepository.login(username, password)
-
-    if (result is Result.Success) {
-      _loginResult.value =
-        LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-    } else {
-      _loginResult.value = LoginResult(error = R.string.login_failed)
-    }
-  }
-
-  fun loginDataChanged(
-    username: String,
-    password: String
-  ) {
-    if (!isUserNameValid(username)) {
+  fun onLoginFormChanged(username: String, password: String) {
+    if (!usernameValidator.isValid(username)) {
       _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
-    } else if (!isPasswordValid(password)) {
+    } else if (!passwordValidator.isValid(password)) {
       _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
     } else {
       _loginForm.value = LoginFormState(isDataValid = true)
     }
   }
 
-  // A placeholder username validation check
-  private fun isUserNameValid(username: String): Boolean {
-    return if (username.contains('@')) {
-      Patterns.EMAIL_ADDRESS.matcher(username)
-          .matches()
-    } else {
-      username.isNotBlank()
-    }
+  fun login(username: String, password: String) {
+    @Suppress("UnstableApiUsage")
+    add(onboardingApi.login(LoginRequest(username, password)).with()
+      .doOnSubscribe { onLoginStart() }
+      .doOnTerminate { onLoginFinish() }
+      .subscribe(
+        { onLoginSuccess(it) },
+        { onLoginError(it) }
+      )
+    )
   }
 
-  // A placeholder password validation check
-  private fun isPasswordValid(password: String): Boolean {
-    return password.length > 5;
+  fun onClick(@Suppress("unused_parameter") view: View?) {
+    login(username.value, password.value)
   }
+
+  private fun onLoginStart() {
+    pbVisibility.value = View.VISIBLE
+  }
+
+  private fun onLoginFinish() {
+    pbVisibility.value = View.GONE
+  }
+
+  private fun onLoginSuccess(response: LoginResponse) {
+    Timber.d(response.response)
+  }
+
+  private fun onLoginError(t: Throwable) {
+    Timber.e(t)
+  }
+
 }

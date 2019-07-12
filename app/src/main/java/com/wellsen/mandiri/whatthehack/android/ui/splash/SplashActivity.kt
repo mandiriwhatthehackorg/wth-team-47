@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/11/19 12:52 PM
+ *  * Created by Wellsen on 7/12/19 11:26 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/11/19 12:51 PM
+ *  * Last modified 7/12/19 11:25 AM
  *
  */
 
@@ -33,17 +33,17 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>() {
     val logo = findViewById<View>(R.id.iv_logo)
 
     Handler().postDelayed(
-        {
-          startActivity(
-              Intent(this, LoginActivity::class.java),
-              ActivityOptions.makeSceneTransitionAnimation(
-                  this,
-                  logo, "logo"
-              ).toBundle()
-          )
-          finish()
-        },
-        3000
+      {
+        startActivity(
+          Intent(this, LoginActivity::class.java),
+          ActivityOptions.makeSceneTransitionAnimation(
+            this,
+            logo, "logo"
+          ).toBundle()
+        )
+        finish()
+      },
+      3000
     )
   }
 

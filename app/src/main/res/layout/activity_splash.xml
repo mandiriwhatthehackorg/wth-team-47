@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/11/19 12:52 PM
+  ~  * Created by Wellsen on 7/12/19 11:26 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/11/19 12:51 PM
+  ~  * Last modified 7/12/19 10:45 AM
   ~  */
   -->
 
@@ -27,7 +27,7 @@
         android:layout_width="200dp"
         android:layout_height="58dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_mandiri"
+        android:src="@drawable/ic_mandiri_white"
         android:transitionName="logo"
         />
 

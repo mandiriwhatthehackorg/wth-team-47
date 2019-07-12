@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/10/19 8:20 PM
+ *  * Created by Wellsen on 7/12/19 11:26 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/10/19 8:19 PM
+ *  * Last modified 7/12/19 11:25 AM
  *
  */
 
@@ -26,7 +26,7 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation()
-        .targetContext
+      .targetContext
     assertEquals("com.wellsen.mandiri.whatthehack.android", appContext.packageName)
   }
 }
