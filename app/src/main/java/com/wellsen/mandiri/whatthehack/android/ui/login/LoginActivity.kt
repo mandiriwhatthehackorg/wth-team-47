@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 11:26 AM
+ *  * Created by Wellsen on 7/12/19 11:41 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 11:25 AM
+ *  * Last modified 7/12/19 11:40 AM
  *
  */
 
@@ -65,6 +65,14 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         }
         false
       }
+    }
+
+    binding.btnRegister.setOnClickListener {
+
+    }
+
+    binding.btnForgotPass.setOnClickListener {
+
     }
 
   }

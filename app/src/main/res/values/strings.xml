@@ -1,18 +1,18 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 11:38 AM
+  ~  * Created by Wellsen on 7/12/19 11:41 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 11:33 AM
+  ~  * Last modified 7/12/19 11:40 AM
   ~  */
   -->
 
 <resources>
-  <string name="app_name">What The Hack</string>
+  <string name="app_name"> Mandiri What The Hack</string>
   <!-- Strings related to login -->
-  <string name="prompt_email">Email</string>
+  <string name="prompt_username">Username</string>
   <string name="prompt_password">Password</string>
-  <string name="action_sign_in">Sign in or register</string>
+  <string name="action_sign_in">Sign in</string>
   <string name="action_sign_in_short">Sign in</string>
   <string name="welcome">"Welcome !"</string>
   <string name="invalid_username">Username must be 4 to 255 characters</string>
