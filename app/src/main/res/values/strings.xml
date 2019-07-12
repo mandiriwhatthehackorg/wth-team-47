@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 12:17 PM
+  ~  * Created by Wellsen on 7/12/19 2:06 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 12:13 PM
+  ~  * Last modified 7/12/19 2:04 PM
   ~  */
   -->
 
@@ -19,5 +19,4 @@
   <string name="invalid_username">Username must be 4 to 255 characters</string>
   <string name="invalid_password">Password must be 6 to 15 characters</string>
   <string name="tv_text_register">Create account</string>
-  <string name="tv_text_forgot_pass">Forgot Password</string>
 </resources>

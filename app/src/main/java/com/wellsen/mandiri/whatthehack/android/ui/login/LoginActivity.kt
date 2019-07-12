@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 1:19 PM
+ *  * Created by Wellsen on 7/12/19 2:06 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 12:45 PM
+ *  * Last modified 7/12/19 2:02 PM
  *
  */
 
@@ -19,7 +19,7 @@ import androidx.lifecycle.Observer
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
-import com.wellsen.mandiri.whatthehack.android.ui.forgotpass.ForgotPassActivity
+import com.wellsen.mandiri.whatthehack.android.ui.resetpass.ResetPassActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -77,7 +77,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
 
     binding.btnForgotPass.setOnClickListener {
       startActivity(
-        Intent(this, ForgotPassActivity::class.java),
+        Intent(this, ResetPassActivity::class.java),
         ActivityOptions.makeSceneTransitionAnimation(
           this,
           Pair.create(binding.ivLogo, "logo"),

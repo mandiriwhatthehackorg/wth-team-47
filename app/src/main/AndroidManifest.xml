@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 12:17 PM
+  ~  * Created by Wellsen on 7/12/19 2:06 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 12:01 PM
+  ~  * Last modified 7/12/19 2:02 PM
   ~  */
   -->
 
@@ -44,7 +44,7 @@
     </activity>
 
     <activity
-        android:name=".ui.forgotpass.ForgotPassActivity"
+        android:name=".ui.resetpass.ResetPassActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">

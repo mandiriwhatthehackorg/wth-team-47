@@ -1,28 +1,28 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 12:17 PM
+ *  * Created by Wellsen on 7/12/19 2:06 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 12:17 PM
+ *  * Last modified 7/12/19 2:05 PM
  *
  */
 
-package com.wellsen.mandiri.whatthehack.android.ui.forgotpass
+package com.wellsen.mandiri.whatthehack.android.ui.resetpass
 
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.wellsen.mandiri.whatthehack.android.R
-import com.wellsen.mandiri.whatthehack.android.databinding.ActivityForgotPassBinding
+import com.wellsen.mandiri.whatthehack.android.databinding.ActivityResetPassBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class ForgotPassActivity : BindingActivity<ActivityForgotPassBinding>() {
+class ResetPassActivity : BindingActivity<ActivityResetPassBinding>() {
 
   @LayoutRes
-  override fun getLayoutResId() = R.layout.activity_forgot_pass
+  override fun getLayoutResId() = R.layout.activity_reset_pass
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -30,15 +30,15 @@ class ForgotPassActivity : BindingActivity<ActivityForgotPassBinding>() {
     binding.vm = getViewModel()
     binding.lifecycleOwner = this
 
-    val vm = binding.vm as ForgotPassViewModel
-    vm.forgotPassFormState.observe(this@ForgotPassActivity, Observer {
-      val forgotPassFormState = it ?: return@Observer
+    val vm = binding.vm as ResetPassViewModel
+    vm.resetPassFormState.observe(this@ResetPassActivity, Observer {
+      val resetPassFormState = it ?: return@Observer
 
-      binding.tilUsername.error = if (forgotPassFormState.usernameError == null) null
-      else getString(forgotPassFormState.usernameError)
+      binding.tilUsername.error = if (resetPassFormState.usernameError == null) null
+      else getString(resetPassFormState.usernameError)
 
       // disable login button unless both username / password is valid
-      binding.btnResetPass.isEnabled = forgotPassFormState.isDataValid
+      binding.btnResetPass.isEnabled = resetPassFormState.isDataValid
     })
 
     binding.etUsername.apply {
