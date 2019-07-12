@@ -1,14 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 11:41 AM
+ *  * Created by Wellsen on 7/12/19 12:17 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 11:40 AM
+ *  * Last modified 7/12/19 11:59 AM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.login
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.annotation.LayoutRes
@@ -16,6 +18,7 @@ import androidx.lifecycle.Observer
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.forgotpass.ForgotPassActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -72,7 +75,13 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
     }
 
     binding.btnForgotPass.setOnClickListener {
-
+      startActivity(
+        Intent(this, ForgotPassActivity::class.java),
+        ActivityOptions.makeSceneTransitionAnimation(
+          this,
+          binding.ivLogo, "logo"
+        ).toBundle()
+      )
     }
 
   }

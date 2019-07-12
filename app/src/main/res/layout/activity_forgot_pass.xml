@@ -4,7 +4,7 @@
   ~  * Created by Wellsen on 7/12/19 12:17 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 12:16 PM
+  ~  * Last modified 7/12/19 12:17 PM
   ~  */
   -->
 
@@ -16,7 +16,7 @@
   <data>
     <variable
         name="vm"
-        type="com.wellsen.mandiri.whatthehack.android.ui.login.LoginViewModel"
+        type="com.wellsen.mandiri.whatthehack.android.ui.forgotpass.ForgotPassViewModel"
         />
   </data>
 
@@ -69,79 +69,30 @@
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:imeActionLabel="@string/action_reset_pass_short"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:text="@={vm.username}"
             />
 
       </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/til_password"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:hint="@string/prompt_password"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/til_username"
-          app:errorEnabled="true"
-          style="@style/TextInputLayout"
-          >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:text="@={vm.password}"
-            />
-
-      </com.google.android.material.textfield.TextInputLayout>
-
       <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_login"
+          android:id="@+id/btn_reset_pass"
           android:layout_width="0dp"
           android:layout_height="?attr/actionBarSize"
           android:layout_marginEnd="48dp"
           android:layout_marginStart="48dp"
           android:layout_marginTop="24dp"
-          android:onClick="@{vm::onClick}"
           android:enabled="false"
-          android:text="@string/action_sign_in"
+          android:onClick="@{vm::onClick}"
+          android:text="@string/action_reset_pass"
           android:textColor="@android:color/white"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/til_password"
+          app:layout_constraintTop_toBottomOf="@+id/til_username"
           app:cornerRadius="8dp"
           style="@style/Button"
-          />
-
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_register"
-          android:layout_width="wrap_content"
-          android:layout_height="48dp"
-          android:layout_marginTop="24dp"
-          android:gravity="center"
-          android:text="@string/tv_text_register"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/btn_login"
-          style="@style/Button.TextButton"
-          />
-
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_forgot_pass"
-          android:layout_width="wrap_content"
-          android:layout_height="48dp"
-          android:gravity="center"
-          android:text="@string/tv_text_forgot_pass"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/btn_register"
-          style="@style/Button.TextButton"
           />
 
       <ProgressBar
