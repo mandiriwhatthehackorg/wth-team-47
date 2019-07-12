@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by Wellsen on 7/12/19 6:40 PM
+  ~  * for Mandiri What The Hack Hackathon
+  ~  * Copyright (c) 2019 . All rights reserved.
+  ~  * Last modified 7/12/19 6:39 PM
+  ~  */
+  -->
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <variable
+        name="vm"
+        type="com.wellsen.mandiri.whatthehack.android.ui.otp.OtpViewModel"
+        />
+  </data>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context=".ui.otp.OtpActivity"
+      >
+
+    <com.wellsen.mandiri.whatthehack.android.ui.otp.OtpView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72dp"
+        android:inputType="number"
+        android:itemBackground="@android:color/white"
+        android:textColor="@android:color/black"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:itemCount="6"
+        app:lineColor="@color/colorPrimary"
+        app:viewType="line"
+        tools:text="123456"
+        />
+
+  </FrameLayout>
+
+</layout>

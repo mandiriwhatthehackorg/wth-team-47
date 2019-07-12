@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 5:40 PM
+ *  * Created by Wellsen on 7/12/19 6:40 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 5:29 PM
+ *  * Last modified 7/12/19 6:13 PM
  *
  */
 
@@ -59,10 +59,14 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
     vm.status.observe(this@RegisterActivity, Observer {
 
       if (it.code == Status.ERROR) {
+
         Toast.makeText(this@RegisterActivity, it.message, Toast.LENGTH_LONG).show()
+
       } else {
+
         // Proceed register
         Timber.d("Proceed register")
+
       }
 
     })

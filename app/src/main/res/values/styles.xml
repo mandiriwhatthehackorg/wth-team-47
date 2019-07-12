@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 1:58 PM
+  ~  * Created by Wellsen on 7/12/19 6:40 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 1:57 PM
+  ~  * Last modified 7/12/19 6:13 PM
   ~  */
   -->
 
@@ -15,6 +15,8 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
   </style>
 
   <!--Style for Splash Activity-->
@@ -59,6 +61,14 @@
 
   <style name="Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
+  </style>
+
+  <style name="OtpWidget"/>
+
+  <style name="OtpWidget.OtpView" parent="Widget.AppCompat.EditText">
+    <item name="android:background">@null</item>
+    <item name="android:minHeight">0dp</item>
+    <item name="android:maxLines">1</item>
   </style>
 
 </resources>

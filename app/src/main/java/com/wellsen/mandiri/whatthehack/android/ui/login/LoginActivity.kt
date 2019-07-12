@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 4:54 PM
+ *  * Created by Wellsen on 7/12/19 6:40 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 4:52 PM
+ *  * Last modified 7/12/19 6:39 PM
  *
  */
 
@@ -21,8 +21,8 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.otp.OtpActivity
 import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
-import com.wellsen.mandiri.whatthehack.android.ui.resetpass.ResetPassActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
@@ -98,7 +98,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
     }
 
     binding.btnForgotPass.setOnClickListener {
-      startActivity(
+      /*startActivity(
         Intent(this, ResetPassActivity::class.java),
         ActivityOptions.makeSceneTransitionAnimation(
           this,
@@ -106,7 +106,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
           Pair.create(binding.tilUsername, "username"),
           Pair.create(binding.btnLogin, "button")
         ).toBundle()
-      )
+      )*/
+
+      startActivity(Intent(this, OtpActivity::class.java))
     }
 
   }

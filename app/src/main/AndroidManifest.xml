@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 5:40 PM
+  ~  * Created by Wellsen on 7/12/19 6:40 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 5:31 PM
+  ~  * Last modified 7/12/19 5:43 PM
   ~  */
   -->
 
@@ -52,6 +52,13 @@
 
     <activity
         android:name=".ui.resetpass.ResetPassActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+
+    <activity
+        android:name=".ui.otp.OtpActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
