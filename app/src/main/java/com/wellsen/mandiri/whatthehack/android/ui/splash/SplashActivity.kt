@@ -1,15 +1,14 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 1:19 PM
+ *  * Created by Wellsen on 7/12/19 1:58 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 1:19 PM
+ *  * Last modified 7/12/19 1:58 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.splash
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -32,8 +31,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>() {
     Handler().postDelayed(
       {
         startActivity(
-          Intent(this, LoginActivity::class.java),
-          ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+          Intent(this, LoginActivity::class.java)
         )
         finish()
       },

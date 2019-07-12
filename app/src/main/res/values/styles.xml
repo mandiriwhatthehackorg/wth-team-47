@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 11:38 AM
+  ~  * Created by Wellsen on 7/12/19 1:58 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 11:34 AM
+  ~  * Last modified 7/12/19 1:57 PM
   ~  */
   -->
 
@@ -22,16 +22,16 @@
     <item name="android:textColorPrimary">@android:color/white</item>
 
     <!-- enable activity transitions -->
-    <item name="android:windowActivityTransitions">true</item>
+    <!--<item name="android:windowActivityTransitions">true</item>-->
     <!-- enable window content transitions -->
-    <item name="android:windowContentTransitions">true</item>
+    <!--<item name="android:windowContentTransitions">true</item>-->
 
     <!-- specify enter and exit transitions -->
-    <item name="android:windowEnterTransition">@android:transition/no_transition</item>
-    <item name="android:windowExitTransition">@android:transition/no_transition</item>
+    <!--<item name="android:windowEnterTransition">@android:transition/no_transition</item>-->
+    <!--<item name="android:windowExitTransition">@android:transition/no_transition</item>-->
 
-    <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
-    <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+    <!--<item name="android:windowSharedElementEnterTransition">@android:transition/move</item>-->
+    <!--<item name="android:windowSharedElementExitTransition">@android:transition/move</item>-->
 
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
