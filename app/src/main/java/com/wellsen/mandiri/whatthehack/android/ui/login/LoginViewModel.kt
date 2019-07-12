@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 3:54 PM
+ *  * Created by Wellsen on 7/12/19 4:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 3:54 PM
+ *  * Last modified 7/12/19 4:47 PM
  *
  */
 
@@ -13,6 +13,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R
+import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.OnboardingApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.LoginRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.LoginResponse
@@ -32,7 +33,7 @@ class LoginViewModel(
   var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
   var username: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
   var password: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
-  var error = MutableLiveData<String>()
+  var status = MutableLiveData<Status>()
 
   private val _loginForm = MutableLiveData<LoginFormState>()
   val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -74,11 +75,12 @@ class LoginViewModel(
 
   private fun onLoginSuccess(response: LoginResponse) {
     Timber.d(response.response)
+    status.value = Status(Status.SUCCESS)
   }
 
   private fun onLoginError(t: Throwable) {
     Timber.e(t)
-    error.value = t.localizedMessage
+    status.value = Status(Status.ERROR, t.localizedMessage)
   }
 
 }

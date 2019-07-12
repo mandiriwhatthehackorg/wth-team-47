@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 3:54 PM
+ *  * Created by Wellsen on 7/12/19 4:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 3:54 PM
+ *  * Last modified 7/12/19 4:52 PM
  *
  */
 
@@ -13,6 +13,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R.string
+import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.OnboardingApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
@@ -34,7 +35,7 @@ class RegisterViewModel(
 ) : BaseViewModel() {
 
   var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
-  var error = MutableLiveData<String>()
+  var status = MutableLiveData<Status>()
   var email: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
   var nik: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
   var phone: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
@@ -83,11 +84,12 @@ class RegisterViewModel(
 
   private fun onRegisterSuccess(response: RegisterResponse) {
     Timber.d(response.response)
+    status.value = Status(Status.SUCCESS)
   }
 
   private fun onRegisterError(t: Throwable) {
     Timber.e(t)
-    error.value = t.localizedMessage
+    status.value = Status(Status.ERROR, t.localizedMessage)
   }
 
 }

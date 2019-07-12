@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 3:54 PM
+ *  * Created by Wellsen on 7/12/19 4:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 3:54 PM
+ *  * Last modified 7/12/19 4:53 PM
  *
  */
 
@@ -17,10 +17,12 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.google.android.material.textfield.TextInputEditText
 import com.wellsen.mandiri.whatthehack.android.R
+import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityRegisterBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
 
 class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
 
@@ -54,8 +56,15 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
       binding.btnRegister.isEnabled = registerFormState.isDataValid
     })
 
-    vm.error.observe(this@RegisterActivity, Observer {
-      Toast.makeText(this@RegisterActivity, it, Toast.LENGTH_LONG).show()
+    vm.status.observe(this@RegisterActivity, Observer {
+
+      if (it.code == Status.ERROR) {
+        Toast.makeText(this@RegisterActivity, it.message, Toast.LENGTH_LONG).show()
+      } else {
+        // Proceed login
+        Timber.d("Proceed register")
+      }
+
     })
 
     setAfterTextChangedListener(binding.etEmail, vm)

@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 3:54 PM
+ *  * Created by Wellsen on 7/12/19 4:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 3:54 PM
+ *  * Last modified 7/12/19 4:52 PM
  *
  */
 
@@ -18,12 +18,14 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.wellsen.mandiri.whatthehack.android.R
+import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
 import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
 import com.wellsen.mandiri.whatthehack.android.ui.resetpass.ResetPassActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
 
 class LoginActivity : BindingActivity<ActivityLoginBinding>() {
 
@@ -48,8 +50,15 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
       binding.btnLogin.isEnabled = loginFormState.isDataValid
     })
 
-    vm.error.observe(this@LoginActivity, Observer {
-      Toast.makeText(this@LoginActivity, it, Toast.LENGTH_LONG).show()
+    vm.status.observe(this@LoginActivity, Observer {
+
+      if (it.code == Status.ERROR) {
+        Toast.makeText(this@LoginActivity, it.message, Toast.LENGTH_LONG).show()
+      } else {
+        // Proceed login
+        Timber.d("Proceed login")
+      }
+
     })
 
     binding.etUsername.afterTextChanged {

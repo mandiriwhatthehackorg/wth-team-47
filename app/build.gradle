@@ -69,16 +69,16 @@ dependencies {
 
 /*
  * *
- *  * Created by Wellsen on 7/10/19 12:33 PM
+ *  * Created by Wellsen on 7/12/19 4:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/10/19 12:32 PM
+ *  * Last modified 7/12/19 4:37 PM
  *
  */
 
 // If you're using the Android Databinding library,
 // you may want to increase the number of errors that javac will print.
-// When Dagger prints an error, databinding compilation will halt and sometimes print more than 100 errors,
+// When Dagger prints an status, databinding compilation will halt and sometimes print more than 100 errors,
 // which is the default amount for javac. For more information, see Issue 306.
 gradle.projectsEvaluated {
   tasks.withType(JavaCompile) {
