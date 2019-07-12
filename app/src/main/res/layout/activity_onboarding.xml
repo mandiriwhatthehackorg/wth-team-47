@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by Wellsen on 7/12/19 5:40 PM
+  ~  * for Mandiri What The Hack Hackathon
+  ~  * Copyright (c) 2019 . All rights reserved.
+  ~  * Last modified 7/12/19 5:40 PM
+  ~  */
+  -->
+
+<layout
+    >
+
+  <data>
+    <variable
+        name="vm"
+        type="com.wellsen.mandiri.whatthehack.android.ui.onboarding.OnboardingViewModel"
+        />
+  </data>
+
+</layout>

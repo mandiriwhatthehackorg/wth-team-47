@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 3:54 PM
+  ~  * Created by Wellsen on 7/12/19 5:40 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 3:54 PM
+  ~  * Last modified 7/12/19 5:34 PM
   ~  */
   -->
 
@@ -27,7 +27,7 @@
       android:paddingLeft="@dimen/activity_horizontal_margin"
       android:paddingRight="@dimen/activity_horizontal_margin"
       android:paddingTop="@dimen/activity_vertical_margin"
-      tools:context=".ui.login.LoginActivity"
+      tools:context=".ui.resetpass.ResetPassActivity"
       >
 
     <androidx.constraintlayout.widget.ConstraintLayout
