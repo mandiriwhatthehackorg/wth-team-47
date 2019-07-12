@@ -1,15 +1,16 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 3:54 PM
+  ~  * Created by Wellsen on 7/12/19 5:28 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 2:25 PM
+  ~  * Last modified 7/12/19 5:03 PM
   ~  */
   -->
 
 <resources>
   <string name="app_name">What The Hack</string>
 
+  <string name="no_connection">No Internet Connection</string>
   <string name="prompt_username">Username</string>
   <string name="prompt_email">Email</string>
   <string name="prompt_nik">NIK</string>
