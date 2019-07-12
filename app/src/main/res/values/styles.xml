@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/11/19 1:30 PM
+  ~  * Created by Wellsen on 7/12/19 11:38 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/11/19 12:55 PM
+  ~  * Last modified 7/12/19 11:34 AM
   ~  */
   -->
 
@@ -18,7 +18,7 @@
   </style>
 
   <!--Style for Splash Activity-->
-  <style name="AppTheme.Onboard">
+  <style name="AppTheme.Splash">
     <item name="android:textColorPrimary">@android:color/white</item>
 
     <!-- enable activity transitions -->
@@ -27,8 +27,8 @@
     <item name="android:windowContentTransitions">true</item>
 
     <!-- specify enter and exit transitions -->
-    <item name="android:windowEnterTransition">@android:transition/fade</item>
-    <item name="android:windowExitTransition">@android:transition/fade</item>
+    <item name="android:windowEnterTransition">@android:transition/no_transition</item>
+    <item name="android:windowExitTransition">@android:transition/no_transition</item>
 
     <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
     <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
@@ -55,6 +55,10 @@
   <style name="Button" parent="Widget.MaterialComponents.Button">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="backgroundTint">?attr/colorPrimaryDark</item>
+  </style>
+
+  <style name="Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
 
 </resources>

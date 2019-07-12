@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 11:26 AM
+  ~  * Created by Wellsen on 7/12/19 11:38 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 11:22 AM
+  ~  * Last modified 7/12/19 11:30 AM
   ~  */
   -->
 
@@ -28,7 +28,7 @@
         android:name=".ui.splash.SplashActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:label="@string/title_activity_splash"
-        android:theme="@style/AppTheme.Onboard">
+        android:theme="@style/AppTheme.Splash">
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
