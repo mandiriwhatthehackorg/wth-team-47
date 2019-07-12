@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 2:06 PM
+ *  * Created by Wellsen on 7/12/19 3:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 2:02 PM
+ *  * Last modified 7/12/19 3:54 PM
  *
  */
 
@@ -14,11 +14,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Pair
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
 import com.wellsen.mandiri.whatthehack.android.ui.resetpass.ResetPassActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -43,8 +45,11 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
       binding.tilPassword.error = if (loginFormState.passwordError == null) null
       else getString(loginFormState.passwordError)
 
-      // disable login button unless both username / password is valid
       binding.btnLogin.isEnabled = loginFormState.isDataValid
+    })
+
+    vm.error.observe(this@LoginActivity, Observer {
+      Toast.makeText(this@LoginActivity, it, Toast.LENGTH_LONG).show()
     })
 
     binding.etUsername.afterTextChanged {
@@ -72,7 +77,15 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
     }
 
     binding.btnRegister.setOnClickListener {
-
+      startActivity(
+        Intent(this, RegisterActivity::class.java),
+        ActivityOptions.makeSceneTransitionAnimation(
+          this,
+          Pair.create(binding.ivLogo, "logo"),
+          Pair.create(binding.tilUsername, "username"),
+          Pair.create(binding.btnLogin, "button")
+        ).toBundle()
+      )
     }
 
     binding.btnForgotPass.setOnClickListener {
@@ -82,7 +95,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
           this,
           Pair.create(binding.ivLogo, "logo"),
           Pair.create(binding.tilUsername, "username"),
-          Pair.create(binding.btnRegister, "button")
+          Pair.create(binding.btnLogin, "button")
         ).toBundle()
       )
     }

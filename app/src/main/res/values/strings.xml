@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 2:06 PM
+  ~  * Created by Wellsen on 7/12/19 3:54 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 2:04 PM
+  ~  * Last modified 7/12/19 2:25 PM
   ~  */
   -->
 
@@ -11,12 +11,20 @@
   <string name="app_name">What The Hack</string>
 
   <string name="prompt_username">Username</string>
+  <string name="prompt_email">Email</string>
+  <string name="prompt_nik">NIK</string>
+  <string name="prompt_phone">Phone</string>
+  <string name="prompt_dob">Date of Birth</string>
   <string name="prompt_password">Password</string>
   <string name="action_sign_in">Sign in</string>
   <string name="action_sign_in_short">Sign in</string>
   <string name="action_reset_pass">Reset Password</string>
   <string name="action_reset_pass_short">Reset</string>
+  <string name="action_register">Register</string>
+  <string name="invalid_email">Invalid email</string>
+  <string name="invalid_nik">NIK must be 16 characters</string>
+  <string name="invalid_phone">Phone must be 10 to 13 characters</string>
+  <string name="invalid_dob">Invalid date of birth</string>
   <string name="invalid_username">Username must be 4 to 255 characters</string>
   <string name="invalid_password">Password must be 6 to 15 characters</string>
-  <string name="tv_text_register">Create account</string>
 </resources>

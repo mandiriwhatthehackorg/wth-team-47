@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 11:26 AM
+ *  * Created by Wellsen on 7/12/19 3:54 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 11:21 AM
+ *  * Last modified 7/12/19 3:54 PM
  *
  */
 
@@ -32,6 +32,7 @@ class LoginViewModel(
   var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
   var username: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
   var password: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
+  var error = MutableLiveData<String>()
 
   private val _loginForm = MutableLiveData<LoginFormState>()
   val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -46,9 +47,10 @@ class LoginViewModel(
     }
   }
 
-  fun login(username: String, password: String) {
+  fun login(request: LoginRequest) {
     @Suppress("UnstableApiUsage")
-    add(onboardingApi.login(LoginRequest(username, password)).with()
+    add(
+      onboardingApi.login(request).with()
       .doOnSubscribe { onLoginStart() }
       .doOnTerminate { onLoginFinish() }
       .subscribe(
@@ -59,7 +61,7 @@ class LoginViewModel(
   }
 
   fun onClick(@Suppress("unused_parameter") view: View?) {
-    login(username.value, password.value)
+    login(LoginRequest(username.value, password.value))
   }
 
   private fun onLoginStart() {
@@ -76,6 +78,7 @@ class LoginViewModel(
 
   private fun onLoginError(t: Throwable) {
     Timber.e(t)
+    error.value = t.localizedMessage
   }
 
 }

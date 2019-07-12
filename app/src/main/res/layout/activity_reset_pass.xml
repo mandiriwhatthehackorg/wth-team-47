@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 2:06 PM
+  ~  * Created by Wellsen on 7/12/19 3:54 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 2:02 PM
+  ~  * Last modified 7/12/19 3:54 PM
   ~  */
   -->
 
@@ -73,6 +73,8 @@
             android:imeActionLabel="@string/action_reset_pass_short"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:digits="abcdefghijklmnopqrstuvwxyz1234567890"
+            android:maxLength="255"
             android:text="@={vm.username}"
             />
 
