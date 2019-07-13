@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 4:54 PM
+ *  * Created by Wellsen on 7/13/19 9:53 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 4:52 PM
+ *  * Last modified 7/13/19 9:52 AM
  *
  */
 
@@ -14,7 +14,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R.string
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
-import com.wellsen.mandiri.whatthehack.android.data.remote.api.OnboardingApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
@@ -27,7 +27,7 @@ import com.wellsen.mandiri.whatthehack.android.util.validator.PhoneValidator
 import timber.log.Timber
 
 class RegisterViewModel(
-  private val onboardingApi: OnboardingApi,
+  private val clientApi: ClientApi,
   private val emailValidator: EmailValidator,
   private val nikValidator: NikValidator,
   private val phoneValidator: PhoneValidator,
@@ -60,7 +60,8 @@ class RegisterViewModel(
 
   fun register(request: RegisterRequest) {
     @Suppress("UnstableApiUsage")
-    add(onboardingApi.register(request).with()
+    add(
+      clientApi.register(request).with()
       .doOnSubscribe { onRegisterStart() }
       .doOnTerminate { onRegisterFinish() }
       .subscribe(

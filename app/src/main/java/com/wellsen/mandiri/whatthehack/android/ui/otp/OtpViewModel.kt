@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/13/19 8:53 AM
+ *  * Created by Wellsen on 7/13/19 9:53 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/13/19 8:50 AM
+ *  * Last modified 7/13/19 9:53 AM
  *
  */
 
@@ -12,7 +12,7 @@ package com.wellsen.mandiri.whatthehack.android.ui.otp
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.data.model.OtpStatus
-import com.wellsen.mandiri.whatthehack.android.data.remote.api.OnboardingApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.OtpResendRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.OtpValidationRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpResendResponse
@@ -23,7 +23,7 @@ import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import timber.log.Timber
 
 class OtpViewModel(
-  private val onboardingApi: OnboardingApi
+  private val clientApi: ClientApi
 ) : BaseViewModel() {
 
   var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
@@ -38,7 +38,7 @@ class OtpViewModel(
   fun onOtpFilled(otp: String) {
     @Suppress("UnstableApiUsage")
     add(
-      onboardingApi.validateOtp(OtpValidationRequest(otp)).with()
+      clientApi.validateOtp(OtpValidationRequest(otp)).with()
         .doOnSubscribe { onOtpRequestStart() }
         .doOnTerminate { onOtpResponseFinish() }
         .subscribe(
@@ -51,7 +51,7 @@ class OtpViewModel(
   fun onClickResend(@Suppress("unused_parameter") view: View?) {
     @Suppress("UnstableApiUsage")
     add(
-      onboardingApi.resendOtp(OtpResendRequest("1234567890123456")).with()
+      clientApi.resendOtp(OtpResendRequest("1234567890123456")).with()
         .doOnSubscribe { onOtpRequestStart() }
         .doOnTerminate { onOtpResponseFinish() }
         .subscribe(
