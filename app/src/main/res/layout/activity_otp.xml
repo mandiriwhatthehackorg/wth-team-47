@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 6:40 PM
+  ~  * Created by Wellsen on 7/13/19 8:53 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 6:39 PM
+  ~  * Last modified 7/13/19 8:53 AM
   ~  */
   -->
 
@@ -24,25 +24,92 @@
   <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:paddingLeft="@dimen/activity_horizontal_margin"
+      android:paddingRight="@dimen/activity_horizontal_margin"
+      android:paddingTop="@dimen/activity_vertical_margin"
       tools:context=".ui.otp.OtpActivity"
       >
 
-    <com.wellsen.mandiri.whatthehack.android.ui.otp.OtpView
-        android:id="@+id/otp_view"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="72dp"
-        android:inputType="number"
-        android:itemBackground="@android:color/white"
-        android:textColor="@android:color/black"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:itemCount="6"
-        app:lineColor="@color/colorPrimary"
-        app:viewType="line"
-        tools:text="123456"
-        />
+        android:layout_gravity="center"
+        android:layout_marginBottom="?attr/actionBarSize"
+        >
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tv_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:gravity="center"
+          android:text="@string/prompt_otp"
+          android:textSize="21sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="Please type the OTP code sent to name@domain.com"
+          />
+
+      <com.wellsen.mandiri.whatthehack.android.ui.otp.OtpView
+          android:id="@+id/view_otp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:layout_marginTop="?attr/actionBarSize"
+          android:inputType="number"
+          android:itemBackground="@android:color/white"
+          android:text="@{vm.otp}"
+          android:textColor="@android:color/black"
+          android:textSize="34sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_title"
+          app:itemCount="6"
+          app:lineColor="@color/colorPrimary"
+          app:viewType="line"
+          tools:text="123456"
+          />
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_resend"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_marginTop="108dp"
+          android:gravity="center"
+          android:onClick="@{vm.onClickResend}"
+          android:text="@string/action_resend"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/view_otp"
+          style="@style/Button.TextButton"
+          />
+
+      <ProgressBar
+          android:id="@+id/pb"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginBottom="64dp"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="64dp"
+          android:visibility="@{safeUnbox(vm.pbVisibility)}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:visibility="visible"
+          />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
   </FrameLayout>
 
