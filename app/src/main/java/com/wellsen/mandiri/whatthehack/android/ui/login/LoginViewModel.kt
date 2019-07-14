@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/13/19 9:53 AM
+ *  * Created by Wellsen on 7/14/19 8:30 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/13/19 9:01 AM
+ *  * Last modified 7/14/19 8:30 AM
  *
  */
 
@@ -20,13 +20,13 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.LoginRespons
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
+import com.wellsen.mandiri.whatthehack.android.util.validator.NameValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.PasswordValidator
-import com.wellsen.mandiri.whatthehack.android.util.validator.UsernameValidator
 import timber.log.Timber
 
 class LoginViewModel(
   private val clientApi: ClientApi,
-  private val usernameValidator: UsernameValidator,
+  private val nameValidator: NameValidator,
   private val passwordValidator: PasswordValidator
 ) : BaseViewModel() {
 
@@ -39,7 +39,7 @@ class LoginViewModel(
   val loginFormState: LiveData<LoginFormState> = _loginForm
 
   fun onLoginFormChanged(username: String, password: String) {
-    if (!usernameValidator.isValid(username)) {
+    if (!nameValidator.isValid(username)) {
       _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
     } else if (!passwordValidator.isValid(password)) {
       _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)

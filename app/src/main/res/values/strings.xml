@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/13/19 8:53 AM
+  ~  * Created by Wellsen on 7/14/19 8:30 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/13/19 8:50 AM
+  ~  * Last modified 7/14/19 7:35 AM
   ~  */
   -->
 
@@ -18,17 +18,23 @@
   <string name="prompt_dob">Date of Birth</string>
   <string name="prompt_password">Password</string>
   <string name="prompt_otp">Please type the OTP code sent to $email</string>
+  <string name="prompt_mother_name">Mother\'s maiden name</string>
   <string name="message_otp_resend">Please check your inbox for OTP</string>
+  <string name="title_text_product_type">Product type</string>
+  <string name="title_text_card_type">Card type</string>
+  <string name="title_text_branch_code">Branch code</string>
   <string name="action_sign_in">Sign in</string>
   <string name="action_sign_in_short">Sign in</string>
   <string name="action_reset_pass">Reset Password</string>
   <string name="action_reset_pass_short">Reset</string>
   <string name="action_register">Register</string>
   <string name="action_resend">Resend OTP</string>
+  <string name="action_submit_data">Submit Data</string>
   <string name="invalid_email">Invalid email</string>
   <string name="invalid_nik">NIK must be 16 characters</string>
   <string name="invalid_phone">Phone must be 10 to 13 characters</string>
   <string name="invalid_dob">Invalid date of birth</string>
   <string name="invalid_username">Username must be 4 to 255 characters</string>
+  <string name="invalid_mothers_name">Mother\'s maiden name ame must be 4 to 255 characters</string>
   <string name="invalid_password">Password must be 6 to 15 characters</string>
 </resources>

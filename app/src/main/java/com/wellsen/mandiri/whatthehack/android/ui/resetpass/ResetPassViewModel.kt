@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 2:06 PM
+ *  * Created by Wellsen on 7/14/19 8:30 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 2:02 PM
+ *  * Last modified 7/14/19 7:30 AM
  *
  */
 
@@ -15,11 +15,11 @@ import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R.string
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.NonNullMutableLiveData
-import com.wellsen.mandiri.whatthehack.android.util.validator.UsernameValidator
+import com.wellsen.mandiri.whatthehack.android.util.validator.NameValidator
 import timber.log.Timber
 
 class ResetPassViewModel(
-  private val usernameValidator: UsernameValidator
+  private val nameValidator: NameValidator
 ) : BaseViewModel() {
 
   var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
@@ -29,7 +29,7 @@ class ResetPassViewModel(
   val resetPassFormState: LiveData<ResetPassFormState> = _resetPassForm
 
   fun onForgotPassFormChanged(username: String) {
-    if (!usernameValidator.isValid(username)) {
+    if (!nameValidator.isValid(username)) {
       _resetPassForm.value = ResetPassFormState(usernameError = string.invalid_username)
     } else {
       _resetPassForm.value = ResetPassFormState(isDataValid = true)

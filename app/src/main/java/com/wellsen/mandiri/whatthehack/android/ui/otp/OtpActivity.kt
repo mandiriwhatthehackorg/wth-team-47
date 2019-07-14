@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/13/19 8:53 AM
+ *  * Created by Wellsen on 7/14/19 8:30 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/13/19 8:51 AM
+ *  * Last modified 7/14/19 8:26 AM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.otp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -17,6 +18,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.OtpStatus
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityOtpBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.submitdata.SubmitDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 
@@ -36,8 +38,10 @@ class OtpActivity : BindingActivity<ActivityOtpBinding>() {
     vm.status.observe(this@OtpActivity, Observer {
 
       when (it.code) {
-        OtpStatus.ERROR ->
+        OtpStatus.ERROR -> {
           Toast.makeText(this@OtpActivity, it.message, Toast.LENGTH_LONG).show()
+          startActivity(Intent(this, SubmitDataActivity::class.java))
+        }
 
         OtpStatus.OTP_RESEND_SUCCESS -> {
           binding.viewOtp.text?.clear()

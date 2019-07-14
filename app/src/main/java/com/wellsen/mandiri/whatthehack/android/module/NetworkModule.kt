@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/13/19 9:53 AM
+ *  * Created by Wellsen on 7/14/19 8:30 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/13/19 9:50 AM
+ *  * Last modified 7/14/19 7:05 AM
  *
  */
 
@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder
 import com.wellsen.mandiri.whatthehack.android.BuildConfig
 import com.wellsen.mandiri.whatthehack.android.data.interceptor.AuthenticationInterceptor
 import com.wellsen.mandiri.whatthehack.android.data.interceptor.OfflineInterceptor
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.AdminApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.Api
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import io.reactivex.schedulers.Schedulers
@@ -102,6 +103,16 @@ val networkModule = module {
       .client(get())
       .build()
       .create(ClientApi::class.java)
+  }
+
+  single {
+    Retrofit.Builder()
+      .baseUrl(BuildConfig.ONBOARDING_BASE_URL)
+      .addConverterFactory(GsonConverterFactory.create(get()))
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+      .client(get())
+      .build()
+      .create(AdminApi::class.java)
   }
 
   single {

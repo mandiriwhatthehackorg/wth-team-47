@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by Wellsen on 7/14/19 8:30 AM
+  ~  * for Mandiri What The Hack Hackathon
+  ~  * Copyright (c) 2019 . All rights reserved.
+  ~  * Last modified 7/14/19 8:30 AM
+  ~  */
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <variable
+        name="vm"
+        type="com.wellsen.mandiri.whatthehack.android.ui.submitdata.SubmitDataViewModel"
+        />
+  </data>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="@dimen/activity_vertical_margin"
+      android:paddingLeft="@dimen/activity_horizontal_margin"
+      android:paddingRight="@dimen/activity_horizontal_margin"
+      android:paddingTop="@dimen/activity_vertical_margin"
+      tools:context=".ui.submitdata.SubmitDataActivity"
+      >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"
+        >
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tv_product_type"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:text="@string/title_text_product_type"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+
+      <androidx.appcompat.widget.AppCompatSpinner
+          android:id="@+id/sp_product_type"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:text="@string/title_text_product_type"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_product_type"
+          app:productType="@={vm.productType}"
+          app:productTypes="@{vm.productTypes}"
+          tools:listitem="@android:layout/simple_spinner_dropdown_item"
+          />
+
+      <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/til_mothers_maiden_name"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:layout_marginTop="?attr/actionBarSize"
+          android:hint="@string/prompt_mother_name"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/sp_product_type"
+          app:errorEnabled="true"
+          style="@style/TextInputLayout"
+          >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mothers_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:text="@={vm.mothersName}"
+            />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_submit"
+          android:layout_width="0dp"
+          android:layout_height="?attr/actionBarSize"
+          android:layout_marginEnd="48dp"
+          android:layout_marginStart="48dp"
+          android:layout_marginTop="?attr/actionBarSize"
+          android:enabled="false"
+          android:onClick="@{vm::onClickSubmit}"
+          android:text="@string/action_submit_data"
+          android:textColor="@android:color/white"
+          android:transitionName="button"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/til_mothers_maiden_name"
+          app:cornerRadius="8dp"
+          style="@style/Button"
+          />
+
+      <ProgressBar
+          android:id="@+id/pb"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginBottom="64dp"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="64dp"
+          android:visibility="@{safeUnbox(vm.pbVisibility)}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:visibility="visible"
+          />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </FrameLayout>
+
+</layout>
