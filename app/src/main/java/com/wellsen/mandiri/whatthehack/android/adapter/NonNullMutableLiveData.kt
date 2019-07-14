@@ -1,13 +1,13 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 11:26 AM
+ *  * Created by Wellsen on 7/14/19 8:52 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/11/19 1:46 PM
+ *  * Last modified 7/14/19 8:48 AM
  *
  */
 
-package com.wellsen.mandiri.whatthehack.android.util
+package com.wellsen.mandiri.whatthehack.android.adapter
 
 import androidx.lifecycle.MutableLiveData
 

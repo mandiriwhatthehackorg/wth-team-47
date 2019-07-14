@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/12/19 5:40 PM
+  ~  * Created by Wellsen on 7/14/19 8:52 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/12/19 5:34 PM
+  ~  * Last modified 7/14/19 8:43 AM
   ~  */
   -->
 
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="?attr/actionBarSize"
         >
 
       <androidx.appcompat.widget.AppCompatImageView

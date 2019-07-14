@@ -1,13 +1,13 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:30 AM
+ *  * Created by Wellsen on 7/14/19 8:52 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:30 AM
+ *  * Last modified 7/14/19 8:48 AM
  *
  */
 
-package com.wellsen.mandiri.whatthehack.android.util
+package com.wellsen.mandiri.whatthehack.android.adapter
 
 import android.content.Context
 import android.view.View
@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.wellsen.mandiri.whatthehack.android.data.model.ProductType
 
-class NameAdapter(
+class ProductTypeAdapter(
   context: Context,
   textViewResourceId: Int,
   private val values: List<ProductType>

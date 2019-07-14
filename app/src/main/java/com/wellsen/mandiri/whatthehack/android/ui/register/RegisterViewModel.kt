@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/13/19 9:53 AM
+ *  * Created by Wellsen on 7/14/19 8:52 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/13/19 9:52 AM
+ *  * Last modified 7/14/19 8:52 AM
  *
  */
 
@@ -13,12 +13,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R.string
+import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
-import com.wellsen.mandiri.whatthehack.android.util.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import com.wellsen.mandiri.whatthehack.android.util.validator.DobValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.EmailValidator
@@ -34,12 +34,17 @@ class RegisterViewModel(
   private val dobValidator: DobValidator
 ) : BaseViewModel() {
 
-  var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
+  var pbVisibility: NonNullMutableLiveData<Int> =
+    NonNullMutableLiveData(View.INVISIBLE)
   var status = MutableLiveData<Status>()
-  var email: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
-  var nik: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
-  var phone: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
-  var dob: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
+  var email: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
+  var nik: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
+  var phone: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
+  var dob: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
 
   private val _registerForm = MutableLiveData<RegisterFormState>()
   val registerFormState: LiveData<RegisterFormState> = _registerForm

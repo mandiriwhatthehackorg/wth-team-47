@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:30 AM
+ *  * Created by Wellsen on 7/14/19 8:52 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 7:30 AM
+ *  * Last modified 7/14/19 8:52 AM
  *
  */
 
@@ -13,8 +13,8 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R.string
+import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
-import com.wellsen.mandiri.whatthehack.android.util.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.util.validator.NameValidator
 import timber.log.Timber
 
@@ -22,8 +22,10 @@ class ResetPassViewModel(
   private val nameValidator: NameValidator
 ) : BaseViewModel() {
 
-  var pbVisibility: NonNullMutableLiveData<Int> = NonNullMutableLiveData(View.INVISIBLE)
-  var username: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
+  var pbVisibility: NonNullMutableLiveData<Int> =
+    NonNullMutableLiveData(View.INVISIBLE)
+  var username: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
 
   private val _resetPassForm = MutableLiveData<ResetPassFormState>()
   val resetPassFormState: LiveData<ResetPassFormState> = _resetPassForm
