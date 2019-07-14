@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:30 AM
+ *  * Created by Wellsen on 7/14/19 9:31 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:08 AM
+ *  * Last modified 7/14/19 9:07 AM
  *
  */
 
@@ -15,6 +15,7 @@ import com.wellsen.mandiri.whatthehack.android.ui.otp.OtpViewModel
 import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterViewModel
 import com.wellsen.mandiri.whatthehack.android.ui.resetpass.ResetPassViewModel
 import com.wellsen.mandiri.whatthehack.android.ui.submitdata.SubmitDataViewModel
+import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -24,5 +25,6 @@ val viewModelModule = module {
   viewModel { RegisterViewModel(get(), get(), get(), get(), get()) }
   viewModel { OtpViewModel(get()) }
   viewModel { SubmitDataViewModel(get(), get(), get()) }
+  viewModel { SubmitKtpViewModel(get()) }
   viewModel { OnboardingViewModel() }
 }

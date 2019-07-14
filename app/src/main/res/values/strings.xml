@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/14/19 8:30 AM
+  ~  * Created by Wellsen on 7/14/19 9:31 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/14/19 7:35 AM
+  ~  * Last modified 7/14/19 9:03 AM
   ~  */
   -->
 
@@ -30,6 +30,8 @@
   <string name="action_register">Register</string>
   <string name="action_resend">Resend OTP</string>
   <string name="action_submit_data">Submit Data</string>
+  <string name="action_take_photo">Take Photo</string>
+  <string name="action_open_gallery">Open Gallery</string>
   <string name="invalid_email">Invalid email</string>
   <string name="invalid_nik">NIK must be 16 characters</string>
   <string name="invalid_phone">Phone must be 10 to 13 characters</string>
