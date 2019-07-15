@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 9:31 AM
+ *  * Created by Wellsen on 7/15/19 4:05 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 9:11 AM
+ *  * Last modified 7/15/19 3:54 PM
  *
  */
 
@@ -20,6 +20,7 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpValidatio
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitDataResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitKtpResponse
+import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitSelfieResponse
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.http.Body
@@ -47,5 +48,9 @@ interface ClientApi {
   @Multipart
   @POST("submitImageKTP")
   fun submitKtp(@Part filePart: MultipartBody.Part): Single<SubmitKtpResponse>
+
+  @Multipart
+  @POST("submitImageSelfie")
+  fun submitSelfie(@Part filePart: MultipartBody.Part): Single<SubmitSelfieResponse>
 
 }

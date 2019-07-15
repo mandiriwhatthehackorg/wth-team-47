@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:53 PM
+ *  * Created by Wellsen on 7/15/19 4:05 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:51 PM
+ *  * Last modified 7/15/19 3:18 PM
  *
  */
 
@@ -18,7 +18,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivitySubmitDataBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
-import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
+import com.wellsen.mandiri.whatthehack.android.ui.submitphoto.SubmitPhotoActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 
@@ -40,7 +40,7 @@ class SubmitDataActivity : BindingActivity<ActivitySubmitDataBinding>() {
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitDataActivity, it.message, Toast.LENGTH_LONG).show()
-        startActivity(Intent(this, SubmitKtpActivity::class.java))
+        startActivity(Intent(this, SubmitPhotoActivity::class.java))
 
       } else {
 

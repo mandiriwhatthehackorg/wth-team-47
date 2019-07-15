@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/15/19 2:37 PM
+  ~  * Created by Wellsen on 7/15/19 4:05 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/15/19 2:36 PM
+  ~  * Last modified 7/15/19 3:18 PM
   ~  */
   -->
 
@@ -79,7 +79,7 @@
     </activity>
 
     <activity
-        android:name=".ui.submitktp.SubmitKtpActivity"
+        android:name=".ui.submitphoto.SubmitPhotoActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">

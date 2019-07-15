@@ -1,13 +1,13 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 1:30 PM
+ *  * Created by Wellsen on 7/15/19 4:05 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 12:42 PM
+ *  * Last modified 7/15/19 3:54 PM
  *
  */
 
-package com.wellsen.mandiri.whatthehack.android.ui.submitktp
+package com.wellsen.mandiri.whatthehack.android.ui.submitphoto
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +15,7 @@ import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitKtpResponse
+import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitSelfieResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -23,27 +24,44 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
 
-class SubmitKtpViewModel(
+class SubmitPhotoViewModel(
   private val clientApi: ClientApi
 ) : BaseViewModel() {
 
   var pbVisibility: NonNullMutableLiveData<Int> =
     NonNullMutableLiveData(View.INVISIBLE)
   var status = MutableLiveData<Status>()
-  lateinit var photoFile: File
+  lateinit var ktpFile: File
+  lateinit var selfieFile: File
 
   private fun submitKtp() {
-    val fileBody = photoFile.asRequestBody("image/*".toMediaTypeOrNull())
-    val body = MultipartBody.Part.createFormData("file", photoFile.name, fileBody)
+    val fileBody = ktpFile.asRequestBody("image/*".toMediaTypeOrNull())
+    val body = MultipartBody.Part.createFormData("file", ktpFile.name, fileBody)
 
     @Suppress("UnstableApiUsage")
     add(
       clientApi.submitKtp(body).with()
-        .doOnSubscribe { onSubmitKtpStart() }
-        .doOnTerminate { onSubmitKtpFinish() }
+        .doOnSubscribe { onSubmitPhotoStart() }
+        .doOnTerminate { onSubmitPhotoFinish() }
         .subscribe(
           { onSubmitKtpSuccess(it) },
-          { onSubmitKtpError(it) }
+          { onSubmitPhotoError(it) }
+        )
+    )
+  }
+
+  private fun submitSelfie() {
+    val fileBody = selfieFile.asRequestBody("image/*".toMediaTypeOrNull())
+    val body = MultipartBody.Part.createFormData("file", selfieFile.name, fileBody)
+
+    @Suppress("UnstableApiUsage")
+    add(
+      clientApi.submitSelfie(body).with()
+        .doOnSubscribe { onSubmitPhotoStart() }
+        .doOnTerminate { onSubmitPhotoFinish() }
+        .subscribe(
+          { onSubmitSelfieSuccess(it) },
+          { onSubmitPhotoError(it) }
         )
     )
   }
@@ -52,20 +70,25 @@ class SubmitKtpViewModel(
     submitKtp()
   }
 
-  private fun onSubmitKtpStart() {
+  private fun onSubmitPhotoStart() {
     pbVisibility.value = View.VISIBLE
   }
 
-  private fun onSubmitKtpFinish() {
+  private fun onSubmitPhotoFinish() {
     pbVisibility.value = View.GONE
   }
 
   private fun onSubmitKtpSuccess(response: SubmitKtpResponse) {
     Timber.d(response.response)
+    submitSelfie()
+  }
+
+  private fun onSubmitSelfieSuccess(response: SubmitSelfieResponse) {
+    Timber.d(response.response)
     status.value = Status(Status.SUCCESS)
   }
 
-  private fun onSubmitKtpError(t: Throwable) {
+  private fun onSubmitPhotoError(t: Throwable) {
     Timber.e(t)
     status.value = Status(Status.ERROR, t.localizedMessage)
   }

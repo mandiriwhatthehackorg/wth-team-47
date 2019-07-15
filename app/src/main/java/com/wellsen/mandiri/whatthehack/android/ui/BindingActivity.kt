@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 1:30 PM
+ *  * Created by Wellsen on 7/15/19 4:05 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 1:30 PM
+ *  * Last modified 7/15/19 4:05 PM
  *
  */
 
@@ -36,16 +36,21 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 
+const val KTP = 1
+const val SELFIE = 2
 const val REQUEST_APP_SETTINGS = 101
-const val REQUEST_TAKE_PHOTO = 102
-const val REQUEST_OPEN_GALLERY = 103
+const val REQUEST_KTP_TAKE_PHOTO = 102
+const val REQUEST_KTP_OPEN_GALLERY = 103
+const val REQUEST_SELFIE_TAKE_PHOTO = 104
+const val REQUEST_SELFIE_OPEN_GALLERY = 105
 
 abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
 
   @LayoutRes
   abstract fun getLayoutResId(): Int
 
-  lateinit var photoFile: File
+  lateinit var selfieFile: File
+  lateinit var ktpFile: File
 
   protected lateinit var binding: T private set
 
@@ -60,7 +65,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
    * This uses multiple permission model from dexter
    * On permanent denial opens settings dialog
    */
-  fun requestCameraPermission() {
+  fun requestCameraPermission(type: Int) {
     Dexter.withActivity(this).withPermissions(
       Manifest.permission.READ_EXTERNAL_STORAGE,
       Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -70,7 +75,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
         override fun onPermissionsChecked(report: MultiplePermissionsReport) {
           // check if all permissions are granted
           if (report.areAllPermissionsGranted()) {
-            dispatchTakePictureIntent()
+            dispatchTakePictureIntent(type)
           }
           // check for permanent denial of any permission
           if (report.isAnyPermissionPermanentlyDenied) {
@@ -101,7 +106,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
    * This uses multiple permission model from dexter
    * On permanent denial opens settings dialog
    */
-  fun requestStoragePermission() {
+  fun requestStoragePermission(type: Int) {
     Dexter.withActivity(this).withPermissions(
       Manifest.permission.READ_EXTERNAL_STORAGE,
       Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -110,7 +115,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
         override fun onPermissionsChecked(report: MultiplePermissionsReport) {
           // check if all permissions are granted
           if (report.areAllPermissionsGranted()) {
-            dispatchGalleryIntent()
+            dispatchGalleryIntent(type)
           }
           // check for permanent denial of any permission
           if (report.isAnyPermissionPermanentlyDenied) {
@@ -179,7 +184,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
   /**
    * Capture image from camera
    */
-  private fun dispatchTakePictureIntent() {
+  private fun dispatchTakePictureIntent(type: Int) {
     val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
     if (takePictureIntent.resolveActivity(packageManager) != null) {
       // Create the File where the photo should go
@@ -198,10 +203,19 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
           photoFile
         )
 
-        this.photoFile = photoFile
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
 
+        when (type) {
+          SELFIE -> {
+            this.selfieFile = photoFile
+            startActivityForResult(takePictureIntent, REQUEST_SELFIE_TAKE_PHOTO)
+          }
+
+          KTP -> {
+            this.ktpFile = photoFile
+            startActivityForResult(takePictureIntent, REQUEST_KTP_TAKE_PHOTO)
+          }
+        }
       }
     }
   }
@@ -209,15 +223,21 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
   /**
    * Select image fro gallery
    */
-  private fun dispatchGalleryIntent() {
-    startActivityForResult(
-      Intent(
-        Intent.ACTION_PICK,
-        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-      )
-        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION),
-      REQUEST_OPEN_GALLERY
-    )
+  private fun dispatchGalleryIntent(type: Int) {
+    when (type) {
+      KTP -> {
+        startActivityForResult(
+          Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION), REQUEST_KTP_OPEN_GALLERY
+        )
+      }
+      SELFIE -> {
+        startActivityForResult(
+          Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION), REQUEST_SELFIE_OPEN_GALLERY
+        )
+      }
+    }
   }
 
 }
