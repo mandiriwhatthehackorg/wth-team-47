@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/14/19 8:52 AM
+  ~  * Created by Wellsen on 7/15/19 2:37 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/14/19 8:43 AM
+  ~  * Last modified 7/15/19 2:12 PM
   ~  */
   -->
 
@@ -20,7 +20,7 @@
         />
   </data>
 
-  <FrameLayout
+  <androidx.core.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingBottom="@dimen/activity_vertical_margin"
@@ -42,6 +42,7 @@
           android:id="@+id/iv_logo"
           android:layout_width="200dp"
           android:layout_height="58dp"
+          android:layout_marginTop="108dp"
           android:layout_gravity="center_horizontal"
           android:src="@drawable/ic_mandiri_blue"
           android:transitionName="logo"
@@ -129,6 +130,30 @@
       </com.google.android.material.textfield.TextInputLayout>
 
       <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/til_mothers_name"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:hint="@string/prompt_mother_name"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/til_phone"
+          app:errorEnabled="true"
+          style="@style/TextInputLayout"
+          >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mothers_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:text="@={vm.mothersName}"
+            />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/til_dob"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -137,7 +162,7 @@
           android:hint="@string/prompt_dob"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/til_phone"
+          app:layout_constraintTop_toBottomOf="@+id/til_mothers_name"
           app:errorEnabled="true"
           style="@style/TextInputLayout"
           >
@@ -161,7 +186,7 @@
           android:layout_height="?attr/actionBarSize"
           android:layout_marginEnd="48dp"
           android:layout_marginStart="48dp"
-          android:layout_marginTop="24dp"
+          android:layout_marginTop="?attr/actionBarSize"
           android:enabled="false"
           android:onClick="@{vm::onClickRegister}"
           android:text="@string/action_register"
@@ -192,6 +217,6 @@
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-  </FrameLayout>
+  </androidx.core.widget.NestedScrollView>
 
 </layout>

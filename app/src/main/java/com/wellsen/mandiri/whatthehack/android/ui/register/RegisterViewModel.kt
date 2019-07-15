@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:52 AM
+ *  * Created by Wellsen on 7/15/19 2:37 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:52 AM
+ *  * Last modified 7/15/19 2:36 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.register
 
+import android.content.SharedPreferences
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,18 +20,22 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import com.wellsen.mandiri.whatthehack.android.util.validator.DobValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.EmailValidator
+import com.wellsen.mandiri.whatthehack.android.util.validator.NameValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.NikValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.PhoneValidator
 import timber.log.Timber
 
 class RegisterViewModel(
   private val clientApi: ClientApi,
+  private val sp: SharedPreferences,
   private val emailValidator: EmailValidator,
   private val nikValidator: NikValidator,
   private val phoneValidator: PhoneValidator,
+  private val nameValidator: NameValidator,
   private val dobValidator: DobValidator
 ) : BaseViewModel() {
 
@@ -43,19 +48,29 @@ class RegisterViewModel(
     NonNullMutableLiveData("")
   var phone: NonNullMutableLiveData<String> =
     NonNullMutableLiveData("")
+  var mothersName: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
   var dob: NonNullMutableLiveData<String> =
     NonNullMutableLiveData("")
 
   private val _registerForm = MutableLiveData<RegisterFormState>()
   val registerFormState: LiveData<RegisterFormState> = _registerForm
 
-  fun onRegisterFormChanged(email: String, nik: String, phone: String, dob: String) {
+  fun onRegisterFormChanged(
+    email: String,
+    nik: String,
+    phone: String,
+    mothersName: String,
+    dob: String
+  ) {
     if (!emailValidator.isValid(email)) {
       _registerForm.value = RegisterFormState(emailError = string.invalid_email)
     } else if (!nikValidator.isValid(nik)) {
       _registerForm.value = RegisterFormState(nikError = string.invalid_nik)
     } else if (!phoneValidator.isValid(phone)) {
       _registerForm.value = RegisterFormState(phoneError = string.invalid_phone)
+    } else if (!nameValidator.isValid(mothersName)) {
+      _registerForm.value = RegisterFormState(mothersNameError = string.invalid_mothers_name)
     } else if (!dobValidator.isValid(dob)) {
       _registerForm.value = RegisterFormState(dobError = string.invalid_dob)
     } else {
@@ -90,11 +105,13 @@ class RegisterViewModel(
 
   private fun onRegisterSuccess(response: RegisterResponse) {
     Timber.d(response.response)
+    sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
     status.value = Status(Status.SUCCESS)
   }
 
   private fun onRegisterError(t: Throwable) {
     Timber.e(t)
+    sp.edit().remove(MOTHERS_NAME).apply()
     status.value = Status(Status.ERROR, t.localizedMessage)
   }
 

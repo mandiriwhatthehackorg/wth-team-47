@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 6:40 PM
+ *  * Created by Wellsen on 7/15/19 2:37 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 6:13 PM
+ *  * Last modified 7/15/19 2:35 PM
  *
  */
 
@@ -11,6 +11,7 @@ package com.wellsen.mandiri.whatthehack.android.ui.register
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -20,6 +21,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityRegisterBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.otp.OtpActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
@@ -49,6 +51,8 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
       else getString(registerFormState.nikError)
       binding.tilPhone.error = if (registerFormState.phoneError == null) null
       else getString(registerFormState.phoneError)
+      binding.tilMothersName.error = if (registerFormState.mothersNameError == null) null
+      else getString(registerFormState.mothersNameError)
       binding.tilDob.error = if (registerFormState.dobError == null) null
       else getString(registerFormState.dobError)
 
@@ -61,6 +65,7 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@RegisterActivity, it.message, Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, OtpActivity::class.java))
 
       } else {
 
@@ -74,6 +79,7 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
     setAfterTextChangedListener(binding.etEmail, vm)
     setAfterTextChangedListener(binding.etNik, vm)
     setAfterTextChangedListener(binding.etPhone, vm)
+    setAfterTextChangedListener(binding.etMothersName, vm)
     setAfterTextChangedListener(binding.etDob, vm)
 
     val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -95,6 +101,7 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
         binding.etEmail.text.toString(),
         binding.etNik.text.toString(),
         binding.etPhone.text.toString(),
+        binding.etMothersName.text.toString(),
         binding.etDob.text.toString()
       )
     }

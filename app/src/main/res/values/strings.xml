@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/15/19 1:30 PM
+  ~  * Created by Wellsen on 7/15/19 2:37 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/14/19 12:07 PM
+  ~  * Last modified 7/15/19 2:28 PM
   ~  */
   -->
 
@@ -42,6 +42,6 @@
   <string name="invalid_phone">Phone must be 10 to 13 characters</string>
   <string name="invalid_dob">Invalid date of birth</string>
   <string name="invalid_username">Username must be 4 to 255 characters</string>
-  <string name="invalid_mothers_name">Mother\'s maiden name ame must be 4 to 255 characters</string>
+  <string name="invalid_mothers_name">Mother\'s maiden name must be 4 to 255 characters</string>
   <string name="invalid_password">Password must be 6 to 15 characters</string>
 </resources>
