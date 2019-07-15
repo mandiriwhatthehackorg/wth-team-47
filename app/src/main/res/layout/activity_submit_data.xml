@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/14/19 8:52 AM
+  ~  * Created by Wellsen on 7/15/19 2:53 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/14/19 8:52 AM
+  ~  * Last modified 7/15/19 2:51 PM
   ~  */
   -->
 
@@ -119,30 +119,6 @@
           tools:listitem="@android:layout/simple_spinner_dropdown_item"
           />
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/til_mothers_maiden_name"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:hint="@string/prompt_mother_name"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/sp_branch_code"
-          app:errorEnabled="true"
-          style="@style/TextInputLayout"
-          >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_mothers_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:text="@={vm.mothersName}"
-            />
-
-      </com.google.android.material.textfield.TextInputLayout>
-
       <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_submit"
           android:layout_width="0dp"
@@ -150,14 +126,13 @@
           android:layout_marginEnd="48dp"
           android:layout_marginStart="48dp"
           android:layout_marginTop="?attr/actionBarSize"
-          android:enabled="false"
           android:onClick="@{vm::onClickSubmit}"
           android:text="@string/action_submit_data"
           android:textColor="@android:color/white"
           android:transitionName="button"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/til_mothers_maiden_name"
+          app:layout_constraintTop_toBottomOf="@+id/sp_branch_code"
           app:cornerRadius="8dp"
           style="@style/Button"
           />

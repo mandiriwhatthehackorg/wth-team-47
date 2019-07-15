@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:37 PM
+ *  * Created by Wellsen on 7/15/19 2:53 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:36 PM
+ *  * Last modified 7/15/19 2:41 PM
  *
  */
 
@@ -30,8 +30,8 @@ import com.wellsen.mandiri.whatthehack.android.util.validator.PhoneValidator
 import timber.log.Timber
 
 class RegisterViewModel(
-  private val clientApi: ClientApi,
   private val sp: SharedPreferences,
+  private val clientApi: ClientApi,
   private val emailValidator: EmailValidator,
   private val nikValidator: NikValidator,
   private val phoneValidator: PhoneValidator,

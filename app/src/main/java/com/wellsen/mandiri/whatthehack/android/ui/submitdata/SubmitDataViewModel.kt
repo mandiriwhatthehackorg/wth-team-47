@@ -1,18 +1,17 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:52 AM
+ *  * Created by Wellsen on 7/15/19 2:53 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:52 AM
+ *  * Last modified 7/15/19 2:43 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.submitdata
 
+import android.content.SharedPreferences
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.wellsen.mandiri.whatthehack.android.R.string
 import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.data.model.BranchCode
 import com.wellsen.mandiri.whatthehack.android.data.model.CardType
@@ -26,14 +25,14 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.GetCardTypes
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.GetProductTypesResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitDataResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
-import com.wellsen.mandiri.whatthehack.android.util.validator.NameValidator
 import timber.log.Timber
 
 class SubmitDataViewModel(
+  private val sp: SharedPreferences,
   private val adminApi: AdminApi,
-  private val clientApi: ClientApi,
-  private val nameValidator: NameValidator
+  private val clientApi: ClientApi
 ) : BaseViewModel() {
 
   var pbVisibility: NonNullMutableLiveData<Int> =
@@ -48,11 +47,6 @@ class SubmitDataViewModel(
     NonNullMutableLiveData(CardType(""))
   var branchCode =
     NonNullMutableLiveData(BranchCode(""))
-  var mothersName: NonNullMutableLiveData<String> =
-    NonNullMutableLiveData("")
-
-  private val _submitDataForm = MutableLiveData<SubmitDataFormState>()
-  val submitDataFormState: LiveData<SubmitDataFormState> = _submitDataForm
 
   init {
     getProductTypes()
@@ -60,15 +54,7 @@ class SubmitDataViewModel(
     getBranchCodes()
   }
 
-  fun onRegisterFormChanged(mothersName: String) {
-    if (!nameValidator.isValid(mothersName)) {
-      _submitDataForm.value = SubmitDataFormState(mothersNameError = string.invalid_mothers_name)
-    } else {
-      _submitDataForm.value = SubmitDataFormState(isDataValid = true)
-    }
-  }
-
-  fun submitData(request: SubmitDataRequest) {
+  private fun submitData(request: SubmitDataRequest) {
     @Suppress("UnstableApiUsage")
     add(
       clientApi.submitData(request).with()
@@ -81,7 +67,7 @@ class SubmitDataViewModel(
     )
   }
 
-  fun getProductTypes() {
+  private fun getProductTypes() {
     @Suppress("UnstableApiUsage")
     add(
       adminApi.getProductTypes().with()
@@ -94,7 +80,7 @@ class SubmitDataViewModel(
     )
   }
 
-  fun getCardTypes() {
+  private fun getCardTypes() {
     @Suppress("UnstableApiUsage")
     add(
       adminApi.getCardTypes().with()
@@ -107,7 +93,7 @@ class SubmitDataViewModel(
     )
   }
 
-  fun getBranchCodes() {
+  private fun getBranchCodes() {
     @Suppress("UnstableApiUsage")
     add(
       adminApi.getBranchCodes().with()
@@ -125,7 +111,7 @@ class SubmitDataViewModel(
       SubmitDataRequest(
         productType.value.product,
         cardType.value.card,
-        mothersName.value,
+        sp.getString(MOTHERS_NAME, "") ?: "",
         branchCode.value.branch
       )
     )

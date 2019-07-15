@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 9:31 AM
+ *  * Created by Wellsen on 7/15/19 2:53 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 9:17 AM
+ *  * Last modified 7/15/19 2:51 PM
  *
  */
 
@@ -19,7 +19,6 @@ import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivitySubmitDataBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
 import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
-import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 
@@ -35,15 +34,6 @@ class SubmitDataActivity : BindingActivity<ActivitySubmitDataBinding>() {
     binding.lifecycleOwner = this
 
     val vm = binding.vm as SubmitDataViewModel
-    vm.submitDataFormState.observe(this@SubmitDataActivity, Observer {
-      val submitDataFormState = it ?: return@Observer
-
-      binding.tilMothersMaidenName.error = if (submitDataFormState.mothersNameError == null) null
-      else getString(submitDataFormState.mothersNameError)
-
-      // disable login button unless both username / password is valid
-      binding.btnSubmit.isEnabled = submitDataFormState.isDataValid
-    })
 
     vm.status.observe(this@SubmitDataActivity, Observer {
 
@@ -60,12 +50,6 @@ class SubmitDataActivity : BindingActivity<ActivitySubmitDataBinding>() {
       }
 
     })
-
-    binding.etMothersName.afterTextChanged {
-      vm.onRegisterFormChanged(
-        binding.etMothersName.text.toString()
-      )
-    }
 
   }
 
