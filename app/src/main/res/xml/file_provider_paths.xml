@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by Wellsen on 7/15/19 1:30 PM
+  ~  * for Mandiri What The Hack Hackathon
+  ~  * Copyright (c) 2019 . All rights reserved.
+  ~  * Last modified 7/15/19 1:30 PM
+  ~  */
+  -->
+
+<paths>
+
+  <external-path
+      name="my_images"
+      path="Android/data/com.wellsen.mandiri.whatthehack.android/files/Pictures"/>
+
+</paths>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/14/19 9:31 AM
+  ~  * Created by Wellsen on 7/15/19 1:30 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/14/19 9:05 AM
+  ~  * Last modified 7/15/19 1:30 PM
   ~  */
   -->
 
@@ -38,36 +38,49 @@
         android:layout_marginBottom="?attr/actionBarSize"
         >
 
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_take_photo"
-          android:layout_width="0dp"
-          android:layout_height="?attr/actionBarSize"
-          android:layout_marginEnd="48dp"
-          android:layout_marginStart="48dp"
-          android:layout_marginTop="24dp"
-          android:enabled="false"
-          android:text="@string/action_take_photo"
-          android:textColor="@android:color/white"
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tv_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginEnd="24dp"
+          android:layout_marginStart="24dp"
+          android:gravity="center"
+          android:text="@string/title_text_ktp"
+          android:textSize="21sp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          app:cornerRadius="8dp"
-          style="@style/Button"
+          />
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/iv_ktp"
+          android:layout_width="0dp"
+          android:layout_height="160dp"
+          android:layout_marginEnd="48dp"
+          android:layout_marginStart="48dp"
+          android:layout_marginBottom="?attr/actionBarSize"
+          android:layout_marginTop="?attr/actionBarSize"
+          android:src="@drawable/ic_photo_camera"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_title"
           />
 
       <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_open_gallery"
+          android:id="@+id/btn_submit"
           android:layout_width="0dp"
           android:layout_height="?attr/actionBarSize"
           android:layout_marginEnd="48dp"
           android:layout_marginStart="48dp"
           android:layout_marginTop="24dp"
           android:enabled="false"
-          android:text="@string/action_open_gallery"
+          android:onClick="@{vm::onClickSubmit}"
           android:textColor="@android:color/white"
+          android:text="@string/action_submit"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/btn_take_photo"
+          app:layout_constraintTop_toBottomOf="@+id/iv_ktp"
           app:cornerRadius="8dp"
           style="@style/Button"
           />

@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 9:31 AM
+ *  * Created by Wellsen on 7/15/19 1:30 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 9:30 AM
+ *  * Last modified 7/14/19 12:42 PM
  *
  */
 
@@ -16,7 +16,12 @@ import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitKtpResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.extension.with
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
+import java.io.File
 
 class SubmitKtpViewModel(
   private val clientApi: ClientApi
@@ -25,18 +30,26 @@ class SubmitKtpViewModel(
   var pbVisibility: NonNullMutableLiveData<Int> =
     NonNullMutableLiveData(View.INVISIBLE)
   var status = MutableLiveData<Status>()
+  lateinit var photoFile: File
 
-  fun submitKtp() {
-//    @Suppress("UnstableApiUsage")
-//    add(
-//      clientApi.submitKtp().with()
-//        .doOnSubscribe { onSubmitKtpStart() }
-//        .doOnTerminate { onSubmitKtpFinish() }
-//        .subscribe(
-//          { onSubmitKtpSuccess(it) },
-//          { onSubmitKtpError(it) }
-//        )
-//    )
+  private fun submitKtp() {
+    val fileBody = photoFile.asRequestBody("image/*".toMediaTypeOrNull())
+    val body = MultipartBody.Part.createFormData("file", photoFile.name, fileBody)
+
+    @Suppress("UnstableApiUsage")
+    add(
+      clientApi.submitKtp(body).with()
+        .doOnSubscribe { onSubmitKtpStart() }
+        .doOnTerminate { onSubmitKtpFinish() }
+        .subscribe(
+          { onSubmitKtpSuccess(it) },
+          { onSubmitKtpError(it) }
+        )
+    )
+  }
+
+  fun onClickSubmit(@Suppress("unused_parameter") view: View?) {
+    submitKtp()
   }
 
   private fun onSubmitKtpStart() {
