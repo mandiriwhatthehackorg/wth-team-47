@@ -1,19 +1,22 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 10:58 AM
+ *  * Created by Wellsen on 7/16/19 1:05 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 6:12 PM
+ *  * Last modified 7/16/19 12:34 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.data.remote.api
 
+import com.wellsen.mandiri.whatthehack.android.data.remote.request.KycRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.LoginRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.OtpResendRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.OtpValidationRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.SubmitDataRequest
+import com.wellsen.mandiri.whatthehack.android.data.remote.response.CreateAccountResponse
+import com.wellsen.mandiri.whatthehack.android.data.remote.response.KycResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.LoginResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpResendResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpValidationResponse
@@ -57,5 +60,11 @@ interface ClientApi {
   @Multipart
   @POST("submitImageSignature")
   fun submitSignature(@Part filePart: MultipartBody.Part): Single<SubmitSignatureResponse>
+
+  @POST("KYC")
+  fun doKyc(@Body request: KycRequest): Single<KycResponse>
+
+  @POST("createAccount")
+  fun doKyc(): Single<CreateAccountResponse>
 
 }
