@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/16/19 10:58 AM
+  ~  * Created by Wellsen on 7/16/19 7:21 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/16/19 9:38 AM
+  ~  * Last modified 7/16/19 6:43 PM
   ~  */
   -->
 
@@ -12,6 +12,7 @@
 
   <string name="no_connection">No Internet Connection</string>
   <string name="prompt_username">Username</string>
+  <string name="prompt_name">Name</string>
   <string name="prompt_email">Email</string>
   <string name="prompt_nik">NIK</string>
   <string name="prompt_phone">Phone</string>
@@ -45,6 +46,7 @@
   <string name="invalid_nik">NIK must be 16 characters</string>
   <string name="invalid_phone">Phone must be 10 to 13 characters</string>
   <string name="invalid_dob">Invalid date of birth</string>
+  <string name="invalid_name">Name must be 4 to 255 characters</string>
   <string name="invalid_username">Username must be 4 to 255 characters</string>
   <string name="invalid_mothers_name">Mother\'s maiden name must be 4 to 255 characters</string>
   <string name="invalid_password">Password must be 6 to 15 characters</string>

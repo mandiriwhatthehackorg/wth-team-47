@@ -1,24 +1,30 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 5:22 PM
+ *  * Created by Wellsen on 7/16/19 7:21 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 5:22 PM
+ *  * Last modified 7/16/19 7:21 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.submitktp
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.Matrix
+import android.net.ParseException
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
+import androidx.exifinterface.media.ExifInterface
 import com.bumptech.glide.Glide
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
@@ -31,6 +37,7 @@ import com.wellsen.mandiri.whatthehack.android.ui.KTP
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_OPEN_GALLERY
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_TAKE_PHOTO
 import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
+import com.wellsen.mandiri.whatthehack.android.util.DATE_FORMAT
 import com.wellsen.mandiri.whatthehack.android.util.DOB
 import com.wellsen.mandiri.whatthehack.android.util.FileUtils
 import com.wellsen.mandiri.whatthehack.android.util.KTP_FILE
@@ -39,8 +46,11 @@ import com.wellsen.mandiri.whatthehack.android.util.NIK
 import id.zelory.compressor.Compressor
 import org.koin.android.ext.android.inject
 import timber.log.Timber
+import java.io.Closeable
 import java.io.File
 import java.io.IOException
+import java.io.OutputStream
+import java.text.SimpleDateFormat
 
 class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
 
@@ -112,7 +122,10 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     }
 
     when (requestCode) {
-      REQUEST_KTP_TAKE_PHOTO -> processOcr(Uri.fromFile(ktpFile), REQUEST_KTP_TAKE_PHOTO)
+      REQUEST_KTP_TAKE_PHOTO -> {
+//        normalizeImage(Uri.fromFile(ktpFile))
+        processOcr(Uri.fromFile(ktpFile), REQUEST_KTP_TAKE_PHOTO)
+      }
 
       REQUEST_KTP_OPEN_GALLERY -> {
         val selectedImage = data?.data ?: return
@@ -183,13 +196,112 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
           sp.edit().putString(NAME, name).apply()
 
           val dob = blockText.trim().substring(blockText.trim().length - 10)
-          sp.edit().putString(DOB, dob).apply()
+          if (isDateValid(dob)) {
+            sp.edit().putString(DOB, dob).apply()
+          }
         }
 
       }
 
     }
 
+  }
+
+  @SuppressLint("SimpleDateFormat")
+  fun isDateValid(date: String): Boolean {
+    return try {
+      val df = SimpleDateFormat(DATE_FORMAT)
+      df.isLenient = false
+      df.parse(date)
+      true
+    } catch (e: ParseException) {
+      false
+    }
+
+  }
+
+  fun normalizeImage(uri: Uri) {
+    if (uri.path == null) {
+      return
+    }
+    try {
+      val exif = ExifInterface(uri.path!!)
+      val orientation =
+        exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+      val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+      val rotatedBitmap = rotateBitmap(bitmap, orientation)
+      if (bitmap != rotatedBitmap) {
+        saveBitmapToFile(rotatedBitmap, uri)
+      }
+    } catch (e: IOException) {
+      Timber.e(e.localizedMessage)
+    }
+  }
+
+  fun rotateBitmap(bitmap: Bitmap, orientation: Int): Bitmap {
+    val matrix = Matrix()
+    when (orientation) {
+      ExifInterface.ORIENTATION_NORMAL -> return bitmap
+
+      ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.setScale(-1.0f, 1.0f)
+
+      ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180.0f)
+
+      ExifInterface.ORIENTATION_FLIP_VERTICAL -> {
+        matrix.setRotate(180.0f)
+        matrix.postScale(-1.0f, 1.0f)
+      }
+
+      ExifInterface.ORIENTATION_TRANSPOSE -> {
+        matrix.setRotate(90.0f)
+        matrix.postScale(-1.0f, 1.0f)
+      }
+
+      ExifInterface.ORIENTATION_ROTATE_90 -> {
+        matrix.setRotate(90.0f)
+      }
+
+      ExifInterface.ORIENTATION_TRANSVERSE -> {
+        matrix.setRotate(-90.0f)
+        matrix.postScale(-1.0f, 1.0f)
+      }
+
+      ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(-90.0f)
+
+      else -> return bitmap
+    }
+
+    return try {
+      val bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+      bitmap.recycle()
+
+      bmRotated
+    } catch (e: OutOfMemoryError) {
+      Timber.e(e.localizedMessage)
+      bitmap
+    }
+
+  }
+
+  fun saveBitmapToFile(croppedImage: Bitmap, saveUri: Uri) {
+    var outputStream: OutputStream? = null
+    try {
+      outputStream = this.contentResolver.openOutputStream(saveUri)
+      croppedImage.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+    } catch (e: IOException) {
+      Timber.e(e.localizedMessage)
+    } finally {
+      outputStream?.let { closeSilently(it) }
+      croppedImage.recycle()
+    }
+  }
+
+  fun closeSilently(c: Closeable) {
+    try {
+      c.close()
+    } catch (t: Throwable) {
+      Timber.e(t.localizedMessage)
+    }
   }
 
 }

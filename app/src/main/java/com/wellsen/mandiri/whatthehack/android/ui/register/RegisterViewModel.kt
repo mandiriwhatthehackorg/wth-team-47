@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 5:22 PM
+ *  * Created by Wellsen on 7/16/19 7:21 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 5:19 PM
+ *  * Last modified 7/16/19 6:43 PM
  *
  */
 
@@ -22,6 +22,7 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResp
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.DOB
 import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
+import com.wellsen.mandiri.whatthehack.android.util.NAME
 import com.wellsen.mandiri.whatthehack.android.util.NIK
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import com.wellsen.mandiri.whatthehack.android.util.validator.DobValidator
@@ -44,6 +45,8 @@ class RegisterViewModel(
   var pbVisibility: NonNullMutableLiveData<Int> =
     NonNullMutableLiveData(View.INVISIBLE)
   var status = MutableLiveData<Status>()
+  var name: NonNullMutableLiveData<String> =
+    NonNullMutableLiveData("")
   var email: NonNullMutableLiveData<String> =
     NonNullMutableLiveData("")
   var nik: NonNullMutableLiveData<String> =
@@ -59,6 +62,10 @@ class RegisterViewModel(
   val registerFormState: LiveData<RegisterFormState> = _registerForm
 
   init {
+    if (sp.getString(NAME, null) != null) {
+      name.value = sp.getString(NAME, null)!!
+    }
+
     if (sp.getString(NIK, null) != null) {
       nik.value = sp.getString(NIK, null)!!
     }
@@ -69,13 +76,16 @@ class RegisterViewModel(
   }
 
   fun onRegisterFormChanged(
+    name: String,
     email: String,
     nik: String,
     phone: String,
     mothersName: String,
     dob: String
   ) {
-    if (!emailValidator.isValid(email)) {
+    if (!nameValidator.isValid(name)) {
+      _registerForm.value = RegisterFormState(nameError = string.invalid_name)
+    } else if (!emailValidator.isValid(email)) {
       _registerForm.value = RegisterFormState(emailError = string.invalid_email)
     } else if (!nikValidator.isValid(nik)) {
       _registerForm.value = RegisterFormState(nikError = string.invalid_nik)

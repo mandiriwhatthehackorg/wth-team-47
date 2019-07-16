@@ -1,15 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 11:26 AM
+ *  * Created by Wellsen on 7/16/19 7:21 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 11:25 AM
+ *  * Last modified 7/16/19 7:21 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.wellsen.mandiri.whatthehack.android.module.networkModule
 import com.wellsen.mandiri.whatthehack.android.module.sharedPreferenceModule
 import com.wellsen.mandiri.whatthehack.android.module.validatorModule
@@ -41,6 +42,8 @@ class MandiriApplication : Application() {
         )
       )
     }
+
+    AndroidThreeTen.init(this)
   }
 
 }

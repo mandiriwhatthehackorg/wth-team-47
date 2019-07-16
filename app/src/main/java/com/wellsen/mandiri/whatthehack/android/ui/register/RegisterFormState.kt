@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:37 PM
+ *  * Created by Wellsen on 7/16/19 7:21 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:18 PM
+ *  * Last modified 7/16/19 6:43 PM
  *
  */
 
@@ -11,6 +11,7 @@ package com.wellsen.mandiri.whatthehack.android.ui.register
 
 data class RegisterFormState(
 
+  val nameError: Int? = null,
   val emailError: Int? = null,
   val nikError: Int? = null,
   val phoneError: Int? = null,
