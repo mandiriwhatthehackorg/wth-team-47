@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/15/19 4:05 PM
+  ~  * Created by Wellsen on 7/16/19 10:58 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/15/19 3:18 PM
+  ~  * Last modified 7/16/19 9:38 AM
   ~  */
   -->
 
@@ -18,6 +18,7 @@
   <string name="prompt_dob">Date of Birth</string>
   <string name="prompt_password">Password</string>
   <string name="prompt_otp">Please type the OTP code sent to $email</string>
+  <string name="prompt_signature">Please sign to proceed</string>
   <string name="prompt_mother_name">Mother\'s maiden name</string>
   <string name="message_otp_resend">Please check your inbox for OTP</string>
   <string name="title_text_product_type">Product type</string>
@@ -26,6 +27,7 @@
   <string name="title_text_selfie">Tap camera to take Selfie Photo</string>
   <string name="title_text_ktp">Tap camera to take KTP Photo</string>
   <string name="title_text_permission_needed">This app needs permission to use this feature. You can grant them in app settings.</string>
+  <string name="title_text_agree">I agree to terms and conditions</string>
   <string name="action_sign_in">Sign in</string>
   <string name="action_sign_in_short">Sign in</string>
   <string name="action_reset_pass">Reset Password</string>
@@ -37,6 +39,7 @@
   <string name="action_open_gallery">Open Gallery</string>
   <string name="action_submit">Submit</string>
   <string name="action_settings">Settings</string>
+  <string name="action_agree">Agree</string>
   <string name="action_cancel">Cancel</string>
   <string name="invalid_email">Invalid email</string>
   <string name="invalid_nik">NIK must be 16 characters</string>

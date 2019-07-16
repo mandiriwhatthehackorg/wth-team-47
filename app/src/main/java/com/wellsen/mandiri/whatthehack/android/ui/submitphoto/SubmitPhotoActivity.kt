@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 4:05 PM
+ *  * Created by Wellsen on 7/16/19 10:58 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 3:59 PM
+ *  * Last modified 7/16/19 9:05 AM
  *
  */
 
@@ -28,6 +28,7 @@ import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_TAKE_PHOTO
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SELFIE_OPEN_GALLERY
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SELFIE_TAKE_PHOTO
 import com.wellsen.mandiri.whatthehack.android.ui.SELFIE
+import com.wellsen.mandiri.whatthehack.android.ui.submitsignature.SubmitSignatureActivity
 import com.wellsen.mandiri.whatthehack.android.util.FileUtils.getPath
 import id.zelory.compressor.Compressor
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -40,6 +41,8 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
   override fun getLayoutResId() = R.layout.activity_submit_photo
 
   lateinit var vm: SubmitPhotoViewModel
+  var selfieDone = false
+  var ktpDone = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -53,6 +56,7 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitPhotoActivity, it.message, Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, SubmitSignatureActivity::class.java))
 
       } else {
 
@@ -97,7 +101,8 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
         val lp = binding.ivKtp.layoutParams as LayoutParams
         lp.height = binding.cl.measuredWidth / 16 * 9
         binding.ivKtp.layoutParams = lp
-        binding.btnSubmit.isEnabled = true
+        ktpDone = true
+        binding.btnSubmit.isEnabled = ktpDone && selfieDone
         vm.ktpFile = ktpFile
 
         Glide.with(this)
@@ -109,7 +114,8 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
         val layoutParams = binding.ivSelfie.layoutParams as LayoutParams
         layoutParams.height = binding.cl.measuredWidth / 9 * 16
         binding.ivSelfie.layoutParams = layoutParams
-        binding.btnSubmit.isEnabled = true
+        selfieDone = true
+        binding.btnSubmit.isEnabled = ktpDone && selfieDone
         vm.selfieFile = selfieFile
 
         Glide.with(this)

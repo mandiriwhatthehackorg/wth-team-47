@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 4:05 PM
+ *  * Created by Wellsen on 7/16/19 10:58 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 4:05 PM
+ *  * Last modified 7/16/19 10:42 AM
  *
  */
 
@@ -38,6 +38,8 @@ import java.util.Date
 
 const val KTP = 1
 const val SELFIE = 2
+const val JPG = 10
+const val PNG = 11
 const val REQUEST_APP_SETTINGS = 101
 const val REQUEST_KTP_TAKE_PHOTO = 102
 const val REQUEST_KTP_OPEN_GALLERY = 103
@@ -173,12 +175,24 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
    */
   @SuppressLint("SimpleDateFormat")
   @Throws(IOException::class)
-  private fun createImageFile(): File {
+  fun createImageFile(type: Int): File {
     // Create an image file name
     val timeStamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-    val mFileName = "JPEG_" + timeStamp + "_"
     val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    return File.createTempFile(mFileName, ".jpg", storageDir)
+
+    when (type) {
+      JPG -> {
+        val mFileName = "JPEG_" + timeStamp + "_"
+        return File.createTempFile(mFileName, ".jpg", storageDir)
+      }
+
+      PNG -> {
+        val mFileName = "PNG_" + timeStamp + "_"
+        return File.createTempFile(mFileName, ".png", storageDir)
+      }
+    }
+
+    return File.createTempFile(timeStamp + "_", ".png", storageDir)
   }
 
   /**
@@ -190,7 +204,7 @@ abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
       // Create the File where the photo should go
       var photoFile: File? = null
       try {
-        photoFile = createImageFile()
+        photoFile = createImageFile(JPG)
       } catch (ex: IOException) {
         ex.printStackTrace()
         // Error occurred while creating the File

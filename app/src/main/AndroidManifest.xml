@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/15/19 4:05 PM
+  ~  * Created by Wellsen on 7/16/19 10:58 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/15/19 3:18 PM
+  ~  * Last modified 7/16/19 8:37 AM
   ~  */
   -->
 
@@ -83,6 +83,13 @@
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
+    </activity>
+
+    <activity
+        android:name=".ui.submitsignature.SubmitSignatureActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.Dialog">
     </activity>
 
     <provider

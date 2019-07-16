@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by Wellsen on 7/16/19 10:58 AM
+  ~  * for Mandiri What The Hack Hackathon
+  ~  * Copyright (c) 2019 . All rights reserved.
+  ~  * Last modified 7/16/19 10:57 AM
+  ~  */
+  -->
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <data>
+    <variable
+        name="vm"
+        type="com.wellsen.mandiri.whatthehack.android.ui.submitsignature.SubmitSignatureViewModel"
+        />
+  </data>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context=".ui.submitsignature.SubmitSignatureActivity"
+      >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tv_title"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:gravity="center"
+          android:padding="8dp"
+          android:text="@string/prompt_signature"
+          android:textColor="@android:color/black"
+          android:textSize="21sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+
+      <com.github.gcacace.signaturepad.views.SignaturePad
+          android:id="@+id/sp"
+          android:layout_width="0dp"
+          android:layout_height="320dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_title"
+          app:onClear="@{vm::onClear}"
+          app:onSigned="@{vm::onSigned}"
+          app:onStartSigning="@{vm::onStartSigning}"
+          />
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tv_desc"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:gravity="center"
+          android:padding="4dp"
+          android:text="@string/title_text_agree"
+          android:textColor="@android:color/black"
+          android:textSize="17sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/sp"
+          />
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_cancel"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_margin="8dp"
+          android:gravity="center"
+          android:padding="8dp"
+          android:text="@string/action_cancel"
+          app:layout_constraintEnd_toStartOf="@+id/btn_agree"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_desc"
+          style="@style/Button.TextButton"
+          />
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_agree"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_margin="8dp"
+          android:enabled="@{vm.btnAgreeEnabled}"
+          android:gravity="center"
+          android:onClick="@{vm::onClickSign}"
+          android:padding="8dp"
+          android:text="@string/action_agree"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+          app:layout_constraintTop_toBottomOf="@+id/tv_desc"
+          style="@style/Button.TextButton"
+          />
+
+      <ProgressBar
+          android:id="@+id/pb"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:visibility="@{safeUnbox(vm.pbVisibility)}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:visibility="visible"
+          />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  </FrameLayout>
+
+</layout>
