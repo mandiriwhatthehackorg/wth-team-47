@@ -1,13 +1,17 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:37 PM
+ *  * Created by Wellsen on 7/16/19 5:22 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:30 PM
+ *  * Last modified 7/16/19 5:03 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.util
 
 const val AUTHORIZATION = "authorization"
+const val NIK = "nik"
+const val NAME = "name"
+const val DOB = "dob"
+const val KTP_FILE = "ktp_file"
 const val MOTHERS_NAME = "mothers_name"

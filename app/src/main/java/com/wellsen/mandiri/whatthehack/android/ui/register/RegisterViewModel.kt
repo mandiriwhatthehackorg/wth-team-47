@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:53 PM
+ *  * Created by Wellsen on 7/16/19 5:22 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:41 PM
+ *  * Last modified 7/16/19 5:19 PM
  *
  */
 
@@ -20,7 +20,9 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.DOB
 import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
+import com.wellsen.mandiri.whatthehack.android.util.NIK
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import com.wellsen.mandiri.whatthehack.android.util.validator.DobValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.EmailValidator
@@ -55,6 +57,16 @@ class RegisterViewModel(
 
   private val _registerForm = MutableLiveData<RegisterFormState>()
   val registerFormState: LiveData<RegisterFormState> = _registerForm
+
+  init {
+    if (sp.getString(NIK, null) != null) {
+      nik.value = sp.getString(NIK, null)!!
+    }
+
+    if (sp.getString(DOB, null) != null) {
+      dob.value = sp.getString(DOB, null)!!
+    }
+  }
 
   fun onRegisterFormChanged(
     email: String,

@@ -1,18 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:37 PM
+ *  * Created by Wellsen on 7/16/19 5:22 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:35 PM
+ *  * Last modified 7/16/19 4:12 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.login
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Pair
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -21,7 +19,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
-import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
+import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
@@ -85,7 +83,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
     }
 
     binding.btnRegister.setOnClickListener {
-      startActivity(
+      /*startActivity(
         Intent(this, RegisterActivity::class.java),
         ActivityOptions.makeSceneTransitionAnimation(
           this,
@@ -93,7 +91,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
           Pair.create(binding.tilUsername, "username"),
           Pair.create(binding.btnLogin, "button")
         ).toBundle()
-      )
+      )*/
+
+      startActivity(Intent(this, SubmitKtpActivity::class.java))
     }
 
     binding.btnForgotPass.setOnClickListener {

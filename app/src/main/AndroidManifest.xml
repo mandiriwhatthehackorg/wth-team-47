@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/16/19 12:30 PM
+  ~  * Created by Wellsen on 7/16/19 5:22 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/16/19 12:30 PM
+  ~  * Last modified 7/16/19 3:47 PM
   ~  */
   -->
 
@@ -17,6 +17,8 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.CAMERA"/>
+  <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
 
   <uses-feature android:name="android.hardware.camera"/>
   <uses-feature android:name="android.hardware.camera.autofocus"/>
@@ -59,6 +61,13 @@
 
     <activity
         android:name=".ui.resetpass.ResetPassActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+
+    <activity
+        android:name=".ui.submitktp.SubmitKtpActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
