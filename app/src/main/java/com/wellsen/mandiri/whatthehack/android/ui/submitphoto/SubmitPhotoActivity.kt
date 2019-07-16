@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 10:58 AM
+ *  * Created by Wellsen on 7/16/19 12:30 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 9:05 AM
+ *  * Last modified 7/16/19 12:30 PM
  *
  */
 
@@ -11,6 +11,7 @@ package com.wellsen.mandiri.whatthehack.android.ui.submitphoto
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.ViewGroup.LayoutParams
 import android.widget.Toast
@@ -18,6 +19,10 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions
+import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivitySubmitPhotoBinding
@@ -34,6 +39,7 @@ import id.zelory.compressor.Compressor
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import java.io.File
+import java.io.IOException
 
 class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
 
@@ -156,6 +162,8 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
         val selectedImage = data?.data ?: return
         val path = getPath(this, selectedImage) ?: return
 
+        processOcr(selectedImage)
+
         ktpFile = Compressor(this)
           .setMaxWidth(1366)
           .setMaxHeight(1366)
@@ -174,6 +182,54 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
           .compressToFile(File(path))
 
         loadPhoto(SELFIE)
+      }
+    }
+  }
+
+  fun processOcr(uri: Uri) {
+    val image: FirebaseVisionImage
+    try {
+      image = FirebaseVisionImage.fromFilePath(this, uri)
+    } catch (e: IOException) {
+      e.printStackTrace()
+      return
+    }
+
+    val options = FirebaseVisionCloudTextRecognizerOptions.Builder()
+      .setLanguageHints(mutableListOf("id"))
+      .build()
+    val detector = FirebaseVision.getInstance().getCloudTextRecognizer(options)
+
+    val result = detector.processImage(image)
+      .addOnSuccessListener {
+        processResult(it)
+      }
+      .addOnFailureListener {
+        Timber.e(it.localizedMessage)
+      }
+  }
+
+  fun processResult(text: FirebaseVisionText) {
+    val resultText = text.text
+    for (block in text.textBlocks) {
+      val blockText = block.text
+      val blockConfidence = block.confidence
+      val blockLanguages = block.recognizedLanguages
+      val blockCornerPoints = block.cornerPoints
+      val blockFrame = block.boundingBox
+      for (line in block.lines) {
+        val lineText = line.text
+        val lineConfidence = line.confidence
+        val lineLanguages = line.recognizedLanguages
+        val lineCornerPoints = line.cornerPoints
+        val lineFrame = line.boundingBox
+        for (element in line.elements) {
+          val elementText = element.text
+          val elementConfidence = element.confidence
+          val elementLanguages = element.recognizedLanguages
+          val elementCornerPoints = element.cornerPoints
+          val elementFrame = element.boundingBox
+        }
       }
     }
   }
