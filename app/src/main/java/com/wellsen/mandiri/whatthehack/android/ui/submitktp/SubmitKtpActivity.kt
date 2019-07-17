@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 7:21 PM
+ *  * Created by Wellsen on 7/17/19 9:57 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 7:21 PM
+ *  * Last modified 7/17/19 8:54 AM
  *
  */
 
@@ -15,7 +15,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Matrix
-import android.net.ParseException
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -123,7 +122,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
 
     when (requestCode) {
       REQUEST_KTP_TAKE_PHOTO -> {
-//        normalizeImage(Uri.fromFile(ktpFile))
+        normalizeImage(Uri.fromFile(ktpFile))
         processOcr(Uri.fromFile(ktpFile), REQUEST_KTP_TAKE_PHOTO)
       }
 
@@ -180,12 +179,45 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   }
 
   fun processResult(text: FirebaseVisionText) {
+    sp.edit().remove(NAME).apply()
+    sp.edit().remove(DOB).apply()
+    sp.edit().remove(NIK).apply()
+    var namePos: Int = -1
+    val words = text.text.split("\n")
+    for (i in words.indices) {
+      if (words[i].replace(" ", "").length == 16) {
+        if (TextUtils.isDigitsOnly(words[i])) {
+          sp.edit().putString(NIK, words[i]).apply()
+        }
+        continue
+      }
+      if (words[i].replace(" ", "").toLowerCase() == "nik") {
+        namePos = i + 1
+        continue
+      }
+      if (i == namePos) {
+        sp.edit().putString(NAME, words[i]).apply()
+        continue
+      }
+      if (words[i].length >= 10) {
+        if (words[i].substring(words[i].length - 4, words[i].length - 2) == "19") {
+          var dob = words[i].substring(words[i].length - 10)
+          dob = dob.replace(" ", "-")
+          if (isDateValid(dob)) {
+            sp.edit().putString(DOB, dob).apply()
+          }
+        }
+      }
+
+    }
     for (block in text.textBlocks) {
       val blockText = block.text
 
       if (blockText.trim().length == 16) {
         if (TextUtils.isDigitsOnly(blockText.trim())) {
-          sp.edit().putString(NIK, blockText.trim()).apply()
+          if (sp.getString(NIK, null) == null) {
+            sp.edit().putString(NIK, blockText.trim()).apply()
+          }
         }
         continue
       }
@@ -193,11 +225,15 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
       if (blockText.trim().contains(",")) {
         if (blockText.contains('\n')) {
           val name = blockText.substring(0, blockText.indexOf('\n'))
-          sp.edit().putString(NAME, name).apply()
+          if (sp.getString(NAME, null) == null) {
+            sp.edit().putString(NAME, name).apply()
+          }
 
           val dob = blockText.trim().substring(blockText.trim().length - 10)
           if (isDateValid(dob)) {
-            sp.edit().putString(DOB, dob).apply()
+            if (sp.getString(DOB, null) == null) {
+              sp.edit().putString(DOB, dob).apply()
+            }
           }
         }
 
@@ -214,7 +250,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
       df.isLenient = false
       df.parse(date)
       true
-    } catch (e: ParseException) {
+    } catch (e: Exception) {
       false
     }
 
