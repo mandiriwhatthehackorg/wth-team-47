@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 1:05 PM
+ *  * Created by Wellsen on 7/17/19 12:04 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 12:52 PM
+ *  * Last modified 7/17/19 12:00 PM
  *
  */
 
@@ -15,9 +15,13 @@ import com.wellsen.mandiri.whatthehack.android.BuildConfig
 import com.wellsen.mandiri.whatthehack.android.data.interceptor.AuthenticationInterceptor
 import com.wellsen.mandiri.whatthehack.android.data.interceptor.OfflineInterceptor
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.AdminApi
-import com.wellsen.mandiri.whatthehack.android.data.remote.api.Api
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.CustomerExperienceApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.MarketingApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.ProductApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.SalesApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.ServicingApi
+import com.wellsen.mandiri.whatthehack.android.data.remote.api.TransactionApi
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -118,22 +122,62 @@ val networkModule = module {
 
   single {
     Retrofit.Builder()
-      .baseUrl(BuildConfig.API_GATEWAY_BASE_URL)
-      .addConverterFactory(GsonConverterFactory.create(get()))
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-      .client(get())
-      .build()
-      .create(Api::class.java)
-  }
-
-  single {
-    Retrofit.Builder()
       .baseUrl(BuildConfig.API_GATEWAY_BASE_URL + "CustomerExpAPI/1.0/")
       .addConverterFactory(GsonConverterFactory.create(get()))
       .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
       .client(get())
       .build()
       .create(CustomerExperienceApi::class.java)
+  }
+
+  single {
+    Retrofit.Builder()
+      .baseUrl(BuildConfig.API_GATEWAY_BASE_URL + "MarketingAPI/1.0/")
+      .addConverterFactory(GsonConverterFactory.create(get()))
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+      .client(get())
+      .build()
+      .create(MarketingApi::class.java)
+  }
+
+  single {
+    Retrofit.Builder()
+      .baseUrl(BuildConfig.API_GATEWAY_BASE_URL + "ProductAPI/1.0/")
+      .addConverterFactory(GsonConverterFactory.create(get()))
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+      .client(get())
+      .build()
+      .create(ProductApi::class.java)
+  }
+
+  single {
+    Retrofit.Builder()
+      .baseUrl(BuildConfig.API_GATEWAY_BASE_URL + "ServicingAPI/1.0/")
+      .addConverterFactory(GsonConverterFactory.create(get()))
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+      .client(get())
+      .build()
+      .create(ServicingApi::class.java)
+  }
+
+  single {
+    Retrofit.Builder()
+      .baseUrl(BuildConfig.API_GATEWAY_BASE_URL + "TrxAndPaymentAPI/1.0/")
+      .addConverterFactory(GsonConverterFactory.create(get()))
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+      .client(get())
+      .build()
+      .create(TransactionApi::class.java)
+  }
+
+  single {
+    Retrofit.Builder()
+      .baseUrl(BuildConfig.API_GATEWAY_BASE_URL + "SalesAPI/1.0/")
+      .addConverterFactory(GsonConverterFactory.create(get()))
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+      .client(get())
+      .build()
+      .create(SalesApi::class.java)
   }
 
 }
