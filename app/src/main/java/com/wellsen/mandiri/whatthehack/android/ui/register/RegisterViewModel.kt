@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 7:21 PM
+ *  * Created by Wellsen on 7/17/19 12:33 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 6:43 PM
+ *  * Last modified 7/17/19 12:15 PM
  *
  */
 
@@ -127,13 +127,19 @@ class RegisterViewModel(
 
   private fun onRegisterSuccess(response: RegisterResponse) {
     Timber.d(response.response)
-    sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
+//    sp.edit().putString(NAME, name.value).apply()
+//    sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
     status.value = Status(Status.SUCCESS)
   }
 
   private fun onRegisterError(t: Throwable) {
     Timber.e(t)
-    sp.edit().remove(MOTHERS_NAME).apply()
+//    sp.edit().remove(NAME).apply()
+//    sp.edit().remove(MOTHERS_NAME).apply()
+
+    sp.edit().putString(NAME, name.value).apply()
+    sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
+
     status.value = Status(Status.ERROR, t.localizedMessage)
   }
 

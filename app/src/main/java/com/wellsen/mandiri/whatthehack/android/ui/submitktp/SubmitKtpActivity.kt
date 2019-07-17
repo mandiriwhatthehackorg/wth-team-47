@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 9:57 AM
+ *  * Created by Wellsen on 7/17/19 12:33 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 8:54 AM
+ *  * Last modified 7/17/19 12:08 PM
  *
  */
 
@@ -56,7 +56,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   @LayoutRes
   override fun getLayoutResId() = R.layout.activity_submit_ktp
 
-  val sp: SharedPreferences by inject()
+  private val sp: SharedPreferences by inject()
 
   lateinit var path: String
 
@@ -72,6 +72,15 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     binding.btnSubmit.setOnClickListener {
       submit()
     }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+
+    sp.edit().remove(KTP_FILE).apply()
+    sp.edit().remove(NAME).apply()
+    sp.edit().remove(NIK).apply()
+    sp.edit().remove(DOB).apply()
   }
 
   private fun submit() {

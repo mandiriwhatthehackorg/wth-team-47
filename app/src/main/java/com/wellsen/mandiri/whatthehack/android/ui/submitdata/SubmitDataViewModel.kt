@@ -1,15 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:53 PM
+ *  * Created by Wellsen on 7/17/19 12:33 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:43 PM
+ *  * Last modified 7/17/19 12:31 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.submitdata
 
 import android.content.SharedPreferences
+import android.net.Uri
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
@@ -24,10 +25,16 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.GetBranchCod
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.GetCardTypesResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.GetProductTypesResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitDataResponse
+import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitKtpResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.KTP_FILE
 import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
+import java.io.File
 
 class SubmitDataViewModel(
   private val sp: SharedPreferences,
@@ -48,6 +55,8 @@ class SubmitDataViewModel(
   var branchCode =
     NonNullMutableLiveData(BranchCode(""))
 
+  lateinit var ktpFile: File
+
   init {
     getProductTypes()
     getCardTypes()
@@ -62,7 +71,7 @@ class SubmitDataViewModel(
         .doOnTerminate { onResponseFinish() }
         .subscribe(
           { onSubmitDataSuccess(it) },
-          { onResponseError(it) }
+          { onSubmitDataError(it) }
         )
     )
   }
@@ -106,6 +115,23 @@ class SubmitDataViewModel(
     )
   }
 
+  private fun submitKtp() {
+    ktpFile = File(Uri.parse(sp.getString(KTP_FILE, null)!!).path!!)
+    val fileBody = ktpFile.asRequestBody("image/*".toMediaTypeOrNull())
+    val body = MultipartBody.Part.createFormData("file", ktpFile.name, fileBody)
+
+    @Suppress("UnstableApiUsage")
+    add(
+      clientApi.submitKtp(body).with()
+        .doOnSubscribe { onRequestStart() }
+        .doOnTerminate { onResponseFinish() }
+        .subscribe(
+          { onSubmitKtpSuccess(it) },
+          { onResponseError(it) }
+        )
+    )
+  }
+
   fun onClickSubmit(@Suppress("unused_parameter") view: View?) {
     submitData(
       SubmitDataRequest(
@@ -126,6 +152,11 @@ class SubmitDataViewModel(
   }
 
   private fun onSubmitDataSuccess(response: SubmitDataResponse) {
+    Timber.d(response.response)
+//    submitKtp()
+  }
+
+  private fun onSubmitKtpSuccess(response: SubmitKtpResponse) {
     Timber.d(response.response)
     status.value = Status(Status.SUCCESS)
   }
@@ -148,6 +179,12 @@ class SubmitDataViewModel(
   private fun onResponseError(t: Throwable) {
     Timber.e(t)
     status.value = Status(Status.ERROR, t.localizedMessage)
+  }
+
+  private fun onSubmitDataError(t: Throwable) {
+    Timber.e(t)
+    status.value = Status(Status.ERROR, t.localizedMessage)
+    submitKtp()
   }
 
 }
