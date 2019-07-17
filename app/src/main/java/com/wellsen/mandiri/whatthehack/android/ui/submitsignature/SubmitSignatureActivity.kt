@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 10:58 AM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 10:57 AM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.submitsignature
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
@@ -49,6 +50,8 @@ class SubmitSignatureActivity : BindingActivity<ActivitySubmitSignatureBinding>(
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitSignatureActivity, it.message, Toast.LENGTH_LONG).show()
+        setResult(Activity.RESULT_OK)
+        finish()
 
       } else {
 

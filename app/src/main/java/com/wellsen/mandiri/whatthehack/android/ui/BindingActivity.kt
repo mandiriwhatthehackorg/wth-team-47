@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 10:58 AM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 10:42 AM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
@@ -45,6 +45,12 @@ const val REQUEST_KTP_TAKE_PHOTO = 102
 const val REQUEST_KTP_OPEN_GALLERY = 103
 const val REQUEST_SELFIE_TAKE_PHOTO = 104
 const val REQUEST_SELFIE_OPEN_GALLERY = 105
+const val REQUEST_SUBMIT_KTP = 106
+const val REQUEST_REGISTER = 107
+const val REQUEST_OTP = 108
+const val REQUEST_SUBMIT_DATA = 109
+const val REQUEST_SUBMIT_PHOTO = 110
+const val REQUEST_SUBMIT_SIGNATURE = 111
 
 abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
 

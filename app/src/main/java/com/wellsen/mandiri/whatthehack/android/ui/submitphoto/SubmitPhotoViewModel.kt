@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 4:05 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 3:54 PM
+ *  * Last modified 7/17/19 12:41 PM
  *
  */
 
@@ -14,7 +14,6 @@ import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
-import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitKtpResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitSelfieResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
@@ -31,24 +30,7 @@ class SubmitPhotoViewModel(
   var pbVisibility: NonNullMutableLiveData<Int> =
     NonNullMutableLiveData(View.INVISIBLE)
   var status = MutableLiveData<Status>()
-  lateinit var ktpFile: File
   lateinit var selfieFile: File
-
-  private fun submitKtp() {
-    val fileBody = ktpFile.asRequestBody("image/*".toMediaTypeOrNull())
-    val body = MultipartBody.Part.createFormData("file", ktpFile.name, fileBody)
-
-    @Suppress("UnstableApiUsage")
-    add(
-      clientApi.submitKtp(body).with()
-        .doOnSubscribe { onSubmitPhotoStart() }
-        .doOnTerminate { onSubmitPhotoFinish() }
-        .subscribe(
-          { onSubmitKtpSuccess(it) },
-          { onSubmitPhotoError(it) }
-        )
-    )
-  }
 
   private fun submitSelfie() {
     val fileBody = selfieFile.asRequestBody("image/*".toMediaTypeOrNull())
@@ -67,7 +49,7 @@ class SubmitPhotoViewModel(
   }
 
   fun onClickSubmit(@Suppress("unused_parameter") view: View?) {
-    submitKtp()
+    submitSelfie()
   }
 
   private fun onSubmitPhotoStart() {
@@ -76,11 +58,6 @@ class SubmitPhotoViewModel(
 
   private fun onSubmitPhotoFinish() {
     pbVisibility.value = View.GONE
-  }
-
-  private fun onSubmitKtpSuccess(response: SubmitKtpResponse) {
-    Timber.d(response.response)
-    submitSelfie()
   }
 
   private fun onSubmitSelfieSuccess(response: SubmitSelfieResponse) {

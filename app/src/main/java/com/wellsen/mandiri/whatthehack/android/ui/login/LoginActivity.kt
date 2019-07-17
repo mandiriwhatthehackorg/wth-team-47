@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 5:22 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 4:12 PM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -19,6 +20,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SUBMIT_KTP
 import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -93,7 +95,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         ).toBundle()
       )*/
 
-      startActivity(Intent(this, SubmitKtpActivity::class.java))
+      startActivityForResult(Intent(this, SubmitKtpActivity::class.java), REQUEST_SUBMIT_KTP)
     }
 
     binding.btnForgotPass.setOnClickListener {
@@ -102,6 +104,18 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
 
     }
 
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    if (resultCode != Activity.RESULT_OK) {
+      return
+    }
+
+    if (requestCode == REQUEST_SUBMIT_KTP) {
+      // proceed
+    }
   }
 
 }

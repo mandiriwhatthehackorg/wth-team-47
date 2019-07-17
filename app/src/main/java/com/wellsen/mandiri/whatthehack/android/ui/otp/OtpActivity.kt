@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:30 AM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:26 AM
+ *  * Last modified 7/17/19 1:03 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.otp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -18,6 +19,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.OtpStatus
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityOtpBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SUBMIT_DATA
 import com.wellsen.mandiri.whatthehack.android.ui.submitdata.SubmitDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
@@ -40,7 +42,7 @@ class OtpActivity : BindingActivity<ActivityOtpBinding>() {
       when (it.code) {
         OtpStatus.ERROR -> {
           Toast.makeText(this@OtpActivity, it.message, Toast.LENGTH_LONG).show()
-          startActivity(Intent(this, SubmitDataActivity::class.java))
+          startActivityForResult(Intent(this, SubmitDataActivity::class.java), REQUEST_SUBMIT_DATA)
         }
 
         OtpStatus.OTP_RESEND_SUCCESS -> {
@@ -57,6 +59,19 @@ class OtpActivity : BindingActivity<ActivityOtpBinding>() {
 
     binding.viewOtp.setOtpCompletionListener {
       vm.onOtpFilled(it)
+    }
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    if (resultCode != Activity.RESULT_OK) {
+      return
+    }
+
+    if (requestCode == REQUEST_SUBMIT_DATA) {
+      setResult(Activity.RESULT_OK)
+      finish()
     }
   }
 

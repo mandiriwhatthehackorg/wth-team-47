@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 10:58 AM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 8:41 AM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
@@ -23,7 +23,7 @@ val viewModelModule = module {
   viewModel { LoginViewModel(get(), get(), get()) }
   viewModel { ResetPassViewModel(get()) }
   viewModel { RegisterViewModel(get(), get(), get(), get(), get(), get(), get()) }
-  viewModel { OtpViewModel(get()) }
+  viewModel { OtpViewModel(get(), get()) }
   viewModel { SubmitDataViewModel(get(), get(), get()) }
   viewModel { SubmitPhotoViewModel(get()) }
   viewModel { SubmitSignatureViewModel(get()) }

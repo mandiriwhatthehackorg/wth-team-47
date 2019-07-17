@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 7:21 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 5:56 PM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
@@ -16,3 +16,4 @@ const val NAME = "name"
 const val DOB = "dob"
 const val KTP_FILE = "ktp_file"
 const val MOTHERS_NAME = "mothers_name"
+const val EMAIL = "email"

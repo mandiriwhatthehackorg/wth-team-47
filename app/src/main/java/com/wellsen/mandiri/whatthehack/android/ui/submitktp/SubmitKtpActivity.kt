@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 12:33 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 12:08 PM
+ *  * Last modified 7/17/19 1:41 PM
  *
  */
 
@@ -35,6 +35,7 @@ import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
 import com.wellsen.mandiri.whatthehack.android.ui.KTP
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_OPEN_GALLERY
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_TAKE_PHOTO
+import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_REGISTER
 import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
 import com.wellsen.mandiri.whatthehack.android.util.DATE_FORMAT
 import com.wellsen.mandiri.whatthehack.android.util.DOB
@@ -84,7 +85,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   }
 
   private fun submit() {
-    startActivity(Intent(this, RegisterActivity::class.java))
+    startActivityForResult(Intent(this, RegisterActivity::class.java), REQUEST_REGISTER)
   }
 
   /**
@@ -111,7 +112,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     when (type) {
       KTP -> {
         val lp = binding.ivKtp.layoutParams as LayoutParams
-        lp.height = binding.cl.measuredWidth / 16 * 9
+        lp.height = binding.cl.measuredWidth/* / 16 * 9*/
         binding.ivKtp.layoutParams = lp
         binding.btnSubmit.isEnabled = true
 
@@ -140,6 +141,11 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
         path = FileUtils.getPath(this, selectedImage) ?: return
 
         processOcr(selectedImage, REQUEST_KTP_OPEN_GALLERY)
+      }
+
+      REQUEST_REGISTER -> {
+        setResult(Activity.RESULT_OK)
+        finish()
       }
     }
   }
@@ -187,7 +193,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
       }
   }
 
-  fun processResult(text: FirebaseVisionText) {
+  private fun processResult(text: FirebaseVisionText) {
     sp.edit().remove(NAME).apply()
     sp.edit().remove(DOB).apply()
     sp.edit().remove(NIK).apply()
@@ -265,7 +271,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
 
   }
 
-  fun normalizeImage(uri: Uri) {
+  private fun normalizeImage(uri: Uri) {
     if (uri.path == null) {
       return
     }
@@ -283,7 +289,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     }
   }
 
-  fun rotateBitmap(bitmap: Bitmap, orientation: Int): Bitmap {
+  private fun rotateBitmap(bitmap: Bitmap, orientation: Int): Bitmap {
     val matrix = Matrix()
     when (orientation) {
       ExifInterface.ORIENTATION_NORMAL -> return bitmap
@@ -328,7 +334,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
 
   }
 
-  fun saveBitmapToFile(croppedImage: Bitmap, saveUri: Uri) {
+  private fun saveBitmapToFile(croppedImage: Bitmap, saveUri: Uri) {
     var outputStream: OutputStream? = null
     try {
       outputStream = this.contentResolver.openOutputStream(saveUri)
@@ -341,7 +347,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     }
   }
 
-  fun closeSilently(c: Closeable) {
+  private fun closeSilently(c: Closeable) {
     try {
       c.close()
     } catch (t: Throwable) {

@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 1:58 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 1:58 PM
+ *  * Last modified 7/17/19 12:41 PM
  *
  */
 
@@ -35,7 +35,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>() {
         )
         finish()
       },
-      3000
+      2000
     )
   }
 

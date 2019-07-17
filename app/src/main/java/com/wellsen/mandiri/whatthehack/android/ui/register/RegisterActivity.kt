@@ -1,15 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 7:21 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 6:44 PM
+ *  * Last modified 7/17/19 1:03 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.register
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -22,6 +23,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityRegisterBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_OTP
 import com.wellsen.mandiri.whatthehack.android.ui.otp.OtpActivity
 import com.wellsen.mandiri.whatthehack.android.util.DATE_FORMAT
 import com.wellsen.mandiri.whatthehack.android.util.DOB
@@ -85,7 +87,7 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@RegisterActivity, it.message, Toast.LENGTH_LONG).show()
-        startActivity(Intent(this, OtpActivity::class.java))
+        startActivityForResult(Intent(this, OtpActivity::class.java), REQUEST_OTP)
 
       } else {
 
@@ -136,6 +138,19 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
     val dateString = if (date >= 10) date.toString() else "0$date"
 
     et.setText("$dateString-$monthString-$yearString")
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    if (resultCode != Activity.RESULT_OK) {
+      return
+    }
+
+    if (requestCode == REQUEST_OTP) {
+      setResult(Activity.RESULT_OK)
+      finish()
+    }
   }
 
 }

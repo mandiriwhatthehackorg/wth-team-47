@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 12:33 PM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 12:15 PM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
@@ -21,6 +21,7 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterReque
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.DOB
+import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
 import com.wellsen.mandiri.whatthehack.android.util.NAME
 import com.wellsen.mandiri.whatthehack.android.util.NIK
@@ -129,6 +130,7 @@ class RegisterViewModel(
     Timber.d(response.response)
 //    sp.edit().putString(NAME, name.value).apply()
 //    sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
+//    sp.edit().putString(EMAIL, email.value).apply()
     status.value = Status(Status.SUCCESS)
   }
 
@@ -139,6 +141,7 @@ class RegisterViewModel(
 
     sp.edit().putString(NAME, name.value).apply()
     sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
+    sp.edit().putString(EMAIL, email.value).apply()
 
     status.value = Status(Status.ERROR, t.localizedMessage)
   }

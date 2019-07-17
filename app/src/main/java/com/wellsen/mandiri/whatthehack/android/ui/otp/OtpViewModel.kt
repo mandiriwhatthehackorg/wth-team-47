@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:52 AM
+ *  * Created by Wellsen on 7/17/19 1:45 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:52 AM
+ *  * Last modified 7/17/19 1:02 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.otp
 
+import android.content.SharedPreferences
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
@@ -19,10 +20,12 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.request.OtpValidation
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpResendResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpValidationResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import timber.log.Timber
 
 class OtpViewModel(
+  sp: SharedPreferences,
   private val clientApi: ClientApi
 ) : BaseViewModel() {
 
@@ -35,7 +38,8 @@ class OtpViewModel(
   var status = MutableLiveData<OtpStatus>()
 
   init {
-
+    val email = sp.getString(EMAIL, "email")
+    otpTitle.value = "Please type the OTP code sent to $email"
   }
 
   fun onOtpFilled(otp: String) {
