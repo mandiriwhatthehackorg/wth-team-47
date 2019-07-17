@@ -1,15 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/17/19 2:05 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:02 PM
+ *  * Last modified 7/17/19 1:54 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.submitsignature
 
 import android.app.Activity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
@@ -21,6 +22,8 @@ import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivitySubmitSignatureBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
 import com.wellsen.mandiri.whatthehack.android.ui.PNG
+import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 
@@ -28,6 +31,8 @@ class SubmitSignatureActivity : BindingActivity<ActivitySubmitSignatureBinding>(
 
   @LayoutRes
   override fun getLayoutResId() = R.layout.activity_submit_signature
+
+  private val sp: SharedPreferences by inject()
 
   lateinit var vm: SubmitSignatureViewModel
 
@@ -50,6 +55,7 @@ class SubmitSignatureActivity : BindingActivity<ActivitySubmitSignatureBinding>(
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitSignatureActivity, it.message, Toast.LENGTH_LONG).show()
+        sp.edit().putBoolean(LOGGED_IN, true).apply()
         setResult(Activity.RESULT_OK)
         finish()
 
