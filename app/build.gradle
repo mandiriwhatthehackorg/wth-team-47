@@ -45,6 +45,8 @@ dependencies {
   implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
   implementation 'androidx.annotation:annotation:1.1.0'
 
+  implementation 'androidx.biometric:biometric:1.0.0-alpha04'
+
   implementation "org.koin:koin-androidx-scope:$koin_version"
   implementation "org.koin:koin-androidx-viewmodel:$koin_version"
   implementation "org.koin:koin-androidx-ext:$koin_version"
@@ -76,10 +78,10 @@ dependencies {
 
 /*
  * *
- *  * Created by Wellsen on 7/16/19 7:21 PM
+ *  * Created by Wellsen on 7/17/19 3:36 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/16/19 6:19 PM
+ *  * Last modified 7/17/19 2:06 PM
  *
  */
 
