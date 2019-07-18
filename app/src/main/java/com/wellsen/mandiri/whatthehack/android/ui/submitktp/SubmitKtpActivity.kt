@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/18/19 10:52 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:41 PM
+ *  * Last modified 7/18/19 10:45 PM
  *
  */
 
@@ -194,7 +194,6 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   }
 
   private fun processResult(text: FirebaseVisionText) {
-    sp.edit().remove(NAME).apply()
     sp.edit().remove(DOB).apply()
     sp.edit().remove(NIK).apply()
     var namePos: Int = -1
@@ -211,7 +210,9 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
         continue
       }
       if (i == namePos) {
-        sp.edit().putString(NAME, words[i]).apply()
+        if (sp.getString(NAME, null) == null) {
+          sp.edit().putString(NAME, words[i]).apply()
+        }
         continue
       }
       if (words[i].length >= 10) {

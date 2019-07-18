@@ -36,6 +36,8 @@ dependencies {
 
   implementation 'com.google.firebase:firebase-core:17.0.1'
   implementation 'com.google.firebase:firebase-ml-vision:22.0.0'
+  implementation 'com.google.firebase:firebase-auth:18.1.0'
+  implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
   implementation 'androidx.appcompat:appcompat:1.0.2'
   implementation 'com.google.android.material:material:1.0.0'
@@ -78,10 +80,10 @@ dependencies {
 
 /*
  * *
- *  * Created by Wellsen on 7/17/19 3:36 PM
+ *  * Created by Wellsen on 7/18/19 10:52 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 2:06 PM
+ *  * Last modified 7/18/19 11:33 AM
  *
  */
 

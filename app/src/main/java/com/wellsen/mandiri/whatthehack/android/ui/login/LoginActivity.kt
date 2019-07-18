@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 2:05 PM
+ *  * Created by Wellsen on 7/18/19 10:52 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:56 PM
+ *  * Last modified 7/18/19 10:45 PM
  *
  */
 
@@ -17,14 +17,23 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityLoginBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_GOOGLE_SIGN_IN
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SUBMIT_KTP
 import com.wellsen.mandiri.whatthehack.android.ui.main.MainActivity
 import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
+import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
+import com.wellsen.mandiri.whatthehack.android.util.NAME
+import com.wellsen.mandiri.whatthehack.android.util.PHOTO_URL
 import com.wellsen.mandiri.whatthehack.android.util.extension.afterTextChanged
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -37,7 +46,28 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
 
   private val sp: SharedPreferences by inject()
 
+  private var googleSignInClient: GoogleApiClient? = null
+  private var auth: FirebaseAuth? = null
+
   override fun onCreate(savedInstanceState: Bundle?) {
+
+    // Configure Google Sign In
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+      .requestIdToken(getString(R.string.default_web_client_id))
+      .requestEmail()
+      .requestProfile()
+      .requestId()
+      .build()
+
+    googleSignInClient = GoogleApiClient.Builder(this)
+      .enableAutoManage(this) {
+        Timber.e(it.errorMessage)
+        it.errorMessage?.let { it1 -> toastOnMainThread(it1) }
+      }
+      .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+      .build()
+
+    auth = FirebaseAuth.getInstance()
 
     if (sp.getBoolean(LOGGED_IN, false)) {
       login()
@@ -107,7 +137,8 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         ).toBundle()
       )*/
 
-      startActivityForResult(Intent(this, SubmitKtpActivity::class.java), REQUEST_SUBMIT_KTP)
+      val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleSignInClient)
+      startActivityForResult(signInIntent, REQUEST_GOOGLE_SIGN_IN)
     }
 
     binding.btnForgotPass.setOnClickListener {
@@ -118,21 +149,62 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
 
   }
 
+  private fun getDetail(result: GoogleSignInResult) {
+    if (result.isSuccess) {
+      val signInAccount = result.signInAccount
+      if (signInAccount != null) {
+        sp.edit().putString(NAME, signInAccount.displayName).apply()
+        sp.edit().putString(EMAIL, signInAccount.email).apply()
+        sp.edit().putString(PHOTO_URL, signInAccount.photoUrl.toString()).apply()
+
+        startActivityForResult(Intent(this, SubmitKtpActivity::class.java), REQUEST_SUBMIT_KTP)
+      } else {
+        Timber.e("Sign in data null")
+      }
+    } else {
+      Timber.d("Masuk Dengan Google Gagal")
+      Toast.makeText(this, "Masuk Dengan Google Gagal", Toast.LENGTH_LONG).show()
+    }
+  }
+
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
 
-    if (resultCode != Activity.RESULT_OK) {
-      return
-    }
-
-    if (requestCode == REQUEST_SUBMIT_KTP) {
+    when (requestCode) {
       // proceed
-      login()
+      REQUEST_SUBMIT_KTP -> {
+        if (resultCode != Activity.RESULT_OK) {
+          return
+        }
+
+        login()
+      }
+
+      REQUEST_GOOGLE_SIGN_IN -> getDetail(Auth.GoogleSignInApi.getSignInResultFromIntent(data))
     }
   }
 
   private fun login() {
     startActivity(Intent(this, MainActivity::class.java))
+  }
+
+  override fun onStart() {
+    super.onStart()
+    if (googleSignInClient != null)
+      googleSignInClient!!.connect()
+  }
+
+  override fun onStop() {
+    super.onStop()
+    if (googleSignInClient != null && googleSignInClient!!.isConnected) {
+//      logout()
+      googleSignInClient!!.disconnect()
+    }
+  }
+
+  fun logout() {
+    if (googleSignInClient != null && googleSignInClient!!.isConnected)
+      Auth.GoogleSignInApi.signOut(googleSignInClient).setResultCallback {}
   }
 
 }

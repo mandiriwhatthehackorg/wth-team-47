@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/18/19 10:52 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:02 PM
+ *  * Last modified 7/18/19 10:51 PM
  *
  */
 
@@ -65,6 +65,10 @@ class RegisterViewModel(
   init {
     if (sp.getString(NAME, null) != null) {
       name.value = sp.getString(NAME, null)!!
+    }
+
+    if (sp.getString(EMAIL, null) != null) {
+      email.value = sp.getString(EMAIL, null)!!
     }
 
     if (sp.getString(NIK, null) != null) {
