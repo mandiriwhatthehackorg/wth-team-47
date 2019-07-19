@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/16/19 10:58 AM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:52 AM
+ *  * Last modified 7/19/19 9:54 PM
  *
  */
 
@@ -121,7 +121,7 @@ private fun setSpinnerListener(spinner: AppCompatSpinner, listener: InverseBindi
 
 private fun setCurrentSelection(spinner: AppCompatSpinner, selectedItem: ProductType): Boolean {
   for (index in 0 until spinner.adapter.count) {
-    if (spinner.getItemAtPosition(index) == selectedItem.product) {
+    if (spinner.getItemAtPosition(index) == selectedItem) {
       spinner.setSelection(index)
       return true
     }
@@ -132,7 +132,7 @@ private fun setCurrentSelection(spinner: AppCompatSpinner, selectedItem: Product
 
 private fun setCurrentSelection(spinner: AppCompatSpinner, selectedItem: CardType): Boolean {
   for (index in 0 until spinner.adapter.count) {
-    if (spinner.getItemAtPosition(index) == selectedItem.card) {
+    if (spinner.getItemAtPosition(index) == selectedItem) {
       spinner.setSelection(index)
       return true
     }
@@ -143,7 +143,7 @@ private fun setCurrentSelection(spinner: AppCompatSpinner, selectedItem: CardTyp
 
 private fun setCurrentSelection(spinner: AppCompatSpinner, selectedItem: BranchCode): Boolean {
   for (index in 0 until spinner.adapter.count) {
-    if (spinner.getItemAtPosition(index) == selectedItem.branch) {
+    if (spinner.getItemAtPosition(index) == selectedItem) {
       spinner.setSelection(index)
       return true
     }

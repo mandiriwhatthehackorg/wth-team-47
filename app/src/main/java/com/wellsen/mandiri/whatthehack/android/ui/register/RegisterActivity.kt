@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:03 PM
+ *  * Last modified 7/19/19 10:50 PM
  *
  */
 
@@ -20,9 +20,10 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.google.android.material.textfield.TextInputEditText
 import com.wellsen.mandiri.whatthehack.android.R
-import com.wellsen.mandiri.whatthehack.android.data.model.Status
+import com.wellsen.mandiri.whatthehack.android.data.model.RegisterStatus
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityRegisterBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.EXTRA_STATUS
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_OTP
 import com.wellsen.mandiri.whatthehack.android.ui.otp.OtpActivity
 import com.wellsen.mandiri.whatthehack.android.util.DATE_FORMAT
@@ -32,7 +33,6 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
-import timber.log.Timber
 
 class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
 
@@ -84,18 +84,24 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
 
     vm.status.observe(this@RegisterActivity, Observer {
 
-      if (it.code == Status.ERROR) {
+      when (it.code) {
+        RegisterStatus.ERROR -> Toast.makeText(
+          this@RegisterActivity,
+          it.message,
+          Toast.LENGTH_LONG
+        ).show()
 
-        Toast.makeText(this@RegisterActivity, it.message, Toast.LENGTH_LONG).show()
-        startActivityForResult(Intent(this, OtpActivity::class.java), REQUEST_OTP)
+        RegisterStatus.SUCCESS -> startActivityForResult(
+          Intent(this, OtpActivity::class.java),
+          REQUEST_OTP
+        )
 
-      } else {
-
-        // Proceed register
-        Timber.d("Proceed register")
-
+        RegisterStatus.SUCCESS_ACTIVE -> {
+          val intent = Intent(this, OtpActivity::class.java)
+          intent.putExtra(EXTRA_STATUS, true)
+          startActivityForResult(intent, REQUEST_OTP)
+        }
       }
-
     })
 
     setAfterTextChangedListener(binding.etName, vm)

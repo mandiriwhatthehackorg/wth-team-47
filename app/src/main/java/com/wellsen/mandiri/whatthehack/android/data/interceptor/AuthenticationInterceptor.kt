@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 2:37 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 2:30 PM
+ *  * Last modified 7/19/19 7:38 PM
  *
  */
 
@@ -25,7 +25,8 @@ class AuthenticationInterceptor(private val sp: SharedPreferences) : Interceptor
       return chain.proceed(request)
     }
 
-    requestBuilder.addHeader("Authorization", sp.getString(AUTHORIZATION, null)!!)
+    val bearer = sp.getString(AUTHORIZATION, null)
+    requestBuilder.addHeader("Authorization", "Bearer $bearer")
 
     return chain.proceed(requestBuilder.build())
   }

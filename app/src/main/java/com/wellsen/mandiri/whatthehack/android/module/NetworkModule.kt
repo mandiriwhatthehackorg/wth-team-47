@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 12:04 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 12:00 PM
+ *  * Last modified 7/19/19 7:21 PM
  *
  */
 
@@ -48,9 +48,9 @@ val networkModule = module {
   single {
     OkHttpClient.Builder()
       .apply {
-        connectTimeout(10, TimeUnit.SECONDS)
-        writeTimeout(10, TimeUnit.SECONDS)
-        readTimeout(10, TimeUnit.SECONDS)
+        connectTimeout(30, TimeUnit.SECONDS)
+        writeTimeout(30, TimeUnit.SECONDS)
+        readTimeout(30, TimeUnit.SECONDS)
         sslSocketFactory(get(), get<Array<TrustManager>>()[0] as X509TrustManager)
         hostnameVerifier(get())
         addInterceptor(get<OfflineInterceptor>())

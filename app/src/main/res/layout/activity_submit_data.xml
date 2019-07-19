@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/15/19 2:53 PM
+  ~  * Created by Wellsen on 7/19/19 10:50 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/15/19 2:51 PM
+  ~  * Last modified 7/19/19 10:10 PM
   ~  */
   -->
 
@@ -60,8 +60,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/tv_product_type"
-          app:productType="@={vm.productType}"
-          app:productTypes="@{vm.productTypes}"
           tools:listitem="@android:layout/simple_spinner_dropdown_item"
           />
 
@@ -87,8 +85,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/tv_card_type"
-          app:cardType="@={vm.cardType}"
-          app:cardTypes="@{vm.cardTypes}"
           tools:listitem="@android:layout/simple_spinner_dropdown_item"
           />
 
@@ -114,8 +110,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/tv_branch_code"
-          app:branchCode="@={vm.branchCode}"
-          app:branchCodes="@{vm.branchCodes}"
           tools:listitem="@android:layout/simple_spinner_dropdown_item"
           />
 

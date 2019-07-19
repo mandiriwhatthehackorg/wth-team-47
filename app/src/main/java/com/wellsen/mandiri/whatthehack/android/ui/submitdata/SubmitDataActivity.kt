@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:02 PM
+ *  * Last modified 7/19/19 10:50 PM
  *
  */
 
@@ -12,6 +12,7 @@ package com.wellsen.mandiri.whatthehack.android.ui.submitdata
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
@@ -42,16 +43,37 @@ class SubmitDataActivity : BindingActivity<ActivitySubmitDataBinding>() {
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitDataActivity, it.message, Toast.LENGTH_LONG).show()
-        startActivityForResult(Intent(this, SubmitPhotoActivity::class.java), REQUEST_SUBMIT_PHOTO)
 
       } else {
 
         // Proceed submit KTP
         Timber.d("Proceed submit KTP")
+        startActivityForResult(Intent(this, SubmitPhotoActivity::class.java), REQUEST_SUBMIT_PHOTO)
 
       }
 
     })
+
+    val branchCodes = ArrayList<String>()
+    branchCodes.add("Cabang Area Kalimantan")
+
+    val branchAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, branchCodes)
+    branchAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    binding.spBranchCode.adapter = branchAdapter
+
+    val cardTypes = ArrayList<String>()
+    cardTypes.add("Mandiri Gold Regular")
+
+    val cardAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cardTypes)
+    cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    binding.spCardType.adapter = cardAdapter
+
+    val productTypes = ArrayList<String>()
+    productTypes.add("Tabungan Regular")
+
+    val productAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, productTypes)
+    productAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    binding.spProductType.adapter = productAdapter
 
   }
 

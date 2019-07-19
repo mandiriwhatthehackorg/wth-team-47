@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:03 PM
+ *  * Last modified 7/19/19 8:44 PM
  *
  */
 
@@ -19,6 +19,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.OtpStatus
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityOtpBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.EXTRA_STATUS
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SUBMIT_DATA
 import com.wellsen.mandiri.whatthehack.android.ui.submitdata.SubmitDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -37,12 +38,15 @@ class OtpActivity : BindingActivity<ActivityOtpBinding>() {
 
     val vm = binding.vm as OtpViewModel
 
+    if (intent.getBooleanExtra(EXTRA_STATUS, false)) {
+      vm.onClickResend(null)
+    }
+
     vm.status.observe(this@OtpActivity, Observer {
 
       when (it.code) {
         OtpStatus.ERROR -> {
           Toast.makeText(this@OtpActivity, it.message, Toast.LENGTH_LONG).show()
-          startActivityForResult(Intent(this, SubmitDataActivity::class.java), REQUEST_SUBMIT_DATA)
         }
 
         OtpStatus.OTP_RESEND_SUCCESS -> {
@@ -50,9 +54,12 @@ class OtpActivity : BindingActivity<ActivityOtpBinding>() {
           Toast.makeText(this@OtpActivity, R.string.message_otp_resend, Toast.LENGTH_LONG).show()
         }
 
-        OtpStatus.OTP_VALIDATION_SUCCESS ->
+        OtpStatus.OTP_VALIDATION_SUCCESS -> {
           // Proceed submit data
           Timber.d("Proceed submit data")
+          startActivityForResult(Intent(this, SubmitDataActivity::class.java), REQUEST_SUBMIT_DATA)
+        }
+
       }
 
     })

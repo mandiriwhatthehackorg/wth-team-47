@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:30 AM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 7:51 AM
+ *  * Last modified 7/19/19 9:52 PM
  *
  */
 
@@ -11,6 +11,7 @@ package com.wellsen.mandiri.whatthehack.android.data.model
 
 data class ProductType(
 
-  val product: String
+  val productCode: String,
+  val productName: String
 
 )

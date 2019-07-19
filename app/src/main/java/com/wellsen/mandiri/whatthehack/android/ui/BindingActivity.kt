@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/18/19 10:52 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/18/19 11:50 AM
+ *  * Last modified 7/19/19 8:42 PM
  *
  */
 
@@ -52,6 +52,8 @@ const val REQUEST_SUBMIT_DATA = 109
 const val REQUEST_SUBMIT_PHOTO = 110
 const val REQUEST_SUBMIT_SIGNATURE = 111
 const val REQUEST_GOOGLE_SIGN_IN = 300
+
+const val EXTRA_STATUS = "extra_status"
 
 abstract class BindingActivity<T : ViewDataBinding> : AppCompatActivity() {
 

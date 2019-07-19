@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/18/19 10:52 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/18/19 10:45 PM
+ *  * Last modified 7/19/19 10:50 PM
  *
  */
 
@@ -133,6 +133,12 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     when (requestCode) {
       REQUEST_KTP_TAKE_PHOTO -> {
         normalizeImage(Uri.fromFile(ktpFile))
+
+        ktpFile = Compressor(this)
+          .setMaxWidth(1366)
+          .setMaxHeight(1366)
+          .compressToFile(ktpFile)
+
         processOcr(Uri.fromFile(ktpFile), REQUEST_KTP_TAKE_PHOTO)
       }
 
@@ -140,7 +146,12 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
         val selectedImage = data?.data ?: return
         path = FileUtils.getPath(this, selectedImage) ?: return
 
-        processOcr(selectedImage, REQUEST_KTP_OPEN_GALLERY)
+        ktpFile = Compressor(this)
+          .setMaxWidth(1366)
+          .setMaxHeight(1366)
+          .compressToFile(File(path))
+
+        processOcr(Uri.fromFile(ktpFile), REQUEST_KTP_OPEN_GALLERY)
       }
 
       REQUEST_REGISTER -> {
@@ -189,6 +200,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
       }
       .addOnFailureListener {
         Timber.e(it.localizedMessage)
+        loadPhoto(KTP)
         binding.pb.visibility = View.GONE
       }
   }

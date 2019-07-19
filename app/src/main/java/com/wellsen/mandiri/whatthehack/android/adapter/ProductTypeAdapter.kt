@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:53 AM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:53 AM
+ *  * Last modified 7/19/19 9:54 PM
  *
  */
 
@@ -28,13 +28,13 @@ class ProductTypeAdapter(
 
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
     val label = super.getView(position, convertView, parent) as TextView
-    label.text = values[position].product
+    label.text = values[position].productName
     return label
   }
 
   override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
     val label = super.getDropDownView(position, convertView, parent) as TextView
-    label.text = values[position].product
+    label.text = values[position].productName
     return label
   }
 

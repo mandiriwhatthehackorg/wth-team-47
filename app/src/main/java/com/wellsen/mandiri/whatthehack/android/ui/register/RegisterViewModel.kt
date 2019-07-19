@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/18/19 10:52 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/18/19 10:51 PM
+ *  * Last modified 7/19/19 10:50 PM
  *
  */
 
@@ -15,11 +15,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.R.string
 import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
-import com.wellsen.mandiri.whatthehack.android.data.model.Status
+import com.wellsen.mandiri.whatthehack.android.data.model.RegisterStatus
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.request.RegisterRequest
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.RegisterResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.AUTHORIZATION
 import com.wellsen.mandiri.whatthehack.android.util.DOB
 import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
@@ -45,7 +46,7 @@ class RegisterViewModel(
 
   var pbVisibility: NonNullMutableLiveData<Int> =
     NonNullMutableLiveData(View.INVISIBLE)
-  var status = MutableLiveData<Status>()
+  var status = MutableLiveData<RegisterStatus>()
   var name: NonNullMutableLiveData<String> =
     NonNullMutableLiveData("")
   var email: NonNullMutableLiveData<String> =
@@ -131,23 +132,26 @@ class RegisterViewModel(
   }
 
   private fun onRegisterSuccess(response: RegisterResponse) {
-    Timber.d(response.response)
-//    sp.edit().putString(NAME, name.value).apply()
-//    sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
-//    sp.edit().putString(EMAIL, email.value).apply()
-    status.value = Status(Status.SUCCESS)
-  }
-
-  private fun onRegisterError(t: Throwable) {
-    Timber.e(t)
-//    sp.edit().remove(NAME).apply()
-//    sp.edit().remove(MOTHERS_NAME).apply()
+    Timber.d(response.message)
 
     sp.edit().putString(NAME, name.value).apply()
     sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
     sp.edit().putString(EMAIL, email.value).apply()
+    if (response.data != null) {
+      sp.edit().putString(AUTHORIZATION, response.data.token).apply()
+      status.value = RegisterStatus(RegisterStatus.SUCCESS)
+      return
+    }
 
-    status.value = Status(Status.ERROR, t.localizedMessage)
+    status.value = RegisterStatus(RegisterStatus.SUCCESS_ACTIVE)
+  }
+
+  private fun onRegisterError(t: Throwable) {
+    Timber.e(t)
+    sp.edit().remove(NAME).apply()
+    sp.edit().remove(MOTHERS_NAME).apply()
+
+    status.value = RegisterStatus(RegisterStatus.ERROR, t.localizedMessage)
   }
 
 }

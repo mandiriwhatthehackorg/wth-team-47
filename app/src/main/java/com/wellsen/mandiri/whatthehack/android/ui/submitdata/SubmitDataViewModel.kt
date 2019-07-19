@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 12:33 PM
+ *  * Created by Wellsen on 7/19/19 10:50 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 12:31 PM
+ *  * Last modified 7/19/19 10:50 PM
  *
  */
 
@@ -49,11 +49,11 @@ class SubmitDataViewModel(
   var cardTypes = ArrayList<CardType>()
   var branchCodes = ArrayList<BranchCode>()
   var productType =
-    NonNullMutableLiveData(ProductType(""))
+    NonNullMutableLiveData(ProductType("", ""))
   var cardType =
-    NonNullMutableLiveData(CardType(""))
+    NonNullMutableLiveData(CardType("gold", "Mandiri Gold Regular"))
   var branchCode =
-    NonNullMutableLiveData(BranchCode(""))
+    NonNullMutableLiveData(BranchCode("76548", "Cabang Area Kalimantan", "Kalimantan"))
 
   lateinit var ktpFile: File
 
@@ -135,10 +135,10 @@ class SubmitDataViewModel(
   fun onClickSubmit(@Suppress("unused_parameter") view: View?) {
     submitData(
       SubmitDataRequest(
-        productType.value.product,
-        cardType.value.card,
+        "TAB",
+        "gold",
         sp.getString(MOTHERS_NAME, "") ?: "",
-        branchCode.value.branch
+        "76548"
       )
     )
   }
@@ -153,7 +153,7 @@ class SubmitDataViewModel(
 
   private fun onSubmitDataSuccess(response: SubmitDataResponse) {
     Timber.d(response.response)
-//    submitKtp()
+    submitKtp()
   }
 
   private fun onSubmitKtpSuccess(response: SubmitKtpResponse) {
@@ -163,17 +163,17 @@ class SubmitDataViewModel(
 
   private fun onGetProductTypesSuccess(response: GetProductTypesResponse) {
     Timber.d(response.toString())
-    productTypes = response.products as ArrayList<ProductType>
+    productTypes = response.data.data as ArrayList<ProductType>
   }
 
   private fun onGetCardTypesSuccess(response: GetCardTypesResponse) {
     Timber.d(response.toString())
-    cardTypes = response.cards as ArrayList<CardType>
+    cardTypes = response.data.data as ArrayList<CardType>
   }
 
   private fun onGetBranchCodesSuccess(response: GetBranchCodesResponse) {
     Timber.d(response.toString())
-    branchCodes = response.branchCodes as ArrayList<BranchCode>
+    branchCodes = response.data.data as ArrayList<BranchCode>
   }
 
   private fun onResponseError(t: Throwable) {
