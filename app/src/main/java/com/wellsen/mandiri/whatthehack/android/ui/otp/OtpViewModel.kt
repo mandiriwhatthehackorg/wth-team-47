@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:02 PM
+ *  * Last modified 7/19/19 11:10 PM
  *
  */
 
@@ -20,12 +20,13 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.request.OtpValidation
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpResendResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpValidationResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.AUTHORIZATION
 import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import timber.log.Timber
 
 class OtpViewModel(
-  sp: SharedPreferences,
+  val sp: SharedPreferences,
   private val clientApi: ClientApi
 ) : BaseViewModel() {
 
@@ -77,12 +78,14 @@ class OtpViewModel(
   }
 
   private fun onOtpValidationSuccess(response: OtpValidationResponse) {
-    Timber.d(response.response)
+    Timber.d(response.message)
+    sp.edit().putString(AUTHORIZATION, response.data.token).apply()
     status.value = OtpStatus(OtpStatus.OTP_VALIDATION_SUCCESS)
   }
 
   private fun onOtpResendSuccess(response: OtpResendResponse) {
-    Timber.d(response.response)
+    Timber.d(response.message)
+    sp.edit().putString(AUTHORIZATION, response.data.token).apply()
     status.value = OtpStatus(OtpStatus.OTP_RESEND_SUCCESS)
   }
 

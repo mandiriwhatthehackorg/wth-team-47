@@ -1,14 +1,15 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 12:41 PM
+ *  * Last modified 7/19/19 11:05 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.submitphoto
 
+import android.content.SharedPreferences
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.wellsen.mandiri.whatthehack.android.adapter.NonNullMutableLiveData
@@ -16,6 +17,7 @@ import com.wellsen.mandiri.whatthehack.android.data.model.Status
 import com.wellsen.mandiri.whatthehack.android.data.remote.api.ClientApi
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitSelfieResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.AUTHORIZATION
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -24,6 +26,7 @@ import timber.log.Timber
 import java.io.File
 
 class SubmitPhotoViewModel(
+  private val sp: SharedPreferences,
   private val clientApi: ClientApi
 ) : BaseViewModel() {
 
@@ -61,7 +64,8 @@ class SubmitPhotoViewModel(
   }
 
   private fun onSubmitSelfieSuccess(response: SubmitSelfieResponse) {
-    Timber.d(response.response)
+    Timber.d(response.message)
+    sp.edit().putString(AUTHORIZATION, response.data.token).apply()
     status.value = Status(Status.SUCCESS)
   }
 

@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 1:45 PM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:45 PM
+ *  * Last modified 7/19/19 10:51 PM
  *
  */
 
@@ -52,15 +52,15 @@ class SubmitPhotoActivity : BindingActivity<ActivitySubmitPhotoBinding>() {
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitPhotoActivity, it.message, Toast.LENGTH_LONG).show()
-        startActivityForResult(
-          Intent(this, SubmitSignatureActivity::class.java),
-          REQUEST_SUBMIT_SIGNATURE
-        )
 
       } else {
 
         // Proceed submit Photo
         Timber.d("Proceed submit Photo")
+        startActivityForResult(
+          Intent(this, SubmitSignatureActivity::class.java),
+          REQUEST_SUBMIT_SIGNATURE
+        )
 
       }
 

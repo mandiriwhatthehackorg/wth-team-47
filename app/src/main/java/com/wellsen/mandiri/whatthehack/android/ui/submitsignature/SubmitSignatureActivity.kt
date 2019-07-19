@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/17/19 2:05 PM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/17/19 1:54 PM
+ *  * Last modified 7/19/19 10:51 PM
  *
  */
 
@@ -55,14 +55,15 @@ class SubmitSignatureActivity : BindingActivity<ActivitySubmitSignatureBinding>(
       if (it.code == Status.ERROR) {
 
         Toast.makeText(this@SubmitSignatureActivity, it.message, Toast.LENGTH_LONG).show()
-        sp.edit().putBoolean(LOGGED_IN, true).apply()
-        setResult(Activity.RESULT_OK)
-        finish()
+
 
       } else {
 
         // Proceed main page
         Timber.d("Proceed main page")
+        sp.edit().putBoolean(LOGGED_IN, true).apply()
+        setResult(Activity.RESULT_OK)
+        finish()
 
       }
 

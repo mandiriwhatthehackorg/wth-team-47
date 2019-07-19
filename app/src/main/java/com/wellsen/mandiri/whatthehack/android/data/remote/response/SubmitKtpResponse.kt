@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 9:31 AM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 9:09 AM
+ *  * Last modified 7/19/19 10:56 PM
  *
  */
 
@@ -11,6 +11,8 @@ package com.wellsen.mandiri.whatthehack.android.data.remote.response
 
 data class SubmitKtpResponse(
 
-  val response: String
+  val success: Boolean,
+  val data: SubmitKtp,
+  val message: String
 
 )

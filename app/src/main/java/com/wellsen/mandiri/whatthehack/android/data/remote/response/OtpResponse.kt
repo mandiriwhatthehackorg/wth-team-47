@@ -9,10 +9,9 @@
 
 package com.wellsen.mandiri.whatthehack.android.data.remote.response
 
-data class OtpResendResponse(
+data class OtpResponse(
 
-  val success: Boolean,
-  val data: OtpResponse,
-  val message: String
+  val viewName: String,
+  val token: String
 
 )

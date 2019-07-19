@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/13/19 8:53 AM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/13/19 8:33 AM
+ *  * Last modified 7/19/19 11:09 PM
  *
  */
 
@@ -11,6 +11,8 @@ package com.wellsen.mandiri.whatthehack.android.data.remote.response
 
 data class OtpValidationResponse(
 
-  val response: String
+  val success: Boolean,
+  val data: OtpValidation,
+  val message: String
 
 )

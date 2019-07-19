@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/19/19 10:50 PM
+ *  * Created by Wellsen on 7/19/19 11:14 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/19/19 10:50 PM
+ *  * Last modified 7/19/19 11:03 PM
  *
  */
 
@@ -27,6 +27,7 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.GetProductTy
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitDataResponse
 import com.wellsen.mandiri.whatthehack.android.data.remote.response.SubmitKtpResponse
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
+import com.wellsen.mandiri.whatthehack.android.util.AUTHORIZATION
 import com.wellsen.mandiri.whatthehack.android.util.KTP_FILE
 import com.wellsen.mandiri.whatthehack.android.util.MOTHERS_NAME
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
@@ -152,12 +153,14 @@ class SubmitDataViewModel(
   }
 
   private fun onSubmitDataSuccess(response: SubmitDataResponse) {
-    Timber.d(response.response)
+    Timber.d(response.message)
+    sp.edit().putString(AUTHORIZATION, response.data.token).apply()
     submitKtp()
   }
 
   private fun onSubmitKtpSuccess(response: SubmitKtpResponse) {
-    Timber.d(response.response)
+    Timber.d(response.message)
+    sp.edit().putString(AUTHORIZATION, response.data.token).apply()
     status.value = Status(Status.SUCCESS)
   }
 
