@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/18/19 10:52 PM
+ *  * Created by Wellsen on 7/20/19 1:35 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/18/19 10:45 PM
+ *  * Last modified 7/20/19 1:33 AM
  *
  */
 
@@ -141,11 +141,11 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
       startActivityForResult(signInIntent, REQUEST_GOOGLE_SIGN_IN)
     }
 
-    binding.btnForgotPass.setOnClickListener {
+    /*binding.btnForgotPass.setOnClickListener {
 
       Timber.d("Not implemented yet")
 
-    }
+    }*/
 
   }
 
@@ -197,7 +197,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
   override fun onStop() {
     super.onStop()
     if (googleSignInClient != null && googleSignInClient!!.isConnected) {
-//      logout()
+      logout()
       googleSignInClient!!.disconnect()
     }
   }
