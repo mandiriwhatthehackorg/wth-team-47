@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/19/19 10:50 PM
+ *  * Created by Wellsen on 7/20/19 9:31 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/19/19 10:50 PM
+ *  * Last modified 7/20/19 9:31 AM
  *
  */
 
@@ -20,7 +20,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.View
-import android.view.ViewGroup.LayoutParams
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.exifinterface.media.ExifInterface
@@ -73,6 +72,10 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     binding.btnSubmit.setOnClickListener {
       submit()
     }
+
+    binding.btnChild.setOnClickListener {
+
+    }
   }
 
   override fun onDestroy() {
@@ -111,9 +114,9 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
 
     when (type) {
       KTP -> {
-        val lp = binding.ivKtp.layoutParams as LayoutParams
-        lp.height = binding.cl.measuredWidth/* / 16 * 9*/
-        binding.ivKtp.layoutParams = lp
+//        val lp = binding.ivKtp.layoutParams as LayoutParams
+//        lp.height = binding.cl.measuredWidth/* / 16 * 9*/
+//        binding.ivKtp.layoutParams = lp
         binding.btnSubmit.isEnabled = true
 
         Glide.with(this)
