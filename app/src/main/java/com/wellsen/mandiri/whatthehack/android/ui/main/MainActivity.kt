@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 6:18 PM
+ *  * Created by Wellsen on 7/20/19 10:07 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 6:18 PM
+ *  * Last modified 7/20/19 9:06 PM
  *
  */
 
@@ -26,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.ui.echannel.EchannelActivity
 import com.wellsen.mandiri.whatthehack.android.ui.login.LoginActivity
+import com.wellsen.mandiri.whatthehack.android.ui.profile.ProfileActivity
 import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
 import com.wellsen.mandiri.whatthehack.android.util.isFingerprintAvailable
 import com.wellsen.mandiri.whatthehack.android.util.isHardwareSupported
@@ -82,8 +83,9 @@ class MainActivity : AppCompatActivity() {
     slider.setAdapter(MainSliderAdapter())
     slider.setInterval(5000)
 
+    val intent = Intent(this, EchannelActivity::class.java)
+
     findViewById<AppCompatImageView>(R.id.iv_linkaja).setOnClickListener {
-      val intent = Intent(this, EchannelActivity::class.java)
       intent.putExtra(EXTRA_CHANNEL, CHANNEL_LINKAJA)
       startActivity(intent)
     }
@@ -96,6 +98,10 @@ class MainActivity : AppCompatActivity() {
     findViewById<AppCompatImageView>(R.id.iv_ovo).setOnClickListener {
       intent.putExtra(EXTRA_CHANNEL, CHANNEL_OVO)
       startActivity(intent)
+    }
+
+    findViewById<AppCompatImageView>(R.id.iv_account).setOnClickListener {
+      startActivity(Intent(this, ProfileActivity::class.java))
     }
   }
 
