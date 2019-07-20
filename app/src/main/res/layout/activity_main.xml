@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/17/19 2:05 PM
+  ~  * Created by Wellsen on 7/20/19 11:55 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/17/19 2:05 PM
+  ~  * Last modified 7/20/19 11:54 AM
   ~  */
   -->
 
@@ -19,14 +19,62 @@
     >
 
   <TextView
-      android:id="@+id/message"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/activity_horizontal_margin"
-      android:layout_marginTop="@dimen/activity_vertical_margin"
-      android:text="@string/title_home"
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?android:attr/actionBarSize"
+      android:gravity="center"
+      android:text="Mandiri Online"
+      android:textSize="17sp"
+      android:textStyle="bold"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/cv_balance"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:layout_margin="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Saldo Total"
+        android:textSize="17sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_balance"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="IDR 10.000.000"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+  </androidx.cardview.widget.CardView>
+
+  <ss.com.bannerslider.Slider
+      android:id="@+id/banner_slider1"
+      android:layout_width="match_parent"
+      android:layout_height="240dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/cv_balance"
+      app:slider_animateIndicators="true"
+      app:slider_indicatorSize="10dp"
+      app:slider_interval="0"
+      app:slider_loopSlides="true"
+      app:slider_selectedSlideIndicator="@drawable/indicator_circle_selected"
+      app:slider_unselectedSlideIndicator="@drawable/indicator_circle_unselected"
       />
 
   <com.google.android.material.bottomnavigation.BottomNavigationView

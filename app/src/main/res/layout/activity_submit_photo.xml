@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/17/19 1:45 PM
+  ~  * Created by Wellsen on 7/20/19 11:55 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/17/19 12:41 PM
+  ~  * Last modified 7/20/19 11:54 AM
   ~  */
   -->
 
@@ -20,71 +20,64 @@
         />
   </data>
 
-  <FrameLayout
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingBottom="@dimen/activity_vertical_margin"
-      android:paddingLeft="@dimen/activity_horizontal_margin"
-      android:paddingRight="@dimen/activity_horizontal_margin"
-      android:paddingTop="@dimen/activity_vertical_margin"
       tools:context=".ui.submitphoto.SubmitPhotoActivity"
       >
+
+    <TextView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="Registrasi"
+        android:textColor="@android:color/black"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@android:style/Widget.Material.Toolbar"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="80dp"
         >
 
-      <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_title_selfie"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:layout_marginTop="16dp"
-          android:gravity="center"
-          android:text="@string/title_text_selfie"
-          android:textSize="21sp"
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/iv_selfie"
+          android:layout_width="240dp"
+          android:layout_height="320dp"
+          android:layout_margin="32dp"
+          android:layout_marginEnd="48dp"
+          android:layout_marginStart="48dp"
+          android:src="@drawable/ic_photo_camera"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           />
 
-      <androidx.appcompat.widget.AppCompatImageView
-          android:id="@+id/iv_selfie"
-          android:layout_width="0dp"
-          android:layout_height="160dp"
-          android:layout_marginEnd="48dp"
-          android:layout_marginStart="48dp"
-          android:layout_marginBottom="8dp"
-          android:layout_marginTop="8dp"
-          android:src="@drawable/ic_photo_camera"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/tv_title_selfie"
-          />
-
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_submit"
-          android:layout_width="0dp"
-          android:layout_height="?attr/actionBarSize"
-          android:layout_marginEnd="48dp"
-          android:layout_marginStart="48dp"
-          android:layout_marginTop="24dp"
-          android:enabled="false"
-          android:onClick="@{vm::onClickSubmit}"
-          android:textColor="@android:color/white"
-          android:text="@string/action_submit"
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="32dp"
+          android:gravity="center"
+          android:padding="16dp"
+          android:text=" Kami membutuhkan foto selfie anda"
+          android:textSize="17sp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/iv_selfie"
-          app:cornerRadius="8dp"
-          style="@style/Button"
           />
+
 
       <ProgressBar
           android:id="@+id/pb"
@@ -104,6 +97,23 @@
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-  </FrameLayout>
+    <TextView
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:enabled="false"
+        android:gravity="center"
+        android:onClick="@{vm::onClickSubmit}"
+        android:text="Lanjut"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+  </RelativeLayout>
 
 </layout>

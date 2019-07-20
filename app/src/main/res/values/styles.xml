@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 8:50 AM
+  ~  * Created by Wellsen on 7/20/19 11:55 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 1:39 AM
+  ~  * Last modified 7/20/19 10:36 AM
   ~  */
   -->
 
@@ -17,6 +17,14 @@
     <item name="colorAccent">@color/colorAccent</item>
 
     <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+  </style>
+
+  <style name="AppTheme.Main" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+
   </style>
 
   <!--Style for Splash Activity-->

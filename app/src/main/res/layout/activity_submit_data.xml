@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/19/19 10:50 PM
+  ~  * Created by Wellsen on 7/20/19 11:55 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/19/19 10:10 PM
+  ~  * Last modified 7/20/19 11:18 AM
   ~  */
   -->
 
@@ -20,20 +20,35 @@
         />
   </data>
 
-  <FrameLayout
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingBottom="@dimen/activity_vertical_margin"
-      android:paddingLeft="@dimen/activity_horizontal_margin"
-      android:paddingRight="@dimen/activity_horizontal_margin"
-      android:paddingTop="@dimen/activity_vertical_margin"
+      android:gravity="center"
       tools:context=".ui.submitdata.SubmitDataActivity"
       >
+
+    <TextView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="Registrasi"
+        android:textColor="@android:color/black"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@android:style/Widget.Material.Toolbar"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="100dp"
         android:layout_gravity="center"
         android:layout_marginBottom="?attr/actionBarSize"
         >
@@ -69,6 +84,7 @@
           android:layout_height="wrap_content"
           android:layout_marginEnd="24dp"
           android:layout_marginStart="24dp"
+          android:layout_marginBottom="16dp"
           android:text="@string/title_text_card_type"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +110,7 @@
           android:layout_height="wrap_content"
           android:layout_marginEnd="24dp"
           android:layout_marginStart="24dp"
+          android:layout_marginBottom="16dp"
           android:text="@string/title_text_branch_code"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -113,24 +130,6 @@
           tools:listitem="@android:layout/simple_spinner_dropdown_item"
           />
 
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/btn_submit"
-          android:layout_width="0dp"
-          android:layout_height="?attr/actionBarSize"
-          android:layout_marginEnd="48dp"
-          android:layout_marginStart="48dp"
-          android:layout_marginTop="?attr/actionBarSize"
-          android:onClick="@{vm::onClickSubmit}"
-          android:text="@string/action_submit_data"
-          android:textColor="@android:color/white"
-          android:transitionName="button"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/sp_branch_code"
-          app:cornerRadius="8dp"
-          style="@style/Button"
-          />
-
       <ProgressBar
           android:id="@+id/pb"
           android:layout_width="wrap_content"
@@ -140,6 +139,7 @@
           android:layout_marginEnd="32dp"
           android:layout_marginStart="32dp"
           android:layout_marginTop="64dp"
+
           android:visibility="@{safeUnbox(vm.pbVisibility)}"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
@@ -149,6 +149,23 @@
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-  </FrameLayout>
+    <TextView
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="Lanjut"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+  </RelativeLayout>
 
 </layout>

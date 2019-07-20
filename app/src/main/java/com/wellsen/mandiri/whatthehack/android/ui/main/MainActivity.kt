@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/18/19 10:52 AM
+ *  * Created by Wellsen on 7/20/19 11:55 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/18/19 10:52 AM
+ *  * Last modified 7/20/19 11:54 AM
  *
  */
 
@@ -16,7 +16,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings.ACTION_SECURITY_SETTINGS
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
@@ -29,6 +28,7 @@ import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
 import com.wellsen.mandiri.whatthehack.android.util.isFingerprintAvailable
 import com.wellsen.mandiri.whatthehack.android.util.isHardwareSupported
 import org.koin.android.ext.android.inject
+import ss.com.bannerslider.Slider
 import timber.log.Timber
 import java.util.concurrent.Executors
 
@@ -40,21 +40,20 @@ class MainActivity : AppCompatActivity() {
   private lateinit var keyguardManager: KeyguardManager
   private val sp: SharedPreferences by inject()
 
-  private lateinit var textMessage: TextView
   private val onNavigationItemSelectedListener =
     BottomNavigationView.OnNavigationItemSelectedListener { item ->
       when (item.itemId) {
         R.id.navigation_home -> {
-          textMessage.setText(R.string.title_home)
+
           return@OnNavigationItemSelectedListener true
         }
         R.id.navigation_dashboard -> {
-          textMessage.setText(R.string.title_dashboard)
+
           checkBiometric("Title", "Description")
           return@OnNavigationItemSelectedListener true
         }
         R.id.navigation_notifications -> {
-          textMessage.setText(R.string.title_notifications)
+
           logout()
           return@OnNavigationItemSelectedListener true
         }
@@ -68,8 +67,13 @@ class MainActivity : AppCompatActivity() {
     val navView: BottomNavigationView = findViewById(R.id.nav_view)
     keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
 
-    textMessage = findViewById(R.id.message)
+    Slider.init(GlideImageLoadingService(this))
+
     navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+    val slider = findViewById<Slider>(R.id.banner_slider1)
+    slider.setAdapter(MainSliderAdapter())
+    slider.setInterval(5000)
   }
 
   private fun logout() {
