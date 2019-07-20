@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 1:35 AM
+ *  * Created by Wellsen on 7/20/19 9:31 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 1:33 AM
+ *  * Last modified 7/20/19 8:56 AM
  *
  */
 
@@ -197,7 +197,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
   override fun onStop() {
     super.onStop()
     if (googleSignInClient != null && googleSignInClient!!.isConnected) {
-      logout()
+//      logout()
       googleSignInClient!!.disconnect()
     }
   }

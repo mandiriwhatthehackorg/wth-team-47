@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 8:50 AM
+  ~  * Created by Wellsen on 7/20/19 9:31 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 8:49 AM
+  ~  * Last modified 7/20/19 9:31 AM
   ~  */
   -->
 
@@ -20,11 +20,81 @@
         />
   </data>
 
-  <RelativeLayout
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:orientation="vertical"
       tools:context=".ui.login.LoginActivity"
       >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="200dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="28dp"
+        android:transitionName="logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_mandiri_blue"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:hint="@string/prompt_username"
+        android:transitionName="username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+        app:errorEnabled="true"
+        style="@style/TextInputLayout"
+        >
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/et_username"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:digits="abcdefghijklmnopqrstuvwxyz1234567890"
+          android:inputType="text"
+          android:maxLength="255"
+          android:text="@={vm.username}"
+          />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:hint="@string/prompt_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_username"
+        app:errorEnabled="true"
+        style="@style/TextInputLayout"
+        >
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/et_password"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:imeActionLabel="@string/action_sign_in_short"
+          android:imeOptions="actionDone"
+          android:inputType="textPassword"
+          android:maxLength="15"
+          android:text="@={vm.password}"
+          />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
@@ -33,74 +103,11 @@
         android:layout_gravity="center"
         >
 
-      <androidx.appcompat.widget.AppCompatImageView
-          android:id="@+id/iv_logo"
-          android:layout_width="200dp"
-          android:layout_height="128dp"
-          android:layout_gravity="center_horizontal"
-          android:layout_marginTop="28dp"
-          android:transitionName="logo"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.535"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:srcCompat="@drawable/ic_mandiri_blue"
-          />
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/til_username"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="32dp"
-          android:layout_marginStart="32dp"
-          android:layout_marginTop="48dp"
-          android:transitionName="username"
-          android:hint="@string/prompt_username"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/iv_logo"
-          app:errorEnabled="true"
-          style="@style/TextInputLayout"
-          >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_username"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:digits="abcdefghijklmnopqrstuvwxyz1234567890"
-            android:maxLength="255"
-            android:text="@={vm.username}"
-            />
 
-      </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/til_password"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="32dp"
-          android:layout_marginStart="32dp"
-          android:hint="@string/prompt_password"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/til_username"
-          app:errorEnabled="true"
-          style="@style/TextInputLayout"
-          >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:maxLength="15"
-            android:text="@={vm.password}"
-            />
-
-      </com.google.android.material.textfield.TextInputLayout>
 
       <TextView
           android:id="@+id/btn_login"
@@ -165,6 +172,6 @@
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-  </RelativeLayout>
+  </LinearLayout>
 
 </layout>
