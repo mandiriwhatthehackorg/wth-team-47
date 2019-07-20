@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 4:08 PM
+ *  * Created by Wellsen on 7/20/19 7:16 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 2:56 PM
+ *  * Last modified 7/20/19 7:13 PM
  *
  */
 
@@ -64,6 +64,8 @@ class RegisterViewModel(
   private val _registerForm = MutableLiveData<RegisterFormState>()
   val registerFormState: LiveData<RegisterFormState> = _registerForm
 
+  var tempNik: String = ""
+
   var child: Boolean = false
 
   init {
@@ -108,10 +110,9 @@ class RegisterViewModel(
   }
 
   fun register(request: RegisterRequest) {
-    if (child) {
-      val number = floor(Math.random() * 9_000_000_000L).toLong() + 1_000_000_000L
-      request.nik = number.toString()
-    }
+    val number = floor(Math.random() * 9_000_000_000L).toLong() + 1_000_000_000L
+    tempNik = number.toString()
+    request.nik = tempNik
 
     @Suppress("UnstableApiUsage")
     add(
@@ -140,6 +141,7 @@ class RegisterViewModel(
   private fun onRegisterSuccess(response: RegisterResponse) {
     Timber.d(response.message)
 
+    sp.edit().putString(NIK, tempNik).apply()
     sp.edit().putString(NAME, name.value).apply()
     sp.edit().putString(MOTHERS_NAME, mothersName.value).apply()
     sp.edit().putString(EMAIL, email.value).apply()

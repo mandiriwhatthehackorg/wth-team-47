@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 9:31 AM
+  ~  * Created by Wellsen on 7/20/19 7:16 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 9:31 AM
+  ~  * Last modified 7/20/19 7:02 PM
   ~  */
   -->
 
@@ -103,18 +103,11 @@
         android:layout_gravity="center"
         >
 
-
-
-
-
-
-
       <TextView
           android:id="@+id/btn_login"
           android:layout_width="match_parent"
           android:layout_height="?attr/actionBarSize"
           android:transitionName="button"
-          android:onClick="@{vm::onClick}"
           android:enabled="false"
           android:background="@color/colorPrimary"
           android:gravity="center"

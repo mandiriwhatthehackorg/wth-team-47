@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 6:28 PM
+ *  * Created by Wellsen on 7/20/19 7:16 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 6:27 PM
+ *  * Last modified 7/20/19 7:07 PM
  *
  */
 
@@ -80,6 +80,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
     binding.lifecycleOwner = this
 
     val vm = binding.vm as LoginViewModel
+
     vm.loginFormState.observe(this@LoginActivity, Observer {
       val loginFormState = it ?: return@Observer
 
@@ -124,6 +125,10 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         }
         false
       }
+    }
+
+    binding.btnLogin.setOnClickListener {
+      login()
     }
 
     binding.btnRegister.setOnClickListener {
@@ -173,7 +178,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         }
 
         login()
-        finish()
       }
 
       REQUEST_GOOGLE_SIGN_IN -> getDetail(Auth.GoogleSignInApi.getSignInResultFromIntent(data))
@@ -181,7 +185,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
   }
 
   private fun login() {
+    sp.edit().putBoolean(LOGGED_IN, true).apply()
     startActivity(Intent(this, MainActivity::class.java))
+    finish()
   }
 
   override fun onStart() {

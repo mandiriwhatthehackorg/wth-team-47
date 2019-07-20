@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/14/19 8:52 AM
+ *  * Created by Wellsen on 7/20/19 7:16 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/14/19 8:52 AM
+ *  * Last modified 7/20/19 7:02 PM
  *
  */
 
@@ -65,7 +65,7 @@ class LoginViewModel(
   }
 
   fun onClick(@Suppress("unused_parameter") view: View?) {
-    login(LoginRequest(username.value, password.value))
+//    login(LoginRequest(username.value, password.value))
   }
 
   private fun onLoginStart() {
