@@ -1,9 +1,9 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 1:35 AM
+  ~  * Created by Wellsen on 7/20/19 8:50 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 1:21 AM
+  ~  * Last modified 7/20/19 1:39 AM
   ~  */
   -->
 
@@ -58,7 +58,7 @@
     <item name="android:textColor">@android:color/black</item>
   </style>
 
-  <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+  <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
     <item name="hintTextAppearance">@style/HintText</item>
     <item name="android:paddingBottom">8dp</item>
   </style>
