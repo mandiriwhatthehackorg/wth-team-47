@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 4:08 PM
+  ~  * Created by Wellsen on 7/20/19 6:22 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 3:02 PM
+  ~  * Last modified 7/20/19 6:22 PM
   ~  */
   -->
 
@@ -53,82 +53,117 @@
         android:layout_marginBottom="?attr/actionBarSize"
         >
 
-      <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_product_type"
-          android:layout_width="0dp"
+      <LinearLayout
+          android:id="@+id/ll_product_type"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:text="@string/title_text_product_type"
+          android:orientation="vertical"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          />
+          >
 
-      <androidx.appcompat.widget.AppCompatSpinner
-          android:id="@+id/sp_product_type"
-          android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_product_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/title_text_product_type"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_product_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_type"
+            tools:listitem="@android:layout/simple_spinner_dropdown_item"
+            />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/ll_card_type"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:layout_marginBottom="12dp"
+          android:orientation="vertical"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/tv_product_type"
-          tools:listitem="@android:layout/simple_spinner_dropdown_item"
-          />
+          app:layout_constraintTop_toBottomOf="@+id/ll_product_type"
+          >
 
-      <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_card_type"
-          android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_card_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/title_text_card_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_product_type"
+            />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_card_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_card_type"
+            tools:listitem="@android:layout/simple_spinner_dropdown_item"
+            />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/ll_branch_code"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:layout_marginBottom="16dp"
-          android:text="@string/title_text_card_type"
+          android:orientation="vertical"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/sp_product_type"
-          />
+          app:layout_constraintTop_toBottomOf="@+id/ll_card_type"
+          >
 
-      <androidx.appcompat.widget.AppCompatSpinner
-          android:id="@+id/sp_card_type"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="12dp"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/tv_card_type"
-          tools:listitem="@android:layout/simple_spinner_dropdown_item"
-          />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_branch_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/title_text_branch_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_card_type"
+            />
 
-      <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_branch_code"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          android:layout_marginBottom="16dp"
-          android:text="@string/title_text_branch_code"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/sp_card_type"
-          />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_branch_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_branch_code"
+            tools:listitem="@android:layout/simple_spinner_dropdown_item"
+            />
 
-      <androidx.appcompat.widget.AppCompatSpinner
-          android:id="@+id/sp_branch_code"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="12dp"
-          android:layout_marginEnd="24dp"
-          android:layout_marginStart="24dp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/tv_branch_code"
-          tools:listitem="@android:layout/simple_spinner_dropdown_item"
-          />
+      </LinearLayout>
+
 
       <ProgressBar
           android:id="@+id/pb"
