@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/19/19 11:14 PM
+ *  * Created by Wellsen on 7/20/19 9:59 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/19/19 11:10 PM
+ *  * Last modified 7/20/19 9:58 AM
  *
  */
 
@@ -22,6 +22,7 @@ import com.wellsen.mandiri.whatthehack.android.data.remote.response.OtpValidatio
 import com.wellsen.mandiri.whatthehack.android.ui.BaseViewModel
 import com.wellsen.mandiri.whatthehack.android.util.AUTHORIZATION
 import com.wellsen.mandiri.whatthehack.android.util.EMAIL
+import com.wellsen.mandiri.whatthehack.android.util.NIK
 import com.wellsen.mandiri.whatthehack.android.util.extension.with
 import timber.log.Timber
 
@@ -59,7 +60,7 @@ class OtpViewModel(
   fun onClickResend(@Suppress("unused_parameter") view: View?) {
     @Suppress("UnstableApiUsage")
     add(
-      clientApi.resendOtp(OtpResendRequest("1234567890123456")).with()
+      clientApi.resendOtp(OtpResendRequest(sp.getString(NIK, "")!!)).with()
         .doOnSubscribe { onOtpRequestStart() }
         .doOnTerminate { onOtpResponseFinish() }
         .subscribe(
@@ -85,7 +86,9 @@ class OtpViewModel(
 
   private fun onOtpResendSuccess(response: OtpResendResponse) {
     Timber.d(response.message)
-    sp.edit().putString(AUTHORIZATION, response.data.token).apply()
+    if (response.success) {
+      sp.edit().putString(AUTHORIZATION, response.data.token).apply()
+    }
     status.value = OtpStatus(OtpStatus.OTP_RESEND_SUCCESS)
   }
 
