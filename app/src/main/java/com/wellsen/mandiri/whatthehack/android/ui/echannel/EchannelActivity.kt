@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 8:20 PM
+ *  * Created by Wellsen on 7/21/19 12:34 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 8:08 PM
+ *  * Last modified 7/21/19 12:34 AM
  *
  */
 
@@ -56,6 +56,8 @@ class EchannelActivity : AppCompatActivity() {
     runOnUiThread {
       tvBalance.text = "IDR $balance"
     }
+
+    toastOnMainThread("Transaksi sukses, saldo anda telah bertambah")
 
     finish()
   }
@@ -132,7 +134,7 @@ class EchannelActivity : AppCompatActivity() {
       override fun onAuthenticationSucceeded(result: AuthenticationResult) {
         super.onAuthenticationSucceeded(result)
         Timber.d("Authenticated, proceed")
-        toastOnMainThread("Authenticated, proceed")
+//        toastOnMainThread("Authenticated, proceed")
         proceed()
       }
 
