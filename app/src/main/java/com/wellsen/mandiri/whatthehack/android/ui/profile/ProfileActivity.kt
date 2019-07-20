@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 10:07 PM
+ *  * Created by Wellsen on 7/20/19 10:11 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 10:07 PM
+ *  * Last modified 7/20/19 10:10 PM
  *
  */
 
@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.ui.login.LoginActivity
 import com.wellsen.mandiri.whatthehack.android.ui.scanner.QrCodeScannerActivity
+import com.wellsen.mandiri.whatthehack.android.util.NAME
 import com.wellsen.mandiri.whatthehack.android.util.PHOTO_URL
 import de.hdodenhof.circleimageview.CircleImageView
 import org.koin.android.ext.android.inject
@@ -29,6 +30,7 @@ class ProfileActivity : AppCompatActivity() {
 
   lateinit var civProfile: CircleImageView
   lateinit var btnLogout: TextView
+  lateinit var tvName: TextView
   lateinit var ivCard: ImageView
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
 
     civProfile = findViewById(R.id.civ_profile)
     btnLogout = findViewById(R.id.btn_logout)
+    tvName = findViewById(R.id.tv_name)
     ivCard = findViewById(R.id.iv_card)
 
     btnLogout.setOnClickListener {
@@ -47,6 +50,11 @@ class ProfileActivity : AppCompatActivity() {
 
     ivCard.setOnClickListener {
       startActivity(Intent(this, QrCodeScannerActivity::class.java))
+    }
+
+    val name = sp.getString(NAME, null)
+    if (name != null) {
+      tvName.text = name
     }
 
     val photoUrl = sp.getString(PHOTO_URL, null)
