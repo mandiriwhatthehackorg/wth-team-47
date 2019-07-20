@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 1:49 PM
+ *  * Created by Wellsen on 7/20/19 5:57 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 12:29 PM
+ *  * Last modified 7/20/19 4:41 PM
  *
  */
 
@@ -26,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.ui.echannel.EchannelActivity
 import com.wellsen.mandiri.whatthehack.android.ui.login.LoginActivity
+import com.wellsen.mandiri.whatthehack.android.ui.vicall.VideoCallActivity
 import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
 import com.wellsen.mandiri.whatthehack.android.util.isFingerprintAvailable
 import com.wellsen.mandiri.whatthehack.android.util.isHardwareSupported
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
         }
         R.id.navigation_notifications -> {
 
-          logout()
+          startActivity(Intent(this, VideoCallActivity::class.java))
+//          logout()
           return@OnNavigationItemSelectedListener true
         }
       }

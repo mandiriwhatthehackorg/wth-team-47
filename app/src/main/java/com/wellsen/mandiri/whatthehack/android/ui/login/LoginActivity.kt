@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 9:31 AM
+ *  * Created by Wellsen on 7/20/19 5:57 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 8:56 AM
+ *  * Last modified 7/20/19 5:28 PM
  *
  */
 
@@ -30,6 +30,7 @@ import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_GOOGLE_SIGN_IN
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SUBMIT_KTP
 import com.wellsen.mandiri.whatthehack.android.ui.main.MainActivity
 import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
+import com.wellsen.mandiri.whatthehack.android.ui.vicall.VideoCallActivity
 import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
 import com.wellsen.mandiri.whatthehack.android.util.NAME
@@ -137,8 +138,9 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         ).toBundle()
       )*/
 
-      val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleSignInClient)
-      startActivityForResult(signInIntent, REQUEST_GOOGLE_SIGN_IN)
+      startActivity(Intent(this, VideoCallActivity::class.java))
+//      val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleSignInClient)
+//      startActivityForResult(signInIntent, REQUEST_GOOGLE_SIGN_IN)
     }
 
     /*binding.btnForgotPass.setOnClickListener {

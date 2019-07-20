@@ -37,6 +37,11 @@ android {
   dataBinding {
     enabled = true
   }
+  sourceSets {
+    main {
+      jniLibs.srcDirs = ['libs']
+    }
+  }
 }
 
 dependencies {
@@ -93,10 +98,10 @@ dependencies {
 
 /*
  * *
- *  * Created by Wellsen on 7/20/19 4:08 PM
+ *  * Created by Wellsen on 7/20/19 5:57 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 1:53 PM
+ *  * Last modified 7/20/19 4:21 PM
  *
  */
 

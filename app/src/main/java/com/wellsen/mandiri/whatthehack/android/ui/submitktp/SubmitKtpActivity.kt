@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 4:08 PM
+ *  * Created by Wellsen on 7/20/19 5:57 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 4:07 PM
+ *  * Last modified 7/20/19 5:12 PM
  *
  */
 
@@ -172,11 +172,6 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
       REQUEST_KTP_TAKE_PHOTO -> {
         normalizeImage(Uri.fromFile(ktpFile))
 
-        ktpFile = Compressor(this)
-          .setMaxWidth(1366)
-          .setMaxHeight(1366)
-          .compressToFile(ktpFile)
-
         processOcr(Uri.fromFile(ktpFile), REQUEST_KTP_TAKE_PHOTO)
       }
 
@@ -244,6 +239,9 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   }
 
   private fun processResult(text: FirebaseVisionText) {
+    if (text.text.isEmpty()) {
+      return
+    }
     sp.edit().remove(DOB).apply()
     sp.edit().remove(NIK).apply()
     var namePos: Int = -1

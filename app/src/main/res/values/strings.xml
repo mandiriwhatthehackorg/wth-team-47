@@ -1,14 +1,14 @@
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 11:55 AM
+  ~  * Created by Wellsen on 7/20/19 5:57 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 10:33 AM
+  ~  * Last modified 7/20/19 4:24 PM
   ~  */
   -->
 
 <resources>
-  <string name="app_name">What The Hack</string>
+  <string name="app_name">WTH</string>
 
   <string name="no_connection">No Internet Connection</string>
   <string name="prompt_username">Username</string>
@@ -57,4 +57,6 @@
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+
+  <string name="agora_app_id">4c2f75bf69e6406990be43663cd0e4e4</string>
 </resources>
