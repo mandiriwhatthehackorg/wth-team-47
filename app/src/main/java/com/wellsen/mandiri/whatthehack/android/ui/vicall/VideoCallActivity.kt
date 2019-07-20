@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 6:28 PM
+ *  * Created by Wellsen on 7/21/19 12:28 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 6:27 PM
+ *  * Last modified 7/21/19 12:27 AM
  *
  */
 
@@ -71,6 +71,8 @@ class VideoCallActivity : AppCompatActivity() {
       )
     ) {
       initAgoraEngine()
+
+      onjoinChannelClicked(null)
     }
 
     findViewById<AppCompatImageView>(R.id.audioBtn).visibility =
@@ -80,7 +82,6 @@ class VideoCallActivity : AppCompatActivity() {
     findViewById<AppCompatImageView>(R.id.videoBtn).visibility =
       View.GONE // set the video button hidden
 
-    onjoinChannelClicked(null)
   }
 
   private fun initAgoraEngine() {
