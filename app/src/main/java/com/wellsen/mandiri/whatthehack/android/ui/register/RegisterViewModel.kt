@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 7:16 PM
+ *  * Created by Wellsen on 7/21/19 12:08 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 7:13 PM
+ *  * Last modified 7/21/19 12:07 AM
  *
  */
 
@@ -117,12 +117,12 @@ class RegisterViewModel(
     @Suppress("UnstableApiUsage")
     add(
       clientApi.register(request).with()
-      .doOnSubscribe { onRegisterStart() }
-      .doOnTerminate { onRegisterFinish() }
-      .subscribe(
-        { onRegisterSuccess(it) },
-        { onRegisterError(it) }
-      )
+        .doOnSubscribe { onRegisterStart() }
+        .doOnTerminate { onRegisterFinish() }
+        .subscribe(
+          { onRegisterSuccess(it) },
+          { onRegisterError(it) }
+        )
     )
   }
 

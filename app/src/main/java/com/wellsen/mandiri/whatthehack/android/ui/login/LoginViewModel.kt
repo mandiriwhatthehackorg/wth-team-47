@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 7:16 PM
+ *  * Created by Wellsen on 7/21/19 12:08 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 7:02 PM
+ *  * Last modified 7/21/19 12:07 AM
  *
  */
 
@@ -55,12 +55,12 @@ class LoginViewModel(
     @Suppress("UnstableApiUsage")
     add(
       clientApi.login(request).with()
-      .doOnSubscribe { onLoginStart() }
-      .doOnTerminate { onLoginFinish() }
-      .subscribe(
-        { onLoginSuccess(it) },
-        { onLoginError(it) }
-      )
+        .doOnSubscribe { onLoginStart() }
+        .doOnTerminate { onLoginFinish() }
+        .subscribe(
+          { onLoginSuccess(it) },
+          { onLoginError(it) }
+        )
     )
   }
 

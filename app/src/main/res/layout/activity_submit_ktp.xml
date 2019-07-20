@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 9:31 AM
+  ~  * Created by Wellsen on 7/21/19 12:08 AM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 9:31 AM
+  ~  * Last modified 7/21/19 12:07 AM
   ~  */
   -->
 
@@ -52,9 +52,9 @@
           android:id="@+id/iv_ktp"
           android:layout_width="0dp"
           android:layout_height="160dp"
+          android:layout_margin="32dp"
           android:layout_marginEnd="48dp"
           android:layout_marginStart="48dp"
-          android:layout_margin="32dp"
           android:src="@drawable/ic_photo_camera"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -71,8 +71,8 @@
           android:padding="16dp"
           android:text="Proses registrasi akan membutuhkan KTP, mohon persiapkan KTP anda"
           android:textSize="17sp"
-          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/iv_ktp"
           />
 
