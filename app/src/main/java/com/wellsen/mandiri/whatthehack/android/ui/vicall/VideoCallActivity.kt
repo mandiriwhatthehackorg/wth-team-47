@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 6:18 PM
+ *  * Created by Wellsen on 7/20/19 6:28 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 6:08 PM
+ *  * Last modified 7/20/19 6:27 PM
  *
  */
 
@@ -79,6 +79,8 @@ class VideoCallActivity : AppCompatActivity() {
       View.GONE // set the leave button hidden
     findViewById<AppCompatImageView>(R.id.videoBtn).visibility =
       View.GONE // set the video button hidden
+
+    onjoinChannelClicked(null)
   }
 
   private fun initAgoraEngine() {
@@ -166,7 +168,7 @@ class VideoCallActivity : AppCompatActivity() {
   }
 
   // join the channel when user clicks UI button
-  fun onjoinChannelClicked(view: View) {
+  fun onjoinChannelClicked(view: View?) {
     mRtcEngine?.joinChannel(
       null,
       "test-channel",

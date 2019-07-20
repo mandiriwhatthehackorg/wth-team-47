@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 6:18 PM
+ *  * Created by Wellsen on 7/20/19 6:28 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 6:18 PM
+ *  * Last modified 7/20/19 6:27 PM
  *
  */
 
@@ -173,6 +173,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         }
 
         login()
+        finish()
       }
 
       REQUEST_GOOGLE_SIGN_IN -> getDetail(Auth.GoogleSignInApi.getSignInResultFromIntent(data))
