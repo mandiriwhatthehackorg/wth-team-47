@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/16/19 7:21 PM
+  ~  * Created by Wellsen on 7/20/19 6:18 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/16/19 6:44 PM
+  ~  * Last modified 7/20/19 6:18 PM
   ~  */
   -->
 
@@ -60,6 +60,44 @@
           app:onSigned="@{vm::onSigned}"
           app:onStartSigning="@{vm::onStartSigning}"
           />
+
+      <FrameLayout
+          android:layout_width="0dp"
+          android:layout_height="320dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_title"
+          >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="top"
+            android:background="@android:color/black"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/black"
+            />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/black"
+            />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@android:color/black"
+            />
+
+      </FrameLayout>
 
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/tv_desc"

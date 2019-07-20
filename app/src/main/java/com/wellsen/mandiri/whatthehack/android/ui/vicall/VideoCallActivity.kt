@@ -1,15 +1,16 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 5:57 PM
+ *  * Created by Wellsen on 7/20/19 6:18 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 5:57 PM
+ *  * Last modified 7/20/19 6:08 PM
  *
  */
 
 package com.wellsen.mandiri.whatthehack.android.ui.vicall
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log.getStackTraceString
@@ -195,6 +196,9 @@ class VideoCallActivity : AppCompatActivity() {
       View.GONE // set the leave button hidden
     findViewById<AppCompatImageView>(R.id.videoBtn).visibility =
       View.GONE // set the video button hidden
+
+    setResult(Activity.RESULT_OK)
+    finish()
   }
 
   private fun leaveChannel() {

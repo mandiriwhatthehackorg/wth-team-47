@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 5:57 PM
+ *  * Created by Wellsen on 7/20/19 6:18 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 5:28 PM
+ *  * Last modified 7/20/19 6:18 PM
  *
  */
 
@@ -30,7 +30,6 @@ import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_GOOGLE_SIGN_IN
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_SUBMIT_KTP
 import com.wellsen.mandiri.whatthehack.android.ui.main.MainActivity
 import com.wellsen.mandiri.whatthehack.android.ui.submitktp.SubmitKtpActivity
-import com.wellsen.mandiri.whatthehack.android.ui.vicall.VideoCallActivity
 import com.wellsen.mandiri.whatthehack.android.util.EMAIL
 import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
 import com.wellsen.mandiri.whatthehack.android.util.NAME
@@ -138,16 +137,10 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
         ).toBundle()
       )*/
 
-      startActivity(Intent(this, VideoCallActivity::class.java))
-//      val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleSignInClient)
-//      startActivityForResult(signInIntent, REQUEST_GOOGLE_SIGN_IN)
+//      startActivity(Intent(this, VideoCallActivity::class.java))
+      val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleSignInClient)
+      startActivityForResult(signInIntent, REQUEST_GOOGLE_SIGN_IN)
     }
-
-    /*binding.btnForgotPass.setOnClickListener {
-
-      Timber.d("Not implemented yet")
-
-    }*/
 
   }
 
@@ -199,7 +192,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>() {
   override fun onStop() {
     super.onStop()
     if (googleSignInClient != null && googleSignInClient!!.isConnected) {
-//      logout()
+      logout()
       googleSignInClient!!.disconnect()
     }
   }
