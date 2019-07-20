@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 11:55 AM
+  ~  * Created by Wellsen on 7/20/19 4:08 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 11:18 AM
+  ~  * Last modified 7/20/19 3:02 PM
   ~  */
   -->
 
@@ -155,10 +155,10 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:enabled="false"
         android:gravity="center"
         android:text="Lanjut"
         android:textAllCaps="true"
+        android:onClick="@{vm::onClickSubmit}"
         android:textColor="@android:color/white"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"

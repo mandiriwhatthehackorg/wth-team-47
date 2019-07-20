@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/12/19 3:54 PM
+ *  * Created by Wellsen on 7/20/19 4:08 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/12/19 2:32 PM
+ *  * Last modified 7/20/19 2:56 PM
  *
  */
 
@@ -12,7 +12,7 @@ package com.wellsen.mandiri.whatthehack.android.data.remote.request
 data class RegisterRequest(
 
   val email: String,
-  val nik: String,
+  var nik: String,
   val phone: String,
   val ttl: String
 

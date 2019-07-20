@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 9:31 AM
+ *  * Created by Wellsen on 7/20/19 4:08 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 9:31 AM
+ *  * Last modified 7/20/19 4:07 PM
  *
  */
 
@@ -14,6 +14,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
@@ -31,11 +32,15 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivitySubmitKtpBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.EXTRA_CHILD
+import com.wellsen.mandiri.whatthehack.android.ui.JPG
 import com.wellsen.mandiri.whatthehack.android.ui.KTP
+import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_BARCODE
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_OPEN_GALLERY
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_KTP_TAKE_PHOTO
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_REGISTER
 import com.wellsen.mandiri.whatthehack.android.ui.register.RegisterActivity
+import com.wellsen.mandiri.whatthehack.android.ui.scanner.QrCodeScannerActivity
 import com.wellsen.mandiri.whatthehack.android.util.DATE_FORMAT
 import com.wellsen.mandiri.whatthehack.android.util.DOB
 import com.wellsen.mandiri.whatthehack.android.util.FileUtils
@@ -59,6 +64,7 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   private val sp: SharedPreferences by inject()
 
   lateinit var path: String
+  var child: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -74,7 +80,15 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     }
 
     binding.btnChild.setOnClickListener {
+      val builder = AlertDialog.Builder(this)
+      builder.setMessage("Scan QR code di aplikasi Mandiri Online orang tua kamu")
 
+      builder.setPositiveButton(android.R.string.yes) { dialog, _ ->
+        dialog.dismiss()
+        startActivityForResult(Intent(this, QrCodeScannerActivity::class.java), REQUEST_BARCODE)
+      }
+
+      builder.show()
     }
   }
 
@@ -88,7 +102,9 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   }
 
   private fun submit() {
-    startActivityForResult(Intent(this, RegisterActivity::class.java), REQUEST_REGISTER)
+    val intent = Intent(this, RegisterActivity::class.java)
+    intent.putExtra(EXTRA_CHILD, child)
+    startActivityForResult(intent, REQUEST_REGISTER)
   }
 
   /**
@@ -112,6 +128,8 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
   private fun loadPhoto(type: Int) {
     sp.edit().putString(KTP_FILE, Uri.fromFile(ktpFile).toString()).apply()
 
+    child = false
+
     when (type) {
       KTP -> {
 //        val lp = binding.ivKtp.layoutParams as LayoutParams
@@ -134,6 +152,23 @@ class SubmitKtpActivity : BindingActivity<ActivitySubmitKtpBinding>() {
     }
 
     when (requestCode) {
+      REQUEST_BARCODE -> {
+        ktpFile = createImageFile(JPG)
+        val bm = BitmapFactory.decodeResource(resources, R.drawable.frame)
+
+        saveBitmapToFile(bm, Uri.fromFile(ktpFile))
+
+        sp.edit().putString(KTP_FILE, Uri.fromFile(ktpFile).toString()).apply()
+
+        Glide.with(this)
+          .load(R.drawable.frame)
+          .into(binding.ivKtp)
+
+        child = true
+
+        binding.btnSubmit.isEnabled = true
+      }
+
       REQUEST_KTP_TAKE_PHOTO -> {
         normalizeImage(Uri.fromFile(ktpFile))
 

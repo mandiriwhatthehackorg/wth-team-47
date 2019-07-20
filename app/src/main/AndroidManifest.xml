@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 1:49 PM
+  ~  * Created by Wellsen on 7/20/19 4:08 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 12:29 PM
+  ~  * Last modified 7/20/19 2:01 PM
   ~  */
   -->
 
@@ -102,6 +102,7 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.Dialog">
     </activity>
+    <activity android:name=".ui.scanner.QrCodeScannerActivity"/>
 
     <provider
         android:name="androidx.core.content.FileProvider"

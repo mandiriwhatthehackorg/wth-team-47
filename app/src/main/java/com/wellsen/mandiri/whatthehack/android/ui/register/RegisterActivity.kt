@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/19/19 10:50 PM
+ *  * Created by Wellsen on 7/20/19 4:08 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/19/19 10:50 PM
+ *  * Last modified 7/20/19 2:54 PM
  *
  */
 
@@ -15,6 +15,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ import com.wellsen.mandiri.whatthehack.android.R
 import com.wellsen.mandiri.whatthehack.android.data.model.RegisterStatus
 import com.wellsen.mandiri.whatthehack.android.databinding.ActivityRegisterBinding
 import com.wellsen.mandiri.whatthehack.android.ui.BindingActivity
+import com.wellsen.mandiri.whatthehack.android.ui.EXTRA_CHILD
 import com.wellsen.mandiri.whatthehack.android.ui.EXTRA_STATUS
 import com.wellsen.mandiri.whatthehack.android.ui.REQUEST_OTP
 import com.wellsen.mandiri.whatthehack.android.ui.otp.OtpActivity
@@ -62,6 +64,13 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
     }
 
     val vm = binding.vm as RegisterViewModel
+
+    if (intent.getBooleanExtra(EXTRA_CHILD, false)) {
+      binding.tilNik.visibility = View.GONE
+      vm.child = true
+    }
+
+
     vm.registerFormState.observe(this@RegisterActivity, Observer {
       val registerFormState = it ?: return@Observer
 
@@ -69,8 +78,6 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
       else getString(registerFormState.nameError)
       binding.tilEmail.error = if (registerFormState.emailError == null) null
       else getString(registerFormState.emailError)
-      binding.tilNik.error = if (registerFormState.nikError == null) null
-      else getString(registerFormState.nikError)
       binding.tilPhone.error = if (registerFormState.phoneError == null) null
       else getString(registerFormState.phoneError)
       binding.tilMothersName.error = if (registerFormState.mothersNameError == null) null
@@ -106,7 +113,6 @@ class RegisterActivity : BindingActivity<ActivityRegisterBinding>() {
 
     setAfterTextChangedListener(binding.etName, vm)
     setAfterTextChangedListener(binding.etEmail, vm)
-    setAfterTextChangedListener(binding.etNik, vm)
     setAfterTextChangedListener(binding.etPhone, vm)
     setAfterTextChangedListener(binding.etMothersName, vm)
     setAfterTextChangedListener(binding.etDob, vm)

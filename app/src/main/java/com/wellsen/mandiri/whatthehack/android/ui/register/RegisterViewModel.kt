@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/19/19 10:50 PM
+ *  * Created by Wellsen on 7/20/19 4:08 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/19/19 10:50 PM
+ *  * Last modified 7/20/19 2:56 PM
  *
  */
 
@@ -33,6 +33,7 @@ import com.wellsen.mandiri.whatthehack.android.util.validator.NameValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.NikValidator
 import com.wellsen.mandiri.whatthehack.android.util.validator.PhoneValidator
 import timber.log.Timber
+import kotlin.math.floor
 
 class RegisterViewModel(
   private val sp: SharedPreferences,
@@ -62,6 +63,8 @@ class RegisterViewModel(
 
   private val _registerForm = MutableLiveData<RegisterFormState>()
   val registerFormState: LiveData<RegisterFormState> = _registerForm
+
+  var child: Boolean = false
 
   init {
     if (sp.getString(NAME, null) != null) {
@@ -93,8 +96,6 @@ class RegisterViewModel(
       _registerForm.value = RegisterFormState(nameError = string.invalid_name)
     } else if (!emailValidator.isValid(email)) {
       _registerForm.value = RegisterFormState(emailError = string.invalid_email)
-    } else if (!nikValidator.isValid(nik)) {
-      _registerForm.value = RegisterFormState(nikError = string.invalid_nik)
     } else if (!phoneValidator.isValid(phone)) {
       _registerForm.value = RegisterFormState(phoneError = string.invalid_phone)
     } else if (!nameValidator.isValid(mothersName)) {
@@ -107,6 +108,11 @@ class RegisterViewModel(
   }
 
   fun register(request: RegisterRequest) {
+    if (child) {
+      val number = floor(Math.random() * 9_000_000_000L).toLong() + 1_000_000_000L
+      request.nik = number.toString()
+    }
+
     @Suppress("UnstableApiUsage")
     add(
       clientApi.register(request).with()

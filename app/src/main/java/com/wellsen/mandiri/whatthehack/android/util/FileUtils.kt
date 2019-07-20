@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/15/19 1:30 PM
+ *  * Created by Wellsen on 7/20/19 4:08 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/15/19 1:30 PM
+ *  * Last modified 7/20/19 2:16 PM
  *
  */
 
@@ -76,12 +76,10 @@ object FileUtils {
         val type = split[0]
 
         var contentUri: Uri? = null
-        if ("image" == type) {
-          contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        } else if ("video" == type) {
-          contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        } else if ("audio" == type) {
-          contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        when (type) {
+          "image" -> contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+          "video" -> contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+          "audio" -> contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         }
 
         val selection = "_id=?"
