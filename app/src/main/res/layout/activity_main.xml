@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 7:16 PM
+  ~  * Created by Wellsen on 7/20/19 8:20 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 7:10 PM
+  ~  * Last modified 7/20/19 7:26 PM
   ~  */
   -->
 
@@ -267,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_trx_title_3"
                 android:padding="4dp"
-                android:text="23 Juli - Uang keluar"
+                android:text="17 Juli - Uang keluar"
                 android:textSize="12sp"
                 />
 
