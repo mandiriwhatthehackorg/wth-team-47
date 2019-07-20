@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/20/19 11:55 AM
+ *  * Created by Wellsen on 7/20/19 1:49 PM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/20/19 11:54 AM
+ *  * Last modified 7/20/19 12:29 PM
  *
  */
 
@@ -18,11 +18,13 @@ import android.os.Bundle
 import android.provider.Settings.ACTION_SECURITY_SETTINGS
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.AuthenticationCallback
 import androidx.biometric.BiometricPrompt.AuthenticationResult
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wellsen.mandiri.whatthehack.android.R
+import com.wellsen.mandiri.whatthehack.android.ui.echannel.EchannelActivity
 import com.wellsen.mandiri.whatthehack.android.ui.login.LoginActivity
 import com.wellsen.mandiri.whatthehack.android.util.LOGGED_IN
 import com.wellsen.mandiri.whatthehack.android.util.isFingerprintAvailable
@@ -34,6 +36,11 @@ import java.util.concurrent.Executors
 
 const val REQUEST_LOCK_CODE = 200
 const val REQUEST_SECURITY_SETTINGS = 201
+
+const val EXTRA_CHANNEL = "channel"
+const val CHANNEL_LINKAJA = "link_aja"
+const val CHANNEL_GOPAY = "gopay"
+const val CHANNEL_OVO = "ovo"
 
 class MainActivity : AppCompatActivity() {
 
@@ -74,6 +81,22 @@ class MainActivity : AppCompatActivity() {
     val slider = findViewById<Slider>(R.id.banner_slider1)
     slider.setAdapter(MainSliderAdapter())
     slider.setInterval(5000)
+
+    findViewById<AppCompatImageView>(R.id.iv_linkaja).setOnClickListener {
+      val intent = Intent(this, EchannelActivity::class.java)
+      intent.putExtra(EXTRA_CHANNEL, CHANNEL_LINKAJA)
+      startActivity(intent)
+    }
+
+    findViewById<AppCompatImageView>(R.id.iv_gopay).setOnClickListener {
+      intent.putExtra(EXTRA_CHANNEL, CHANNEL_GOPAY)
+      startActivity(intent)
+    }
+
+    findViewById<AppCompatImageView>(R.id.iv_ovo).setOnClickListener {
+      intent.putExtra(EXTRA_CHANNEL, CHANNEL_OVO)
+      startActivity(intent)
+    }
   }
 
   private fun logout() {

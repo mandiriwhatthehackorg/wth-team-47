@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~  * Created by Wellsen on 7/20/19 11:55 AM
+  ~  * Created by Wellsen on 7/20/19 1:49 PM
   ~  * for Mandiri What The Hack Hackathon
   ~  * Copyright (c) 2019 . All rights reserved.
-  ~  * Last modified 7/20/19 11:54 AM
+  ~  * Last modified 7/20/19 1:49 PM
   ~  */
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     >
 
   <TextView
@@ -30,59 +29,294 @@
       app:layout_constraintTop_toTopOf="parent"
       />
 
-  <androidx.cardview.widget.CardView
-      android:id="@+id/cv_balance"
+  <androidx.core.widget.NestedScrollView
       android:layout_width="match_parent"
-      android:layout_height="100dp"
-      android:layout_margin="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/nav_view"
+      android:layout_below="@+id/toolbar"
       >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Saldo Total"
-        android:textSize="17sp"
-        />
-
-    <TextView
-        android:id="@+id/tv_balance"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="IDR 10.000.000"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        />
+        tools:context=".ui.main.MainActivity"
+        >
 
-  </androidx.cardview.widget.CardView>
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cv_balance"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:layout_margin="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          >
 
-  <ss.com.bannerslider.Slider
-      android:id="@+id/banner_slider1"
-      android:layout_width="match_parent"
-      android:layout_height="240dp"
-      android:layout_marginBottom="8dp"
-      android:layout_marginTop="8dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/cv_balance"
-      app:slider_animateIndicators="true"
-      app:slider_indicatorSize="10dp"
-      app:slider_interval="0"
-      app:slider_loopSlides="true"
-      app:slider_selectedSlideIndicator="@drawable/indicator_circle_selected"
-      app:slider_unselectedSlideIndicator="@drawable/indicator_circle_unselected"
-      />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Saldo Total"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="IDR 10.000.000"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            />
+
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cv_e_channel"
+          android:layout_width="match_parent"
+          android:layout_height="160dp"
+          android:layout_margin="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cv_balance"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Topup E-channel"
+            android:textSize="17sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            >
+
+          <androidx.appcompat.widget.AppCompatImageView
+              android:id="@+id/iv_linkaja"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:padding="16dp"
+              app:srcCompat="@drawable/echannel_linkaja"
+              />
+
+          <androidx.appcompat.widget.AppCompatImageView
+              android:id="@+id/iv_gopay"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              app:srcCompat="@drawable/echannel_gopay"
+              />
+
+          <androidx.appcompat.widget.AppCompatImageView
+              android:id="@+id/iv_ovo"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:padding="16dp"
+              app:srcCompat="@drawable/echannel_ovo"
+              />
+
+        </LinearLayout>
+
+      </androidx.cardview.widget.CardView>
+
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cv_transaction"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cv_e_channel"
+          >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="8dp"
+              android:text="Riwayat Transaksi"
+              android:textSize="17sp"
+              />
+
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@android:color/black"
+              />
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              >
+
+            <TextView
+                android:id="@+id/tv_trx_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Topup LinkAja"
+                android:textSize="17sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_trx_desc_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_trx_title_1"
+                android:padding="4dp"
+                android:text="20 Juli - Uang keluar"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_trx_amount_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:text="IDR 100.000"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                />
+
+          </RelativeLayout>
+
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@android:color/black"
+              />
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              >
+
+            <TextView
+                android:id="@+id/tv_trx_title_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Topup LinkAja"
+                android:textSize="17sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_trx_desc_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_trx_title_2"
+                android:padding="4dp"
+                android:text="20 Juli - Uang keluar"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_trx_amount_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:text="IDR 100.000"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                />
+
+          </RelativeLayout>
+
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@android:color/black"
+              />
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              >
+
+            <TextView
+                android:id="@+id/tv_trx_title_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="Topup LinkAja"
+                android:textSize="17sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_trx_desc_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_trx_title_3"
+                android:padding="4dp"
+                android:text="20 Juli - Uang keluar"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_trx_amount_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:text="IDR 100.000"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                />
+
+          </RelativeLayout>
+
+
+        </LinearLayout>
+
+      </androidx.cardview.widget.CardView>
+
+      <ss.com.bannerslider.Slider
+          android:id="@+id/banner_slider1"
+          android:layout_width="match_parent"
+          android:layout_height="240dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginTop="8dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cv_transaction"
+          app:slider_animateIndicators="true"
+          app:slider_indicatorSize="10dp"
+          app:slider_interval="0"
+          app:slider_loopSlides="true"
+          app:slider_selectedSlideIndicator="@drawable/indicator_circle_selected"
+          app:slider_unselectedSlideIndicator="@drawable/indicator_circle_unselected"
+          />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/nav_view"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginEnd="0dp"
       android:layout_marginStart="0dp"
+      android:layout_alignParentBottom="true"
       android:background="?android:attr/windowBackground"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
@@ -90,4 +324,5 @@
       app:menu="@menu/bottom_nav_menu"
       />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
+
