@@ -1,9 +1,9 @@
 /*
  * *
- *  * Created by Wellsen on 7/21/19 12:28 AM
+ *  * Created by Wellsen on 7/21/19 1:20 AM
  *  * for Mandiri What The Hack Hackathon
  *  * Copyright (c) 2019 . All rights reserved.
- *  * Last modified 7/21/19 12:27 AM
+ *  * Last modified 7/21/19 1:04 AM
  *
  */
 
@@ -71,16 +71,14 @@ class VideoCallActivity : AppCompatActivity() {
       )
     ) {
       initAgoraEngine()
-
-      onjoinChannelClicked(null)
     }
 
     findViewById<AppCompatImageView>(R.id.audioBtn).visibility =
-      View.GONE // set the audio button hidden
+      View.VISIBLE // set the audio button hidden
     findViewById<AppCompatImageView>(R.id.leaveBtn).visibility =
-      View.GONE // set the leave button hidden
+      View.VISIBLE // set the leave button hidden
     findViewById<AppCompatImageView>(R.id.videoBtn).visibility =
-      View.GONE // set the video button hidden
+      View.VISIBLE // set the video button hidden
 
   }
 
